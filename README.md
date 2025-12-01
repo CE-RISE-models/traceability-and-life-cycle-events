@@ -95,8 +95,20 @@ TraceabilityLifecycleEvents (root)
     │   ├── ReturnMethod
     │   └── ReturnDocumentation
     ├── RefurbishmentEvent
+    │   ├── RefurbishmentDate
+    │   ├── RefurbishmentActivities
+    │   ├── ComponentsReplaced
+    │   └── RefurbishmentCertification
     ├── RecyclingEvent
+    │   ├── RecyclingDate
+    │   ├── RecyclingStream
+    │   ├── MaterialsRecovered
+    │   └── RecoveryPercentage
     └── DisposalEvent
+        ├── DisposalDate
+        ├── DisposalMethod
+        ├── DisposalFacility
+        └── DisposalCertification
 ```
 
 ### Workflow Sequence
@@ -109,24 +121,25 @@ Foundation for all lifecycle events with complete audit trail (EPCIS-compatible 
 - **EventLocation**: GLN or URI for location (EPCIS readPoint/bizLocation)
 - **EventDescription**: Human-readable event description (extends EPCIS)
 - **LinkedProductIdentifier**: EPC URI or GTIN + serial (EPCIS epcList)
-- **Disposition**: Business state (EPCIS disposition)
-- **BizStep**: Business process step (EPCIS bizStep vocabulary)
+- **Disposition**: Business state (uses EPCIS disposition vocabulary directly)
+- **BizStep**: Business process step (uses cbv:BizStep directly)
+- **Action**: How event relates to lifecycle (uses epcis:Action directly)
 
 #### **Step 2: OwnershipEvent** 
 Legal ownership and custody transfers throughout supply chain (extends EPCIS TransactionEvent):
 - **TransferDate**: Precise timestamp of ownership change (EPCIS eventTime)
 - **PreviousOwner**: Source party GLN (EPCIS source)
 - **NewOwner**: Destination party GLN (EPCIS destination)
-- **TransferType**: EPCIS business transaction type (po/despatch_advice/invoice)
+- **TransferType**: Business transaction type (uses cbv:BTT directly - po/desadv/inv/rma etc)
 - **TransferLocation**: Physical location GLN (EPCIS bizLocation)
 - **ChainOfCustodyReference**: Previous event links (EPCIS extensions)
 - **OwnershipDocumentation**: Digital references (EPCIS bizTransactionList)
-- **Action**: EPCIS action (ADD/OBSERVE/DELETE)
+
 
 #### **Step 3: ValueAddingActivityLocation**
 Transformation and processing events that modify or enhance products (EPCIS TransformationEvent):
 - **ActivityIdentifier**: Unique activity reference (EPCIS eventID)
-- **ActivityType**: EPCIS transformation type vocabulary
+- **ActivityType**: Activity type (uses cbv:BizStep directly - commissioning/transformation/decommissioning)
 - **ActivityDate**: When occurred (EPCIS eventTime)
 - **FacilityIdentifier**: Facility GLN (EPCIS bizLocation)
 - **ProcessDescription**: Transformation details (EPCIS extensions)
@@ -216,12 +229,12 @@ This identifier system enables seamless integration with databases and ensures c
 
 | Step | Component | Criticalities Identified | Solutions Implemented | Status | Missing/TODO |
 |------|-----------|-------------------------|----------------------|--------|--------------|
-| **1** | **ProductHistory** | • Need for comprehensive event tracking<br>• Lack of standardized event types<br>• Missing audit trail capabilities<br>• No link to product identities | • Implemented UUID-based event identifiers<br>• ISO 8601 timestamps with timezone support<br>• Standardized event type taxonomy<br>• GPS and facility-based location tracking<br>• Links to Product Profile identifiers | **IN PROGRESS** | • Event type ontology development<br>• Blockchain integration for immutability<br>• Event correlation engine |
-| **2** | **OwnershipEvent** | • Complex custody chain tracking<br>• Legal ownership vs physical possession<br>• International transfer complications<br>• Document verification needs | • Dual owner identification (previous/new)<br>• Transfer type classification<br>• Chain of custody references<br>• Digital document linking<br>• GS1 GLN and LEI integration | **IN PROGRESS** | • Smart contract integration<br>• Ownership verification APIs<br>• Multi-signature validation |
-| **3** | **ValueAddingActivityLocation** | • Transformation tracking complexity<br>• Input/output product mapping<br>• Process documentation<br>• Quality control integration | • Activity type taxonomy<br>• Input/output product arrays<br>• Process description fields<br>• Facility identification via GLN/OSID<br>• Timestamp and location tracking | **PLANNED** | • Process optimization metrics<br>• Quality measurement integration<br>• Carbon footprint calculation |
-| **4** | **ActorTracking** | • Multiple actor roles in supply chain<br>• Certification verification<br>• Responsibility boundaries<br>• Actor authentication | • Comprehensive role taxonomy<br>• Multiple identifier support (GLN/LEI/VAT)<br>• Certification status tracking<br>• Responsibility scope definition<br>• Time-stamped interactions | **PLANNED** | • Real-time actor verification<br>• Role-based access control<br>• Certification validation APIs |
-| **5** | **LogisticsEvents** | • Multi-modal transport tracking<br>• Supply chain visibility<br>• Real-time location updates<br>• Transport condition monitoring | • UN/LOCODE location standards<br>• Multi-modal transport support<br>• Intermediate stops tracking<br>• Transport condition monitoring<br>• Route information capture<br>• Carrier identification<br>• Excludes initial import data (in Product Profile) | **PLANNED** | • IoT sensor integration<br>• Real-time tracking APIs<br>• Predictive arrival algorithms<br>• Carbon emission tracking |
-| **6** | **ReverseLogistics** | • Return pathway complexity<br>• End-of-life tracking<br>• Circular economy requirements<br>• Refurbishment documentation | • Return reason classification<br>• Customer return channels<br>• Refurbishment event tracking<br>• Recycling event capture<br>• Disposal certification<br>• Complete return lifecycle | **PLANNED** | • Circular economy metrics<br>• Material recovery tracking<br>• Warranty management integration<br>• Environmental impact assessment |
+| **1** | **ProductHistory** | • Need for comprehensive event tracking<br>• Lack of standardized event types<br>• Missing audit trail capabilities<br>• No link to product identities | • UUID-based event identifiers<br>• ISO 8601 timestamps<br>• Direct use of epcis:EventType<br>• Direct use of cbv:BizStep<br>• Direct use of epcis:Action<br>• Links to Product Profile identifiers | **IN PROGRESS** | • Event correlation engine |
+| **2** | **OwnershipEvent** | • Complex custody chain tracking<br>• Legal ownership vs physical possession<br>• International transfer complications<br>• Document verification needs | • Dual owner identification<br>• Direct use of cbv:BTT for transfer types<br>• Chain of custody references<br>• Digital document linking<br>• GLN-based party identification | **IN PROGRESS** | • Ownership verification APIs |
+| **3** | **ValueAddingActivityLocation** | • Transformation tracking complexity<br>• Input/output product mapping<br>• Process documentation<br>• Quality control integration | • Direct use of cbv:BizStep for activity types<br>• Input/output product arrays<br>• Process description fields<br>• Facility GLN identification<br>• Timestamp tracking | **IN PROGRESS** | • Quality measurement integration |
+| **4** | **ActorTracking** | • Multiple actor roles in supply chain<br>• Certification verification<br>• Responsibility boundaries<br>• Actor authentication | • Actor identifier fields (GLN/LEI/VAT)<br>• Actor role tracking<br>• Activity timestamp<br>• Action performed tracking<br>• Responsibility scope definition<br>• Certification status fields | **IN PROGRESS** | • Real-time actor verification<br>• Role-based access control<br>• Certification validation APIs |
+| **5** | **LogisticsEvents** | • Multi-modal transport tracking<br>• Supply chain visibility<br>• Real-time location updates<br>• Transport condition monitoring | • UN/LOCODE location standards<br>• Transport mode field<br>• Departure/arrival tracking<br>• IntermediateStop class<br>• Carrier identification<br>• Transport conditions field<br>• Route information capture | **IN PROGRESS** | • IoT sensor integration<br>• Real-time tracking APIs<br>• Predictive arrival algorithms |
+| **6** | **ReverseLogistics** | • Return pathway complexity<br>• End-of-life tracking<br>• Circular economy requirements<br>• Refurbishment documentation | • ReturnReasonEnum<br>• CustomerReturnChannel class<br>• RefurbishmentEvent class<br>• RecyclingEvent class<br>• DisposalEvent class<br>• Complete lifecycle sub-classes | **IN PROGRESS** | • Circular economy metrics<br>• Extended material recovery tracking |
 
 ### Integration Opportunities
 

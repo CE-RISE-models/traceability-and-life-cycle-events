@@ -14,6 +14,8 @@ prefixes:
 
 imports:
     - linkml:types
+    - https://ns.gs1.org/epcis/
+    - https://ns.gs1.org/cbv/
 
 default_range: string
 
@@ -31,14 +33,29 @@ classes:
                 range: OwnershipEvent
                 description: Legal ownership and custody transfers throughout supply chain
                 multivalued: true
+            value_adding_activity:
+                range: ValueAddingActivityLocation
+                description: Transformation and processing events that modify or enhance products
+                multivalued: true
+            actor_tracking:
+                range: ActorTracking
+                description: All supply chain participants and their interactions with products
+                multivalued: true
+            logistics_events:
+                range: LogisticsEvents
+                description: Supply chain transportation and movement tracking post-import
+                multivalued: true
+            reverse_logistics:
+                range: ReverseLogistics
+                description: End-of-life and return pathway management
+                multivalued: true
 
     ProductHistory:
         description: EPCIS-compatible base event structure for complete product lifecycle audit trail
         attributes:
             event_identifier:
                 range: string
-                required: true
-                description: Unique identifier for each event UUID format maps to EPCIS eventID
+                description: Unique identifier for each event - aligns with EPCIS eventID concept
                 annotations:
                     sql_identifier: trc_hist_event_id
                 pattern: "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
@@ -49,8 +66,7 @@ classes:
 
             event_timestamp:
                 range: datetime
-                required: true
-                description: ISO 8601 timestamp with timezone EPCIS eventTime
+                description: ISO 8601 timestamp with timezone - aligns with EPCIS eventTime concept
                 annotations:
                     sql_identifier: trc_hist_event_timestamp
 
@@ -59,9 +75,8 @@ classes:
                 description: Value holder for event timestamp
 
             event_type:
-                range: EventTypeEnum
-                required: true
-                description: EPCIS event types ObjectEvent TransactionEvent TransformationEvent etc
+                range: epcis:EventType
+                description: Uses EPCIS EventType vocabulary directly - ObjectEvent TransactionEvent etc
                 annotations:
                     sql_identifier: trc_hist_event_type
 
@@ -71,7 +86,7 @@ classes:
 
             event_location:
                 range: string
-                description: GLN or URI for location EPCIS readPoint or bizLocation
+                description: GLN or URI for location - aligns with EPCIS readPoint/bizLocation concepts
                 annotations:
                     sql_identifier: trc_hist_event_location
                 pattern: "^(urn:epc:id:sgln:|https?://|[0-9]{13}).*"
@@ -92,8 +107,7 @@ classes:
 
             linked_product_identifier:
                 range: string
-                required: true
-                description: EPC URI or GTIN plus serial reference to product EPCIS epcList
+                description: EPC URI or GTIN plus serial reference - aligns with EPCIS epcList concept
                 annotations:
                     sql_identifier: trc_hist_linked_product_id
                 pattern: "^(urn:epc:id:|[0-9]{14}:).*"
@@ -104,7 +118,7 @@ classes:
 
             disposition:
                 range: string
-                description: Business state of the objects following the event EPCIS disposition
+                description: Business state of objects - aligns with EPCIS disposition concept
                 annotations:
                     sql_identifier: trc_hist_disposition
 
@@ -113,8 +127,8 @@ classes:
                 description: Value holder for disposition
 
             biz_step:
-                range: BizStepEnum
-                description: Business process step EPCIS bizStep vocabulary
+                range: cbv:BizStep
+                description: Uses CBV BizStep vocabulary directly
                 annotations:
                     sql_identifier: trc_hist_biz_step
 
@@ -123,8 +137,8 @@ classes:
                 description: Value holder for business step
 
             action:
-                range: ActionEnum
-                description: How this event relates to object lifecycle EPCIS action
+                range: epcis:Action
+                description: Uses EPCIS Action vocabulary directly - ADD OBSERVE DELETE
                 annotations:
                     sql_identifier: trc_hist_action
 
@@ -192,8 +206,7 @@ classes:
         attributes:
             transfer_date:
                 range: datetime
-                required: true
-                description: Precise timestamp of ownership change EPCIS eventTime
+                description: Precise timestamp of ownership change - aligns with EPCIS eventTime concept
                 annotations:
                     sql_identifier: trc_owner_transfer_date
 
@@ -203,8 +216,7 @@ classes:
 
             previous_owner:
                 range: string
-                required: true
-                description: Source party GLN EPCIS source
+                description: Source party GLN - aligns with EPCIS source concept
                 annotations:
                     sql_identifier: trc_owner_previous_owner
                 pattern: "^[0-9]{13}$"
@@ -215,8 +227,7 @@ classes:
 
             new_owner:
                 range: string
-                required: true
-                description: Destination party GLN EPCIS destination
+                description: Destination party GLN - aligns with EPCIS destination concept
                 annotations:
                     sql_identifier: trc_owner_new_owner
                 pattern: "^[0-9]{13}$"
@@ -226,9 +237,8 @@ classes:
                 description: Value holder for new owner
 
             transfer_type:
-                range: string
-                required: true
-                description: EPCIS CBV business transaction type like bol desadv inv po rma
+                range: cbv:BTT
+                description: Uses CBV Business Transaction Type vocabulary directly - po desadv inv rma etc
                 annotations:
                     sql_identifier: trc_owner_transfer_type
                     epcis_cbv_aligned: true
@@ -239,7 +249,7 @@ classes:
 
             transfer_location:
                 range: string
-                description: Physical location GLN EPCIS bizLocation
+                description: Physical location GLN - aligns with EPCIS bizLocation concept
                 annotations:
                     sql_identifier: trc_owner_transfer_location
                 pattern: "^[0-9]{13}$"
@@ -282,8 +292,7 @@ classes:
 
             linked_product_identifier:
                 range: string
-                required: true
-                description: Reference to products being transferred EPCIS epcList
+                description: Reference to products being transferred - aligns with EPCIS epcList concept
                 annotations:
                     sql_identifier: trc_owner_linked_product
                 pattern: "^(urn:epc:id:|[0-9]{14}:).*"
@@ -334,6 +343,182 @@ classes:
                 range: string
                 description: Value holder for ownership status
 
+    ValueAddingActivityLocation:
+        description: Transformation and processing events extending EPCIS TransformationEvent
+        attributes:
+            activity_identifier:
+                range: string
+                description: Unique activity reference - aligns with EPCIS eventID concept
+                annotations:
+                    sql_identifier: trc_value_activity_id
+                pattern: "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+
+            activity_identifier_value:
+                range: string
+                description: Value holder for activity identifier
+
+            activity_type:
+                range: cbv:BizStep
+                description: Uses CBV BizStep vocabulary directly - commissioning transformation decommissioning
+                annotations:
+                    sql_identifier: trc_value_activity_type
+                    epcis_cbv_aligned: true
+
+            activity_type_value:
+                range: string
+                description: Value holder for activity type
+
+            activity_date:
+                range: datetime
+                description: When activity occurred - aligns with EPCIS eventTime concept
+                annotations:
+                    sql_identifier: trc_value_activity_date
+
+            activity_date_value:
+                range: string
+                description: Value holder for activity date
+
+            facility_identifier:
+                range: string
+                description: Facility GLN where activity occurred - aligns with EPCIS bizLocation concept
+                annotations:
+                    sql_identifier: trc_value_facility_id
+                pattern: "^[0-9]{13}$"
+
+            facility_identifier_value:
+                range: string
+                description: Value holder for facility identifier
+
+            process_description:
+                range: string
+                description: Detailed transformation process description EPCIS extension
+                annotations:
+                    sql_identifier: trc_value_process_desc
+                    dpp_extension: true
+
+            process_description_value:
+                range: string
+                description: Value holder for process description
+
+            input_products:
+                range: string
+                multivalued: true
+                description: Input EPCs and quantities - aligns with EPCIS inputEPCList concept
+                annotations:
+                    sql_identifier: trc_value_input_products
+
+            input_products_value:
+                range: string
+                description: Value holder for input products
+
+            output_products:
+                range: string
+                multivalued: true
+                description: Output EPCs and quantities - aligns with EPCIS outputEPCList concept
+                annotations:
+                    sql_identifier: trc_value_output_products
+
+            output_products_value:
+                range: string
+                description: Value holder for output products
+
+            transformation_id:
+                range: string
+                description: Links related transformations - aligns with EPCIS transformationID concept
+                annotations:
+                    sql_identifier: trc_value_transformation_id
+
+            transformation_id_value:
+                range: string
+                description: Value holder for transformation ID
+
+            process_step:
+                range: string
+                description: Specific process step within transformation EPCIS bizStep
+                annotations:
+                    sql_identifier: trc_value_process_step
+                    epcis_cbv_aligned: true
+
+            process_step_value:
+                range: string
+                description: Value holder for process step
+
+            quality_check_performed:
+                range: boolean
+                description: Whether quality control was performed DPP extension
+                annotations:
+                    sql_identifier: trc_value_quality_check
+                    dpp_extension: true
+
+            quality_check_performed_value:
+                range: string
+                description: Value holder for quality check flag
+
+            quality_check_results:
+                range: string
+                description: Quality control test results DPP extension
+                annotations:
+                    sql_identifier: trc_value_quality_results
+                    dpp_extension: true
+
+            quality_check_results_value:
+                range: string
+                description: Value holder for quality results
+
+            process_duration_minutes:
+                range: integer
+                description: Duration of the process in minutes DPP extension
+                annotations:
+                    sql_identifier: trc_value_duration_min
+                    dpp_extension: true
+
+            process_duration_minutes_value:
+                range: string
+                description: Value holder for process duration
+
+            operator_identifier:
+                range: string
+                description: GLN or ID of operator performing activity
+                annotations:
+                    sql_identifier: trc_value_operator_id
+
+            operator_identifier_value:
+                range: string
+                description: Value holder for operator identifier
+
+            batch_identifier:
+                range: string
+                description: Batch or lot number for this processing run
+                annotations:
+                    sql_identifier: trc_value_batch_id
+
+            batch_identifier_value:
+                range: string
+                description: Value holder for batch identifier
+
+            value_added:
+                range: float
+                description: Economic value added by this activity DPP extension
+                annotations:
+                    sql_identifier: trc_value_added_amount
+                    dpp_extension: true
+
+            value_added_value:
+                range: string
+                description: Value holder for value added
+
+            process_certification:
+                range: string
+                multivalued: true
+                description: Certifications applicable to this process DPP extension
+                annotations:
+                    sql_identifier: trc_value_certifications
+                    dpp_extension: true
+
+            process_certification_value:
+                range: string
+                description: Value holder for process certifications
+
     ErrorDeclaration:
         description: Declaration that an event was recorded in error EPCIS errorDeclaration
         attributes:
@@ -369,132 +554,418 @@ classes:
                 range: string
                 description: Value holder for corrective event IDs
 
+    ActorTracking:
+        description: Supply chain participants and their interactions with products
+        attributes:
+            actor_identifier:
+                range: string
+                description: Organization identifier GLN LEI or VAT
+                annotations:
+                    sql_identifier: trc_actor_id
+
+            actor_identifier_value:
+                range: string
+                description: Value holder for actor identifier
+
+            actor_role:
+                range: string
+                description: Role in supply chain - aligns with CBV party role concepts
+                annotations:
+                    sql_identifier: trc_actor_role
+
+            actor_role_value:
+                range: string
+                description: Value holder for actor role
+
+            activity_timestamp:
+                range: datetime
+                description: When actor interacted with product
+                annotations:
+                    sql_identifier: trc_actor_timestamp
+
+            activity_timestamp_value:
+                range: string
+                description: Value holder for activity timestamp
+
+            action_performed:
+                range: string
+                description: Specific action taken by actor
+                annotations:
+                    sql_identifier: trc_actor_action
+
+            action_performed_value:
+                range: string
+                description: Value holder for action performed
+
+            responsibility_scope:
+                range: string
+                description: Actor responsibility boundaries
+                annotations:
+                    sql_identifier: trc_actor_responsibility
+
+            responsibility_scope_value:
+                range: string
+                description: Value holder for responsibility scope
+
+            certification_status:
+                range: string
+                multivalued: true
+                description: Relevant certifications ISO organic fair trade
+                annotations:
+                    sql_identifier: trc_actor_certifications
+
+            certification_status_value:
+                range: string
+                description: Value holder for certification status
+
+    LogisticsEvents:
+        description: Supply chain transportation tracking post-import - aligns with EPCIS ObjectEvent concepts
+        attributes:
+            shipment_identifier:
+                range: string
+                description: Unique shipment reference carrier tracking number
+                annotations:
+                    sql_identifier: trc_logis_shipment_id
+
+            shipment_identifier_value:
+                range: string
+                description: Value holder for shipment identifier
+
+            transport_mode:
+                range: string
+                description: Mode of transport road rail sea air multimodal
+                annotations:
+                    sql_identifier: trc_logis_transport_mode
+
+            transport_mode_value:
+                range: string
+                description: Value holder for transport mode
+
+            departure_location:
+                range: string
+                description: Origin UN/LOCODE
+                annotations:
+                    sql_identifier: trc_logis_departure_loc
+
+            departure_location_value:
+                range: string
+                description: Value holder for departure location
+
+            departure_timestamp:
+                range: datetime
+                description: Departure time with timezone
+                annotations:
+                    sql_identifier: trc_logis_departure_time
+
+            departure_timestamp_value:
+                range: string
+                description: Value holder for departure timestamp
+
+            arrival_location:
+                range: string
+                description: Destination UN/LOCODE
+                annotations:
+                    sql_identifier: trc_logis_arrival_loc
+
+            arrival_location_value:
+                range: string
+                description: Value holder for arrival location
+
+            arrival_timestamp:
+                range: datetime
+                description: Actual or estimated arrival
+                annotations:
+                    sql_identifier: trc_logis_arrival_time
+
+            arrival_timestamp_value:
+                range: string
+                description: Value holder for arrival timestamp
+
+            carrier_identifier:
+                range: string
+                description: Transport company GLN or identifier
+                annotations:
+                    sql_identifier: trc_logis_carrier_id
+
+            carrier_identifier_value:
+                range: string
+                description: Value holder for carrier identifier
+
+            route_information:
+                range: string
+                description: Planned route details
+                annotations:
+                    sql_identifier: trc_logis_route_info
+
+            route_information_value:
+                range: string
+                description: Value holder for route information
+
+            intermediate_stops:
+                range: IntermediateStop
+                multivalued: true
+                description: Distribution centers warehouses transshipment points
+
+            transport_conditions:
+                range: string
+                description: Temperature humidity shock monitoring data
+                annotations:
+                    sql_identifier: trc_logis_conditions
+
+            transport_conditions_value:
+                range: string
+                description: Value holder for transport conditions
+
+    IntermediateStop:
+        description: Stop location during logistics movement
+        attributes:
+            stop_location:
+                range: string
+                description: UN/LOCODE of stop location
+                annotations:
+                    sql_identifier: trc_logis_stop_location
+
+            stop_location_value:
+                range: string
+                description: Value holder for stop location
+
+            stop_timestamp:
+                range: datetime
+                description: When arrived at stop
+                annotations:
+                    sql_identifier: trc_logis_stop_time
+
+            stop_timestamp_value:
+                range: string
+                description: Value holder for stop timestamp
+
+            stop_duration:
+                range: integer
+                description: Duration at stop in minutes
+                annotations:
+                    sql_identifier: trc_logis_stop_duration
+
+            stop_duration_value:
+                range: string
+                description: Value holder for stop duration
+
+    ReverseLogistics:
+        description: End-of-life and return pathway management beyond EPCIS scope
+        attributes:
+            return_event_identifier:
+                range: string
+                description: Unique return tracking ID
+                annotations:
+                    sql_identifier: trc_reverse_event_id
+
+            return_event_identifier_value:
+                range: string
+                description: Value holder for return event identifier
+
+            return_initiation_date:
+                range: datetime
+                description: When return process started
+                annotations:
+                    sql_identifier: trc_reverse_init_date
+
+            return_initiation_date_value:
+                range: string
+                description: Value holder for return initiation date
+
+            return_reason:
+                range: ReturnReasonEnum
+                description: Reason for return
+                annotations:
+                    sql_identifier: trc_reverse_reason
+
+            return_reason_value:
+                range: string
+                description: Value holder for return reason
+
+            customer_return_channels:
+                range: CustomerReturnChannel
+                multivalued: true
+                description: Available return methods and locations
+
+            refurbishment_event:
+                range: RefurbishmentEvent
+                description: Repair and refurbishment activities
+
+            recycling_event:
+                range: RecyclingEvent
+                description: Material recovery and recycling processes
+
+            disposal_event:
+                range: DisposalEvent
+                description: Final disposal method and certification
+
+    CustomerReturnChannel:
+        description: Return channel information
+        attributes:
+            return_location:
+                range: string
+                description: GLN of return collection point
+                annotations:
+                    sql_identifier: trc_reverse_return_loc
+
+            return_location_value:
+                range: string
+                description: Value holder for return location
+
+            return_method:
+                range: ReturnMethodEnum
+                description: How product can be returned
+                annotations:
+                    sql_identifier: trc_reverse_method
+
+            return_method_value:
+                range: string
+                description: Value holder for return method
+
+            return_documentation:
+                range: string
+                description: Required documentation for return
+                annotations:
+                    sql_identifier: trc_reverse_docs
+
+            return_documentation_value:
+                range: string
+                description: Value holder for return documentation
+
+    RefurbishmentEvent:
+        description: Product repair and refurbishment details
+        attributes:
+            refurbishment_date:
+                range: datetime
+                description: When refurbishment occurred
+                annotations:
+                    sql_identifier: trc_reverse_refurb_date
+
+            refurbishment_date_value:
+                range: string
+                description: Value holder for refurbishment date
+
+            refurbishment_activities:
+                range: string
+                multivalued: true
+                description: List of refurbishment activities performed
+                annotations:
+                    sql_identifier: trc_reverse_refurb_activities
+
+            refurbishment_activities_value:
+                range: string
+                description: Value holder for refurbishment activities
+
+            components_replaced:
+                range: string
+                multivalued: true
+                description: Components that were replaced
+                annotations:
+                    sql_identifier: trc_reverse_components
+
+            components_replaced_value:
+                range: string
+                description: Value holder for components replaced
+
+            refurbishment_certification:
+                range: string
+                description: Certification of refurbishment quality
+                annotations:
+                    sql_identifier: trc_reverse_refurb_cert
+
+            refurbishment_certification_value:
+                range: string
+                description: Value holder for refurbishment certification
+
+    RecyclingEvent:
+        description: Material recovery and recycling details
+        attributes:
+            recycling_date:
+                range: datetime
+                description: When recycling occurred
+                annotations:
+                    sql_identifier: trc_reverse_recycle_date
+
+            recycling_date_value:
+                range: string
+                description: Value holder for recycling date
+
+            recycling_stream:
+                range: RecyclingStreamEnum
+                description: Which recycling stream
+                annotations:
+                    sql_identifier: trc_reverse_stream
+
+            recycling_stream_value:
+                range: string
+                description: Value holder for recycling stream
+
+            materials_recovered:
+                range: string
+                multivalued: true
+                description: List of recovered materials
+                annotations:
+                    sql_identifier: trc_reverse_materials
+
+            materials_recovered_value:
+                range: string
+                description: Value holder for materials recovered
+
+            recovery_percentage:
+                range: float
+                description: Percentage of materials recovered
+                annotations:
+                    sql_identifier: trc_reverse_recovery_pct
+
+            recovery_percentage_value:
+                range: string
+                description: Value holder for recovery percentage
+
+    DisposalEvent:
+        description: Final disposal details
+        attributes:
+            disposal_date:
+                range: datetime
+                description: When disposal occurred
+                annotations:
+                    sql_identifier: trc_reverse_disposal_date
+
+            disposal_date_value:
+                range: string
+                description: Value holder for disposal date
+
+            disposal_method:
+                range: DisposalMethodEnum
+                description: Method of disposal
+                annotations:
+                    sql_identifier: trc_reverse_disposal_method
+
+            disposal_method_value:
+                range: string
+                description: Value holder for disposal method
+
+            disposal_facility:
+                range: string
+                description: GLN or identifier of disposal facility
+                annotations:
+                    sql_identifier: trc_reverse_disposal_facility
+
+            disposal_facility_value:
+                range: string
+                description: Value holder for disposal facility
+
+            disposal_certification:
+                range: string
+                description: Certification of proper disposal
+                annotations:
+                    sql_identifier: trc_reverse_disposal_cert
+
+            disposal_certification_value:
+                range: string
+                description: Value holder for disposal certification
+
 # Enumerations aligned with EPCIS/CBV standards
 enums:
-    EventTypeEnum:
-        description: EPCIS 2.0 event types - Direct import from EPCIS standard
-        permissible_values:
-            OBJECT_EVENT:
-                description: Observation of one or more objects at a location
-            AGGREGATION_EVENT:
-                description: Objects aggregated or disaggregated
-            TRANSACTION_EVENT:
-                description: Association of objects with business transaction
-            TRANSFORMATION_EVENT:
-                description: Input objects transformed into output objects
-            ASSOCIATION_EVENT:
-                description: Objects associated or disassociated with parent
-
-    BizStepEnum:
-        description: EPCIS Core Business Vocabulary business steps - Direct import from CBV 2.0
-        permissible_values:
-            ACCEPTING:
-                description: Goods are accepted for return
-            ARRIVING:
-                description: Objects arriving at a location
-            ASSEMBLING:
-                description: Components assembled into product
-            COLLECTING:
-                description: Objects collected for disposal/recycling
-            COMMISSIONING:
-                description: Instance created/put in use
-            CONSIGNING:
-                description: Goods consigned for sale
-            CREATING_CLASS_INSTANCE:
-                description: Creating instance of a class
-            CYCLE_COUNTING:
-                description: Inventory count
-            DECOMMISSIONING:
-                description: Instance retired from use
-            DEPARTING:
-                description: Objects leaving a location
-            DESTROYING:
-                description: Objects destroyed
-            DISASSEMBLING:
-                description: Product disassembled into components
-            DISPENSING:
-                description: Objects dispensed
-            ENCODING:
-                description: Encoding identifier on object
-            ENTERING_EXITING:
-                description: Objects entering or exiting location
-            HOLDING:
-                description: Objects held at location
-            INSPECTING:
-                description: Objects inspected
-            INSTALLING:
-                description: Objects installed
-            KILLING:
-                description: Biological entity killed
-            LOADING:
-                description: Objects loaded for transport
-            PACKING:
-                description: Objects packed
-            PICKING:
-                description: Objects picked from inventory
-            RECEIVING:
-                description: Objects received
-            REMOVING:
-                description: Objects removed
-            REPACKAGING:
-                description: Objects repackaged
-            REPAIRING:
-                description: Objects repaired
-            REPLACING:
-                description: Objects replaced
-            RESERVING:
-                description: Objects reserved
-            RETAIL_SELLING:
-                description: Objects sold at retail
-            SAMPLING:
-                description: Sample taken
-            SENSOR_REPORTING:
-                description: Sensor observation reported
-            SHIPPING:
-                description: Objects shipped
-            STAGING_OUTBOUND:
-                description: Objects staged for shipment
-            STOCK_TAKING:
-                description: Stock count performed
-            STORING:
-                description: Objects put in storage
-            TRANSPORTING:
-                description: Objects in transport
-            UNLOADING:
-                description: Objects unloaded
-            UNPACKING:
-                description: Objects unpacked
-            VOID_SHIPPING:
-                description: Shipping cancelled
-
-    ActionEnum:
-        description: EPCIS action vocabulary - Direct import from EPCIS standard
-        permissible_values:
-            ADD:
-                description: Object came into existence or into scope
-            OBSERVE:
-                description: Object neither created nor destroyed
-            DELETE:
-                description: Object went out of existence or out of scope
-
-    # Business Transaction Types - Use EPCIS CBV standard values directly:
-    # Standard EPCIS CBV values (import these):
-    # - bol: Bill of Lading
-    # - desadv: Despatch Advice
-    # - inv: Invoice
-    # - pedigree: Pedigree document
-    # - po: Purchase Order
-    # - poc: Purchase Order Confirmation
-    # - prodorder: Production Order
-    # - recadv: Receiving Advice
-    # - rma: Return Merchandise Authorization
-    #
-    # DPP Extensions beyond EPCIS CBV:
-    # - donation: Charitable donation
-    # - lease: Lease or rental agreement
-    # - loan: Temporary loan
-    # - consignment: Goods on consignment
-
     OwnershipStatusEnum:
         description: Legal status of ownership - DPP extension beyond EPCIS standard
         permissible_values:
@@ -510,3 +981,59 @@ enums:
                 description: Ownership during transportation
             DISPUTED:
                 description: Ownership under dispute
+
+    ReturnReasonEnum:
+        description: Reasons for product return - DPP specific
+        permissible_values:
+            DEFECT:
+                description: Product defect or malfunction
+            WARRANTY_CLAIM:
+                description: Warranty claim
+            END_OF_LIFE:
+                description: Product reached end of life
+            PRODUCT_RECALL:
+                description: Manufacturer recall
+            CUSTOMER_DISSATISFACTION:
+                description: Customer not satisfied
+
+    ReturnMethodEnum:
+        description: How product was returned - DPP specific
+        permissible_values:
+            STORE_RETURN:
+                description: Returned to retail store
+            MAIL_RETURN:
+                description: Mailed back
+            PICKUP_SERVICE:
+                description: Pickup service collected
+            DROP_OFF_POINT:
+                description: Dropped at collection point
+
+    RecyclingStreamEnum:
+        description: Recycling pathways - DPP specific
+        permissible_values:
+            ELECTRONICS:
+                description: E-waste recycling
+            PLASTICS:
+                description: Plastic recycling
+            METALS:
+                description: Metal recycling
+            TEXTILES:
+                description: Textile recycling
+            BATTERIES:
+                description: Battery recycling
+            MIXED_MATERIALS:
+                description: Mixed material recycling
+
+    DisposalMethodEnum:
+        description: Final disposal methods - DPP specific
+        permissible_values:
+            LANDFILL:
+                description: Landfill disposal
+            INCINERATION:
+                description: Incineration
+            ENERGY_RECOVERY:
+                description: Waste-to-energy
+            COMPOSTING:
+                description: Industrial composting
+            SPECIALIZED_TREATMENT:
+                description: Specialized hazardous treatment
