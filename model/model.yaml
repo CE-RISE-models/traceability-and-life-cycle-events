@@ -1,20 +1,327 @@
-id: https://ce-rise-models.codeberg.page/template-data-model/
-name: template_data_model
+id: https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/
+name: traceability_and_life_cycle_events
+title: Traceability and Life Cycle Events Data Model
+description: Dynamic event-based information throughout a product's supply chain journey, aligned with GS1 EPCIS 2.0 standard
+license: https://creativecommons.org/licenses/by-nc/4.0/
+version: 0.1.0
+
 prefixes:
-  linkml: https://w3id.org/linkml/
+    linkml: https://w3id.org/linkml/
+    trc: https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/
+    epcis: https://ns.gs1.org/epcis/
+    cbv: https://ns.gs1.org/cbv/
+    schema: http://schema.org/
+
 imports:
-  - linkml:types
+    - linkml:types
+
 default_range: string
+
+# Root class
 classes:
-  ExampleClass:
-    attributes:
-      example_attribute:
-        range: string
-        description: Example field
-slots:
-  label:
-    range: string
-    description: Human-readable label
-  sqlIdentifier:
-    range: string
-    description: Machine-friendly field name for databases
+    TraceabilityLifecycleEvents:
+        description: Root container for all traceability and lifecycle events in a product's journey
+        tree_root: true
+        attributes:
+            product_history:
+                range: ProductHistory
+                description: Foundation for all lifecycle events with complete audit trail
+                multivalued: true
+
+    ProductHistory:
+        description: EPCIS-compatible base event structure for complete product lifecycle audit trail
+        attributes:
+            event_identifier:
+                range: string
+                required: true
+                description: Unique identifier for each event (UUID format, maps to EPCIS eventID)
+                annotations:
+                    sql_identifier: trc_hist_event_id
+                pattern: "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+
+            event_identifier_value:
+                range: string
+                description: Value holder for event identifier
+
+            event_timestamp:
+                range: datetime
+                required: true
+                description: ISO 8601 timestamp with timezone (EPCIS eventTime)
+                annotations:
+                    sql_identifier: trc_hist_event_timestamp
+
+            event_timestamp_value:
+                range: string
+                description: Value holder for event timestamp
+
+            event_type:
+                range: EventTypeEnum
+                required: true
+                description: EPCIS event types (ObjectEvent, TransactionEvent, TransformationEvent, etc.)
+                annotations:
+                    sql_identifier: trc_hist_event_type
+
+            event_type_value:
+                range: string
+                description: Value holder for event type
+
+            event_location:
+                range: string
+                description: GLN or URI for location (EPCIS readPoint/bizLocation)
+                annotations:
+                    sql_identifier: trc_hist_event_location
+                pattern: "^(urn:epc:id:sgln:|https?://|[0-9]{13}).*"
+
+            event_location_value:
+                range: string
+                description: Value holder for event location
+
+            event_description:
+                range: string
+                description: Human-readable event description (extends EPCIS)
+                annotations:
+                    sql_identifier: trc_hist_event_description
+
+            event_description_value:
+                range: string
+                description: Value holder for event description
+
+            linked_product_identifier:
+                range: string
+                required: true
+                description: EPC URI or GTIN + serial reference to product (EPCIS epcList)
+                annotations:
+                    sql_identifier: trc_hist_linked_product_id
+                pattern: "^(urn:epc:id:|[0-9]{14}:).*"
+
+            linked_product_identifier_value:
+                range: string
+                description: Value holder for linked product identifier
+
+            disposition:
+                range: string
+                description: Business state of the object(s) following the event (EPCIS disposition)
+                annotations:
+                    sql_identifier: trc_hist_disposition
+
+            disposition_value:
+                range: string
+                description: Value holder for disposition
+
+            biz_step:
+                range: BizStepEnum
+                description: Business process step (EPCIS bizStep vocabulary)
+                annotations:
+                    sql_identifier: trc_hist_biz_step
+
+            biz_step_value:
+                range: string
+                description: Value holder for business step
+
+            action:
+                range: ActionEnum
+                description: How this event relates to object lifecycle (EPCIS action)
+                annotations:
+                    sql_identifier: trc_hist_action
+
+            action_value:
+                range: string
+                description: Value holder for action
+
+            event_time_zone_offset:
+                range: string
+                description: Time zone offset from UTC (e.g., +01:00, -05:00)
+                annotations:
+                    sql_identifier: trc_hist_timezone_offset
+                pattern: "^[+-][0-9]{2}:[0-9]{2}$"
+
+            event_time_zone_offset_value:
+                range: string
+                description: Value holder for timezone offset
+
+            read_point:
+                range: string
+                description: Specific location where event occurred (EPCIS readPoint)
+                annotations:
+                    sql_identifier: trc_hist_read_point
+
+            read_point_value:
+                range: string
+                description: Value holder for read point
+
+            biz_location:
+                range: string
+                description: Business location where objects are expected following event (EPCIS bizLocation)
+                annotations:
+                    sql_identifier: trc_hist_biz_location
+
+            biz_location_value:
+                range: string
+                description: Value holder for business location
+
+            error_declaration:
+                range: ErrorDeclaration
+                description: Declaration that this event is in error (EPCIS errorDeclaration)
+
+            certification_info:
+                range: string
+                description: Reference to relevant certifications for this event
+                annotations:
+                    sql_identifier: trc_hist_certification_info
+
+            certification_info_value:
+                range: string
+                description: Value holder for certification info
+
+            sensor_metadata:
+                range: string
+                description: IoT sensor data associated with event (temperature, humidity, etc.)
+                annotations:
+                    sql_identifier: trc_hist_sensor_metadata
+
+            sensor_metadata_value:
+                range: string
+                description: Value holder for sensor metadata
+
+    ErrorDeclaration:
+        description: Declaration that an event was recorded in error (EPCIS errorDeclaration)
+        attributes:
+            declaration_time:
+                range: datetime
+                required: true
+                description: When the error was declared
+                annotations:
+                    sql_identifier: trc_hist_error_declaration_time
+
+            declaration_time_value:
+                range: string
+                description: Value holder for declaration time
+
+            reason:
+                range: string
+                description: Reason for the error declaration
+                annotations:
+                    sql_identifier: trc_hist_error_reason
+
+            reason_value:
+                range: string
+                description: Value holder for error reason
+
+            corrective_event_ids:
+                range: string
+                multivalued: true
+                description: IDs of events that correct this error
+                annotations:
+                    sql_identifier: trc_hist_corrective_event_ids
+
+            corrective_event_ids_value:
+                range: string
+                description: Value holder for corrective event IDs
+
+# Enumerations aligned with EPCIS/CBV standards
+enums:
+    EventTypeEnum:
+        description: EPCIS 2.0 event types
+        permissible_values:
+            OBJECT_EVENT:
+                description: Observation of one or more objects at a location
+            AGGREGATION_EVENT:
+                description: Objects aggregated or disaggregated
+            TRANSACTION_EVENT:
+                description: Association of objects with business transaction
+            TRANSFORMATION_EVENT:
+                description: Input objects transformed into output objects
+            ASSOCIATION_EVENT:
+                description: Objects associated or disassociated with parent
+
+    BizStepEnum:
+        description: EPCIS Core Business Vocabulary business steps
+        permissible_values:
+            ACCEPTING:
+                description: Goods are accepted for return
+            ARRIVING:
+                description: Objects arriving at a location
+            ASSEMBLING:
+                description: Components assembled into product
+            COLLECTING:
+                description: Objects collected for disposal/recycling
+            COMMISSIONING:
+                description: Instance created/put in use
+            CONSIGNING:
+                description: Goods consigned for sale
+            CREATING_CLASS_INSTANCE:
+                description: Creating instance of a class
+            CYCLE_COUNTING:
+                description: Inventory count
+            DECOMMISSIONING:
+                description: Instance retired from use
+            DEPARTING:
+                description: Objects leaving a location
+            DESTROYING:
+                description: Objects destroyed
+            DISASSEMBLING:
+                description: Product disassembled into components
+            DISPENSING:
+                description: Objects dispensed
+            ENCODING:
+                description: Encoding identifier on object
+            ENTERING_EXITING:
+                description: Objects entering or exiting location
+            HOLDING:
+                description: Objects held at location
+            INSPECTING:
+                description: Objects inspected
+            INSTALLING:
+                description: Objects installed
+            KILLING:
+                description: Biological entity killed
+            LOADING:
+                description: Objects loaded for transport
+            PACKING:
+                description: Objects packed
+            PICKING:
+                description: Objects picked from inventory
+            RECEIVING:
+                description: Objects received
+            REMOVING:
+                description: Objects removed
+            REPACKAGING:
+                description: Objects repackaged
+            REPAIRING:
+                description: Objects repaired
+            REPLACING:
+                description: Objects replaced
+            RESERVING:
+                description: Objects reserved
+            RETAIL_SELLING:
+                description: Objects sold at retail
+            SAMPLING:
+                description: Sample taken
+            SENSOR_REPORTING:
+                description: Sensor observation reported
+            SHIPPING:
+                description: Objects shipped
+            STAGING_OUTBOUND:
+                description: Objects staged for shipment
+            STOCK_TAKING:
+                description: Stock count performed
+            STORING:
+                description: Objects put in storage
+            TRANSPORTING:
+                description: Objects in transport
+            UNLOADING:
+                description: Objects unloaded
+            UNPACKING:
+                description: Objects unpacked
+            VOID_SHIPPING:
+                description: Shipping cancelled
+
+    ActionEnum:
+        description: EPCIS action vocabulary
+        permissible_values:
+            ADD:
+                description: Object came into existence or into scope
+            OBSERVE:
+                description: Object neither created nor destroyed
+            DELETE:
+                description: Object went out of existence or out of scope
