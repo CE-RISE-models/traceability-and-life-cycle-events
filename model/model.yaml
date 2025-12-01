@@ -226,11 +226,12 @@ classes:
                 description: Value holder for new owner
 
             transfer_type:
-                range: TransferTypeEnum
+                range: string
                 required: true
-                description: EPCIS business transaction type po despatch_advice invoice
+                description: EPCIS CBV business transaction type like bol desadv inv po rma
                 annotations:
                     sql_identifier: trc_owner_transfer_type
+                    epcis_cbv_aligned: true
 
             transfer_type_value:
                 range: string
@@ -261,7 +262,7 @@ classes:
             ownership_documentation:
                 range: string
                 multivalued: true
-                description: Digital references EPCIS bizTransactionList
+                description: Digital references EPCIS bizTransactionList URIs to documents
                 annotations:
                     sql_identifier: trc_owner_documentation
 
@@ -324,9 +325,10 @@ classes:
 
             ownership_status:
                 range: OwnershipStatusEnum
-                description: Legal status of ownership after transfer
+                description: Legal status of ownership after transfer DPP extension beyond EPCIS
                 annotations:
                     sql_identifier: trc_owner_status
+                    dpp_extension: true
 
             ownership_status_value:
                 range: string
@@ -370,7 +372,7 @@ classes:
 # Enumerations aligned with EPCIS/CBV standards
 enums:
     EventTypeEnum:
-        description: EPCIS 2.0 event types
+        description: EPCIS 2.0 event types - Direct import from EPCIS standard
         permissible_values:
             OBJECT_EVENT:
                 description: Observation of one or more objects at a location
@@ -384,7 +386,7 @@ enums:
                 description: Objects associated or disassociated with parent
 
     BizStepEnum:
-        description: EPCIS Core Business Vocabulary business steps
+        description: EPCIS Core Business Vocabulary business steps - Direct import from CBV 2.0
         permissible_values:
             ACCEPTING:
                 description: Goods are accepted for return
@@ -466,7 +468,7 @@ enums:
                 description: Shipping cancelled
 
     ActionEnum:
-        description: EPCIS action vocabulary
+        description: EPCIS action vocabulary - Direct import from EPCIS standard
         permissible_values:
             ADD:
                 description: Object came into existence or into scope
@@ -475,32 +477,26 @@ enums:
             DELETE:
                 description: Object went out of existence or out of scope
 
-    TransferTypeEnum:
-        description: Types of ownership transfer aligned with EPCIS business transactions
-        permissible_values:
-            PURCHASE_ORDER:
-                description: Purchase order transaction
-            DESPATCH_ADVICE:
-                description: Despatch advice or shipping notification
-            INVOICE:
-                description: Invoice for goods
-            SALE:
-                description: Direct sale transaction
-            CONSIGNMENT:
-                description: Goods on consignment
-            LEASE:
-                description: Lease or rental agreement
-            DONATION:
-                description: Charitable donation
-            RETURN:
-                description: Product return
-            LOAN:
-                description: Temporary loan
-            TRANSFER:
-                description: Internal transfer between facilities
+    # Business Transaction Types - Use EPCIS CBV standard values directly:
+    # Standard EPCIS CBV values (import these):
+    # - bol: Bill of Lading
+    # - desadv: Despatch Advice
+    # - inv: Invoice
+    # - pedigree: Pedigree document
+    # - po: Purchase Order
+    # - poc: Purchase Order Confirmation
+    # - prodorder: Production Order
+    # - recadv: Receiving Advice
+    # - rma: Return Merchandise Authorization
+    #
+    # DPP Extensions beyond EPCIS CBV:
+    # - donation: Charitable donation
+    # - lease: Lease or rental agreement
+    # - loan: Temporary loan
+    # - consignment: Goods on consignment
 
     OwnershipStatusEnum:
-        description: Legal status of ownership
+        description: Legal status of ownership - DPP extension beyond EPCIS standard
         permissible_values:
             FULL_OWNERSHIP:
                 description: Complete legal ownership
