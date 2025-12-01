@@ -27,6 +27,10 @@ classes:
                 range: ProductHistory
                 description: Foundation for all lifecycle events with complete audit trail
                 multivalued: true
+            ownership_event:
+                range: OwnershipEvent
+                description: Legal ownership and custody transfers throughout supply chain
+                multivalued: true
 
     ProductHistory:
         description: EPCIS-compatible base event structure for complete product lifecycle audit trail
@@ -183,6 +187,151 @@ classes:
                 range: string
                 description: Value holder for sensor metadata
 
+    OwnershipEvent:
+        description: Legal ownership and custody transfers extending EPCIS TransactionEvent
+        attributes:
+            transfer_date:
+                range: datetime
+                required: true
+                description: Precise timestamp of ownership change EPCIS eventTime
+                annotations:
+                    sql_identifier: trc_owner_transfer_date
+
+            transfer_date_value:
+                range: string
+                description: Value holder for transfer date
+
+            previous_owner:
+                range: string
+                required: true
+                description: Source party GLN EPCIS source
+                annotations:
+                    sql_identifier: trc_owner_previous_owner
+                pattern: "^[0-9]{13}$"
+
+            previous_owner_value:
+                range: string
+                description: Value holder for previous owner
+
+            new_owner:
+                range: string
+                required: true
+                description: Destination party GLN EPCIS destination
+                annotations:
+                    sql_identifier: trc_owner_new_owner
+                pattern: "^[0-9]{13}$"
+
+            new_owner_value:
+                range: string
+                description: Value holder for new owner
+
+            transfer_type:
+                range: TransferTypeEnum
+                required: true
+                description: EPCIS business transaction type po despatch_advice invoice
+                annotations:
+                    sql_identifier: trc_owner_transfer_type
+
+            transfer_type_value:
+                range: string
+                description: Value holder for transfer type
+
+            transfer_location:
+                range: string
+                description: Physical location GLN EPCIS bizLocation
+                annotations:
+                    sql_identifier: trc_owner_transfer_location
+                pattern: "^[0-9]{13}$"
+
+            transfer_location_value:
+                range: string
+                description: Value holder for transfer location
+
+            chain_of_custody_reference:
+                range: string
+                multivalued: true
+                description: Previous event links EPCIS extensions
+                annotations:
+                    sql_identifier: trc_owner_custody_chain
+
+            chain_of_custody_reference_value:
+                range: string
+                description: Value holder for custody chain references
+
+            ownership_documentation:
+                range: string
+                multivalued: true
+                description: Digital references EPCIS bizTransactionList
+                annotations:
+                    sql_identifier: trc_owner_documentation
+
+            ownership_documentation_value:
+                range: string
+                description: Value holder for ownership documentation
+
+            action:
+                range: ActionEnum
+                description: EPCIS action ADD OBSERVE DELETE
+                annotations:
+                    sql_identifier: trc_owner_action
+
+            action_value:
+                range: string
+                description: Value holder for action
+
+            linked_product_identifier:
+                range: string
+                required: true
+                description: Reference to products being transferred EPCIS epcList
+                annotations:
+                    sql_identifier: trc_owner_linked_product
+                pattern: "^(urn:epc:id:|[0-9]{14}:).*"
+
+            linked_product_identifier_value:
+                range: string
+                description: Value holder for linked product identifier
+
+            quantity_transferred:
+                range: integer
+                description: Number of units transferred
+                annotations:
+                    sql_identifier: trc_owner_quantity
+
+            quantity_transferred_value:
+                range: string
+                description: Value holder for quantity transferred
+
+            transfer_value:
+                range: float
+                description: Monetary value of transfer
+                annotations:
+                    sql_identifier: trc_owner_transfer_value
+
+            transfer_value_value:
+                range: string
+                description: Value holder for transfer monetary value
+
+            currency:
+                range: string
+                description: Currency code for transfer value ISO 4217
+                annotations:
+                    sql_identifier: trc_owner_currency
+                pattern: "^[A-Z]{3}$"
+
+            currency_value:
+                range: string
+                description: Value holder for currency
+
+            ownership_status:
+                range: OwnershipStatusEnum
+                description: Legal status of ownership after transfer
+                annotations:
+                    sql_identifier: trc_owner_status
+
+            ownership_status_value:
+                range: string
+                description: Value holder for ownership status
+
     ErrorDeclaration:
         description: Declaration that an event was recorded in error EPCIS errorDeclaration
         attributes:
@@ -325,3 +474,43 @@ enums:
                 description: Object neither created nor destroyed
             DELETE:
                 description: Object went out of existence or out of scope
+
+    TransferTypeEnum:
+        description: Types of ownership transfer aligned with EPCIS business transactions
+        permissible_values:
+            PURCHASE_ORDER:
+                description: Purchase order transaction
+            DESPATCH_ADVICE:
+                description: Despatch advice or shipping notification
+            INVOICE:
+                description: Invoice for goods
+            SALE:
+                description: Direct sale transaction
+            CONSIGNMENT:
+                description: Goods on consignment
+            LEASE:
+                description: Lease or rental agreement
+            DONATION:
+                description: Charitable donation
+            RETURN:
+                description: Product return
+            LOAN:
+                description: Temporary loan
+            TRANSFER:
+                description: Internal transfer between facilities
+
+    OwnershipStatusEnum:
+        description: Legal status of ownership
+        permissible_values:
+            FULL_OWNERSHIP:
+                description: Complete legal ownership
+            CONDITIONAL:
+                description: Conditional ownership pending payment
+            CONSIGNED:
+                description: Owned but consigned to another party
+            LEASED:
+                description: Under lease agreement
+            IN_TRANSIT:
+                description: Ownership during transportation
+            DISPUTED:
+                description: Ownership under dispute

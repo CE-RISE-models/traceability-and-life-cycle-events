@@ -1,8 +1,9 @@
 # CE-RISE Data Model Template
 
+[![DOI](https://zenodo.org/badge/DOI/TOBEOBTAINED.svg)](https://doi.org/TOBEOBTAINED) [![Schemas](https://img.shields.io/badge/Generated%20Schema%20Files-JSON%2C%20SHACL%2C%20OWL-32CD32)](https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/)
+
 This repository provides the **official template** for creating CE-RISE data models.  
 It defines the standard structure, tooling, and workflow used across all model projects.
-
 
 ---
 
@@ -216,7 +217,7 @@ This identifier system enables seamless integration with databases and ensures c
 | Step | Component | Criticalities Identified | Solutions Implemented | Status | Missing/TODO |
 |------|-----------|-------------------------|----------------------|--------|--------------|
 | **1** | **ProductHistory** | • Need for comprehensive event tracking<br>• Lack of standardized event types<br>• Missing audit trail capabilities<br>• No link to product identities | • Implemented UUID-based event identifiers<br>• ISO 8601 timestamps with timezone support<br>• Standardized event type taxonomy<br>• GPS and facility-based location tracking<br>• Links to Product Profile identifiers | **IN PROGRESS** | • Event type ontology development<br>• Blockchain integration for immutability<br>• Event correlation engine |
-| **2** | **OwnershipEvent** | • Complex custody chain tracking<br>• Legal ownership vs physical possession<br>• International transfer complications<br>• Document verification needs | • Dual owner identification (previous/new)<br>• Transfer type classification<br>• Chain of custody references<br>• Digital document linking<br>• GS1 GLN and LEI integration | **PLANNED** | • Smart contract integration<br>• Ownership verification APIs<br>• Multi-signature validation |
+| **2** | **OwnershipEvent** | • Complex custody chain tracking<br>• Legal ownership vs physical possession<br>• International transfer complications<br>• Document verification needs | • Dual owner identification (previous/new)<br>• Transfer type classification<br>• Chain of custody references<br>• Digital document linking<br>• GS1 GLN and LEI integration | **IN PROGRESS** | • Smart contract integration<br>• Ownership verification APIs<br>• Multi-signature validation |
 | **3** | **ValueAddingActivityLocation** | • Transformation tracking complexity<br>• Input/output product mapping<br>• Process documentation<br>• Quality control integration | • Activity type taxonomy<br>• Input/output product arrays<br>• Process description fields<br>• Facility identification via GLN/OSID<br>• Timestamp and location tracking | **PLANNED** | • Process optimization metrics<br>• Quality measurement integration<br>• Carbon footprint calculation |
 | **4** | **ActorTracking** | • Multiple actor roles in supply chain<br>• Certification verification<br>• Responsibility boundaries<br>• Actor authentication | • Comprehensive role taxonomy<br>• Multiple identifier support (GLN/LEI/VAT)<br>• Certification status tracking<br>• Responsibility scope definition<br>• Time-stamped interactions | **PLANNED** | • Real-time actor verification<br>• Role-based access control<br>• Certification validation APIs |
 | **5** | **LogisticsEvents** | • Multi-modal transport tracking<br>• Supply chain visibility<br>• Real-time location updates<br>• Transport condition monitoring | • UN/LOCODE location standards<br>• Multi-modal transport support<br>• Intermediate stops tracking<br>• Transport condition monitoring<br>• Route information capture<br>• Carrier identification<br>• Excludes initial import data (in Product Profile) | **PLANNED** | • IoT sensor integration<br>• Real-time tracking APIs<br>• Predictive arrival algorithms<br>• Carbon emission tracking |
