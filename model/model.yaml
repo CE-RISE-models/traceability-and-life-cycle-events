@@ -496,7 +496,7 @@ classes:
                 description: Value holder for quality results
 
             process_duration:
-                range: duration
+                range: string
                 description: Process duration in ISO 8601 format (e.g. PT30M for 30 minutes)
                 annotations:
                     sql_identifier: trc_value_duration
@@ -786,7 +786,7 @@ classes:
                 description: Value holder for stop timestamp
 
             stop_duration:
-                range: duration
+                range: string
                 description: Stop duration in ISO 8601 format (e.g. PT2H30M for 2 hours 30 minutes)
                 annotations:
                     sql_identifier: trc_logis_stop_duration
