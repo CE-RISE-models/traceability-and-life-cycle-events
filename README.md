@@ -1,4 +1,4 @@
-# Traceability and Life Cycle Event
+# CE-RISE Traceability and Life Cycle Event
 
 [![DOI](https://zenodo.org/badge/DOI/TOBEOBTAINED.svg)](https://doi.org/TOBEOBTAINED) [![Schemas](https://img.shields.io/badge/Generated%20Schema%20Files-JSON%2C%20SHACL%2C%20OWL-32CD32)](https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/)
 
@@ -299,24 +299,16 @@ This identifier system enables seamless integration with databases and ensures c
 
 | Step | Component | Supply Chain Focus | Solutions Implemented | Status | Missing/TODO |
 |------|-----------|-------------------|----------------------|--------|--------------|
-| **1** | **ProductHistory** | • Foundation event structure<br>• EPCIS compatibility<br>• Event audit trails<br>• Product identity linking | • UUID-based event identifiers<br>• ISO 8601 timestamps<br>• Direct use of epcis:EventType<br>• Direct use of cbv:BizStep<br>• Links to product-profile identifiers | **IN PROGRESS** | • Event correlation engine<br>• Performance optimization |
-| **2** | **OwnershipEvent** | • Business transaction tracking<br>• Custody chain management<br>• Legal ownership transfers<br>• Supply chain transparency | • GLN-based party identification<br>• Direct use of cbv:BTT<br>• Chain of custody references<br>• Digital document linking<br>• Transaction event structure | **IN PROGRESS** | • Cross-border transfer handling<br>• Ownership verification APIs |
-| **3** | **ValueAddingActivityLocation** | • Supply chain transformations<br>• Processing and packaging<br>• Input/output tracking<br>• Facility-based activities | • Direct use of cbv:BizStep<br>• Input/output product arrays<br>• Facility GLN identification<br>• Transformation event structure<br>• Process documentation | **IN PROGRESS** | • Complex transformation chains<br>• Multi-facility processes |
-| **4** | **ActorTracking** | • Supply chain participant roles<br>• Actor responsibility tracking<br>• Certification management<br>• Performance accountability | • Multiple identifier support<br>• Role-based tracking<br>• Activity timestamps<br>• Responsibility definitions<br>• Certification status tracking | **IN PROGRESS** | • Real-time verification<br>• Performance metrics<br>• Dynamic role assignments |
-| **5** | **LogisticsEvents** | • Transportation tracking<br>• Multi-modal logistics<br>• Route optimization<br>• Condition monitoring | • UN/LOCODE standards<br>• Multi-modal support<br>• Intermediate stops<br>• Carrier identification<br>• Transport conditions | **IN PROGRESS** | • IoT integration<br>• Real-time updates<br>• Predictive logistics |
-| **6** | **ReverseLogistics** | • Return pathway management<br>• End-of-life collection<br>• Reverse supply chains<br>• Recovery operations | • Return reason classification<br>• Multi-channel returns<br>• Refurbishment tracking<br>• Recovery documentation<br>• Disposal certification | **IN PROGRESS** | • Recovery optimization<br>• Circular metrics integration |
-| **7** | **AggregationEvents** | • Packaging hierarchy tracking<br>• Parent-child relationships<br>• Pack/unpack operations<br>• Container management | • EPCIS AggregationEvent structure<br>• Parent/child EPC tracking<br>• Hierarchy level classification<br>• Aggregation type handling<br>• Location/timestamp tracking | **TODO** | • Complex hierarchy validation<br>• Mixed product aggregation<br>• Bulk operations support |
-| **8** | **SupplyChainIncidents** | • Exception event handling<br>• Incident tracking<br>• Risk management<br>• Disruption documentation | • Incident classification system<br>• Severity level tracking<br>• Root cause analysis fields<br>• Corrective action tracking<br>• Documentation references | **TODO** | • Automated incident detection<br>• Risk assessment integration<br>• Recovery workflow automation |
+| **1** | **ProductHistory** | • Foundation event structure<br>• EPCIS compatibility<br>• Event audit trails<br>• Product identity linking | • UUID-based event identifiers<br>• ISO 8601 timestamps<br>• EPCIS EventType alignment<br>• CBV BizStep integration<br>• Links to product-profile identifiers | **COMPLETE** | - |
+| **2** | **OwnershipEvent** | • Business transaction tracking<br>• Custody chain management<br>• Legal ownership transfers<br>• Supply chain transparency | • GLN-based party identification<br>• CBV BTT vocabulary<br>• Chain of custody references<br>• Digital document linking<br>• Transaction event structure | **COMPLETE** | - |
+| **3** | **ValueAddingActivityLocation** | • Supply chain transformations<br>• Processing and packaging<br>• Input/output tracking<br>• Facility-based activities | • CBV BizStep vocabulary<br>• Input/output product arrays<br>• Facility GLN identification<br>• Transformation event structure<br>• Process documentation | **COMPLETE** | - |
+| **4** | **ActorTracking** | • Supply chain participant roles<br>• Actor responsibility tracking<br>• Certification management<br>• Performance accountability | • Multiple identifier support<br>• Role-based tracking<br>• Activity timestamps<br>• Responsibility definitions<br>• Certification status tracking | **COMPLETE** | - |
+| **5** | **LogisticsEvents** | • Transportation tracking<br>• Multi-modal logistics<br>• Route optimization<br>• Condition monitoring | • UN/LOCODE standards<br>• Multi-modal support<br>• Intermediate stops<br>• Carrier identification<br>• Transport conditions | **COMPLETE** | - |
+| **6** | **ReverseLogistics** | • Return pathway management<br>• End-of-life collection<br>• Reverse supply chains<br>• Recovery operations | • Return reason classification<br>• Multi-channel returns<br>• Refurbishment tracking<br>• Recovery documentation<br>• Disposal certification | **COMPLETE** | - |
+| **7** | **AggregationEvents** | • Packaging hierarchy tracking<br>• Parent-child relationships<br>• Pack/unpack operations<br>• Container management | • EPCIS AggregationEvent structure<br>• Parent/child EPC tracking<br>• Hierarchy level classification<br>• Aggregation type handling<br>• Location/timestamp tracking | **COMPLETE** | - |
+| **8** | **SupplyChainIncidents** | • Exception event handling<br>• Incident tracking<br>• Risk management<br>• Disruption documentation | • Incident classification system<br>• Severity level tracking<br>• Root cause analysis fields<br>• Corrective action tracking<br>• Documentation references | **COMPLETE** | - |
 
 
-
-### CE-RISE Architecture Integration Status
-
-| Related Model | Integration Type | Status | Implementation Notes |
-|---------------|------------------|--------|---------------------|
-| **product-profile** | **Identifier References** | ✅ ACTIVE | Events reference static product identifiers |
-| **diagnostic-results** | **Event Triggers** | 🔄 PLANNED | Supply chain events trigger diagnostic needs |
-| **usage-and-maintenance** | **Lifecycle Han• ReturnReasonEnum<br>• CustomerReturnChannel class<br>• RefurbishmentEvent class<br>• RecyclingEvent class<br>• DisposalEvent class<br>• Complete lifecycle sub-classes | **IN PROGRESS** | • Circular economy metrics<br>• Extended material recovery tracking |
 
 ### Integration Opportunities
 
