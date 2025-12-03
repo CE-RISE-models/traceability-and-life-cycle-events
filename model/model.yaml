@@ -17,8 +17,6 @@ prefixes:
 
 imports:
     - linkml:types
-    - https://ns.gs1.org/epcis/
-    - https://ns.gs1.org/cbv/
 
 default_range: string
 
@@ -86,21 +84,22 @@ classes:
                 description: Value holder for event timestamp
 
             event_type:
-                range: epcis:EventType
+                range: string
                 description: Uses EPCIS EventType vocabulary directly - ObjectEvent TransactionEvent etc
                 annotations:
                     sql_identifier: trc_hist_event_type
+                    owl.filler: epcis:EventType
 
             event_type_value:
                 range: string
                 description: Value holder for event type
 
             event_location:
-                range: gs1:GlobalLocationNumber
+                range: string
                 description: GLN or URI for location - aligns with EPCIS readPoint/bizLocation concepts
                 annotations:
                     sql_identifier: trc_hist_event_location
-                    gs1_aligned: true
+                    owl.filler: gs1:GlobalLocationNumber
                 pattern: "^(urn:epc:id:sgln:|https?://|[0-9]{13}).*"
 
             event_location_value:
@@ -139,20 +138,22 @@ classes:
                 description: Value holder for disposition
 
             biz_step:
-                range: cbv:BizStep
+                range: string
                 description: Uses CBV BizStep vocabulary directly
                 annotations:
                     sql_identifier: trc_hist_biz_step
+                    owl.filler: cbv:BizStep
 
             biz_step_value:
                 range: string
                 description: Value holder for business step
 
             action:
-                range: epcis:Action
+                range: string
                 description: Uses EPCIS Action vocabulary directly - ADD OBSERVE DELETE
                 annotations:
                     sql_identifier: trc_hist_action
+                    owl.filler: epcis:Action
 
             action_value:
                 range: string
@@ -170,22 +171,22 @@ classes:
                 description: Value holder for timezone offset
 
             read_point:
-                range: gs1:GlobalLocationNumber
+                range: string
                 description: Specific location where event occurred EPCIS readPoint
                 annotations:
                     sql_identifier: trc_hist_read_point
-                    gs1_aligned: true
+                    owl.filler: gs1:GlobalLocationNumber
 
             read_point_value:
                 range: string
                 description: Value holder for read point
 
             biz_location:
-                range: gs1:GlobalLocationNumber
+                range: string
                 description: Business location where objects are expected following event EPCIS bizLocation
                 annotations:
                     sql_identifier: trc_hist_biz_location
-                    gs1_aligned: true
+                    owl.filler: gs1:GlobalLocationNumber
 
             biz_location_value:
                 range: string
@@ -208,11 +209,11 @@ classes:
                 description: Value holder for certification info
 
             sensor_metadata:
-                range: epcis:SensorReport
+                range: string
                 description: IoT sensor data using EPCIS 2.0 SensorReport structure
                 annotations:
                     sql_identifier: trc_hist_sensor_metadata
-                    epcis_aligned: true
+                    owl.filler: epcis:SensorReport
 
             sensor_metadata_value:
                 range: string
@@ -232,11 +233,11 @@ classes:
                 description: Value holder for transfer date
 
             previous_owner:
-                range: gs1:GlobalLocationNumber
+                range: string
                 description: Source party GLN - aligns with EPCIS source concept
                 annotations:
                     sql_identifier: trc_owner_previous_owner
-                    gs1_aligned: true
+                    owl.filler: gs1:GlobalLocationNumber
                 pattern: "^[0-9]{13}$"
 
             previous_owner_value:
@@ -244,11 +245,11 @@ classes:
                 description: Value holder for previous owner
 
             new_owner:
-                range: gs1:GlobalLocationNumber
+                range: string
                 description: Destination party GLN - aligns with EPCIS destination concept
                 annotations:
                     sql_identifier: trc_owner_new_owner
-                    gs1_aligned: true
+                    owl.filler: gs1:GlobalLocationNumber
                 pattern: "^[0-9]{13}$"
 
             new_owner_value:
@@ -256,22 +257,22 @@ classes:
                 description: Value holder for new owner
 
             transfer_type:
-                range: cbv:BTT
+                range: string
                 description: Uses CBV Business Transaction Type vocabulary directly - po desadv inv rma etc
                 annotations:
                     sql_identifier: trc_owner_transfer_type
-                    epcis_cbv_aligned: true
+                    owl.filler: cbv:BTT
 
             transfer_type_value:
                 range: string
                 description: Value holder for transfer type
 
             transfer_location:
-                range: gs1:GlobalLocationNumber
+                range: string
                 description: Physical location GLN - aligns with EPCIS bizLocation concept
                 annotations:
                     sql_identifier: trc_owner_transfer_location
-                    gs1_aligned: true
+                    owl.filler: gs1:GlobalLocationNumber
                 pattern: "^[0-9]{13}$"
 
             transfer_location_value:
@@ -324,11 +325,11 @@ classes:
                 description: Value holder for linked product identifier
 
             quantity_transferred:
-                range: epcis:QuantityElement
+                range: integer
                 description: Quantity transferred using EPCIS QuantityElement structure
                 annotations:
                     sql_identifier: trc_owner_quantity
-                    epcis_aligned: true
+                    owl.filler: epcis:QuantityElement
 
             quantity_transferred_value:
                 range: string
@@ -345,11 +346,11 @@ classes:
                 description: Value holder for transfer monetary value
 
             currency:
-                range: iso:4217
+                range: string
                 description: Currency code for transfer value using ISO 4217 standard
                 annotations:
                     sql_identifier: trc_owner_currency
-                    iso_4217: true
+                    owl.filler: iso:4217
                 pattern: "^[A-Z]{3}$"
 
             currency_value:
@@ -382,11 +383,11 @@ classes:
                 description: Value holder for activity identifier
 
             activity_type:
-                range: cbv:BizStep
+                range: string
                 description: Uses CBV BizStep vocabulary directly - commissioning transformation decommissioning
                 annotations:
                     sql_identifier: trc_value_activity_type
-                    epcis_cbv_aligned: true
+                    owl.filler: cbv:BizStep
 
             activity_type_value:
                 range: string
@@ -403,11 +404,11 @@ classes:
                 description: Value holder for activity date
 
             facility_identifier:
-                range: gs1:GlobalLocationNumber
+                range: string
                 description: GLN or OSID of processing facility
                 annotations:
                     sql_identifier: trc_value_facility_id
-                    gs1_aligned: true
+                    owl.filler: gs1:GlobalLocationNumber
                 pattern: "^[0-9]{13}$"
 
             facility_identifier_value:
@@ -426,35 +427,35 @@ classes:
                 description: Value holder for process description
 
             input_products:
-                range: epcis:EPCList
+                range: string
                 multivalued: true
                 description: Input EPCs and quantities using EPCIS inputEPCList structure
                 annotations:
                     sql_identifier: trc_value_input_products
-                    epcis_aligned: true
+                    owl.filler: epcis:EPCList
 
             input_products_value:
                 range: string
                 description: Value holder for input products
 
             output_products:
-                range: epcis:EPCList
+                range: string
                 multivalued: true
                 description: Output EPCs and quantities using EPCIS outputEPCList structure
                 annotations:
                     sql_identifier: trc_value_output_products
-                    epcis_aligned: true
+                    owl.filler: epcis:EPCList
 
             output_products_value:
                 range: string
                 description: Value holder for output products
 
             transformation_id:
-                range: epcis:TransformationID
+                range: string
                 description: Transformation identifier using EPCIS transformationID
                 annotations:
                     sql_identifier: trc_value_transformation_id
-                    epcis_aligned: true
+                    owl.filler: epcis:TransformationID
 
             transformation_id_value:
                 range: string
@@ -588,11 +589,11 @@ classes:
         description: Supply chain participants and their interactions with products
         attributes:
             actor_identifier:
-                range: gs1:PartyGlobalLocationNumber
+                range: string
                 description: Organization identifier GLN LEI or VAT
                 annotations:
                     sql_identifier: trc_actor_id
-                    gs1_aligned: true
+                    owl.filler: gs1:PartyGlobalLocationNumber
                 pattern: "^([0-9]{13}|[A-Z0-9]{20}|[A-Z]{2}[A-Z0-9]+)$"
 
             actor_identifier_value:
@@ -600,11 +601,11 @@ classes:
                 description: Value holder for actor identifier
 
             actor_role:
-                range: cbv:SourceDestinationType
+                range: string
                 description: Role in supply chain using CBV Source/Destination types
                 annotations:
                     sql_identifier: trc_actor_role
-                    cbv_aligned: true
+                    owl.filler: cbv:SourceDestinationType
 
             actor_role_value:
                 range: string
@@ -666,22 +667,22 @@ classes:
                 description: Value holder for shipment identifier
 
             transport_mode:
-                range: unece:TransportModeCode
+                range: string
                 description: Mode of transport using UN/ECE Recommendation 19 codes
                 annotations:
                     sql_identifier: trc_logis_transport_mode
-                    unece_rec_19: true
+                    owl.filler: unece:TransportModeCode
 
             transport_mode_value:
                 range: string
                 description: Value holder for transport mode
 
             departure_location:
-                range: unece:UNLOCODE
+                range: string
                 description: Origin UN/LOCODE or GLN
                 annotations:
                     sql_identifier: trc_logis_departure_loc
-                    unece_aligned: true
+                    owl.filler: unece:UNLOCODE
                 pattern: "^([A-Z]{2}[A-Z0-9]{3}|[0-9]{13})$"
 
             departure_location_value:
@@ -699,11 +700,11 @@ classes:
                 description: Value holder for departure timestamp
 
             arrival_location:
-                range: unece:UNLOCODE
+                range: string
                 description: Destination UN/LOCODE or GLN
                 annotations:
                     sql_identifier: trc_logis_arrival_loc
-                    unece_aligned: true
+                    owl.filler: unece:UNLOCODE
                 pattern: "^([A-Z]{2}[A-Z0-9]{3}|[0-9]{13})$"
 
             arrival_location_value:
@@ -721,22 +722,22 @@ classes:
                 description: Value holder for arrival timestamp
 
             carrier_identifier:
-                range: gs1:PartyGlobalLocationNumber
+                range: string
                 description: Transport company GLN or identifier
                 annotations:
                     sql_identifier: trc_logis_carrier_id
-                    gs1_aligned: true
+                    owl.filler: gs1:PartyGlobalLocationNumber
 
             carrier_identifier_value:
                 range: string
                 description: Value holder for carrier identifier
 
             route_information:
-                range: gs1:RouteInformation
+                range: string
                 description: Planned route using GS1 route information structure
                 annotations:
                     sql_identifier: trc_logis_route_info
-                    gs1_aligned: true
+                    owl.filler: gs1:RouteInformation
 
             route_information_value:
                 range: string
@@ -748,11 +749,11 @@ classes:
                 description: Distribution centers warehouses transshipment points
 
             transport_conditions:
-                range: epcis:SensorReport
+                range: string
                 description: Transport conditions using EPCIS 2.0 SensorReport for temperature humidity shock
                 annotations:
                     sql_identifier: trc_logis_conditions
-                    epcis_aligned: true
+                    owl.filler: epcis:SensorReport
 
             transport_conditions_value:
                 range: string
@@ -762,11 +763,11 @@ classes:
         description: Stop location during logistics movement
         attributes:
             stop_location:
-                range: unece:UNLOCODE
+                range: string
                 description: UN/LOCODE or GLN of stop location
                 annotations:
                     sql_identifier: trc_logis_stop_location
-                    unece_aligned: true
+                    owl.filler: unece:UNLOCODE
                 pattern: "^([A-Z]{2}[A-Z0-9]{3}|[0-9]{13})$"
 
             stop_location_value:
@@ -849,11 +850,11 @@ classes:
         description: Return channel information
         attributes:
             return_location:
-                range: gs1:GlobalLocationNumber
+                range: string
                 description: Location where products can be returned GLN
                 annotations:
                     sql_identifier: trc_reverse_return_location
-                    gs1_aligned: true
+                    owl.filler: gs1:GlobalLocationNumber
 
             return_location_value:
                 range: string
@@ -999,11 +1000,11 @@ classes:
                 description: Value holder for disposal method
 
             disposal_facility:
-                range: gs1:GlobalLocationNumber
+                range: string
                 description: GLN or identifier of disposal facility
                 annotations:
                     sql_identifier: trc_reverse_disposal_facility
-                    gs1_aligned: true
+                    owl.filler: gs1:GlobalLocationNumber
 
             disposal_facility_value:
                 range: string
@@ -1035,11 +1036,11 @@ classes:
                 description: Value holder for aggregation event ID
 
             aggregation_type:
-                range: epcis:Action
+                range: string
                 description: ADD for packing DELETE for unpacking - uses EPCIS Action directly
                 annotations:
                     sql_identifier: trc_agg_type
-                    epcis_aligned: true
+                    owl.filler: epcis:Action
 
             aggregation_type_value:
                 range: string
@@ -1057,23 +1058,23 @@ classes:
                 description: Value holder for parent identifier
 
             child_identifiers:
-                range: epcis:EPCList
+                range: string
                 multivalued: true
                 description: Child EPCs being aggregated/disaggregated using EPCIS childEPCs structure
                 annotations:
                     sql_identifier: trc_agg_child_ids
-                    epcis_aligned: true
+                    owl.filler: epcis:EPCList
 
             child_identifiers_value:
                 range: string
                 description: Value holder for child identifiers
 
             aggregation_location:
-                range: gs1:GlobalLocationNumber
+                range: string
                 description: GLN where operation occurred - aligns with EPCIS bizLocation
                 annotations:
                     sql_identifier: trc_agg_location
-                    gs1_aligned: true
+                    owl.filler: gs1:GlobalLocationNumber
                 pattern: "^[0-9]{13}$"
 
             aggregation_location_value:
@@ -1101,11 +1102,11 @@ classes:
                 description: Value holder for packaging level
 
             biz_step:
-                range: cbv:BizStep
+                range: string
                 description: Business step like packing commissioning etc - uses CBV directly
                 annotations:
                     sql_identifier: trc_agg_biz_step
-                    epcis_cbv_aligned: true
+                    owl.filler: cbv:BizStep
 
             biz_step_value:
                 range: string
@@ -1122,11 +1123,11 @@ classes:
                 description: Value holder for disposition
 
             read_point:
-                range: gs1:GlobalLocationNumber
+                range: string
                 description: Specific read point where aggregation occurred - EPCIS readPoint
                 annotations:
                     sql_identifier: trc_agg_read_point
-                    gs1_aligned: true
+                    owl.filler: gs1:GlobalLocationNumber
 
             read_point_value:
                 range: string
@@ -1167,11 +1168,11 @@ classes:
                 description: Value holder for incident timestamp
 
             incident_location:
-                range: unece:UNLOCODE
+                range: string
                 description: GLN or UN/LOCODE where incident happened
                 annotations:
                     sql_identifier: trc_incident_location
-                    unece_aligned: true
+                    owl.filler: unece:UNLOCODE
                 pattern: "^([0-9]{13}|[A-Z]{2}[A-Z0-9]{3}).*"
 
             incident_location_value:
@@ -1179,12 +1180,12 @@ classes:
                 description: Value holder for incident location
 
             affected_products:
-                range: epcis:EPCList
+                range: string
                 multivalued: true
                 description: Affected products using EPCIS EPCList structure
                 annotations:
                     sql_identifier: trc_incident_affected_products
-                    epcis_aligned: true
+                    owl.filler: epcis:EPCList
 
             affected_products_value:
                 range: string
@@ -1256,22 +1257,22 @@ classes:
                 description: Value holder for linked event IDs
 
             estimated_impact:
-                range: iso:MonetaryAmount
+                range: string
                 description: Estimated financial impact using ISO monetary amount structure
                 annotations:
                     sql_identifier: trc_incident_impact
-                    iso_4217: true
+                    owl.filler: iso:MonetaryAmount
 
             estimated_impact_value:
                 range: string
                 description: Value holder for estimated impact
 
             reporter_identifier:
-                range: gs1:PartyGlobalLocationNumber
+                range: string
                 description: GLN or identifier of entity reporting the incident
                 annotations:
                     sql_identifier: trc_incident_reporter
-                    gs1_aligned: true
+                    owl.filler: gs1:PartyGlobalLocationNumber
                 pattern: "^[0-9]{13}$"
 
             reporter_identifier_value:
