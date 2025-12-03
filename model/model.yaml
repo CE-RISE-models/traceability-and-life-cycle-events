@@ -11,6 +11,9 @@ prefixes:
     epcis: https://ns.gs1.org/epcis/
     cbv: https://ns.gs1.org/cbv/
     schema: http://schema.org/
+    iso: https://www.iso.org/
+    unece: https://unece.org/trade/
+    gs1: https://www.gs1.org/voc/
 
 imports:
     - linkml:types
@@ -49,6 +52,14 @@ classes:
                 range: ReverseLogistics
                 description: End-of-life and return pathway management
                 multivalued: true
+            aggregation_events:
+                range: AggregationEvents
+                description: Packaging hierarchy operations - packing and unpacking of items into containers
+                multivalued: true
+            supply_chain_incidents:
+                range: SupplyChainIncidents
+                description: Exception events and disruptions during supply chain operations
+                multivalued: true
 
     ProductHistory:
         description: EPCIS-compatible base event structure for complete product lifecycle audit trail
@@ -85,10 +96,11 @@ classes:
                 description: Value holder for event type
 
             event_location:
-                range: string
+                range: gs1:GlobalLocationNumber
                 description: GLN or URI for location - aligns with EPCIS readPoint/bizLocation concepts
                 annotations:
                     sql_identifier: trc_hist_event_location
+                    gs1_aligned: true
                 pattern: "^(urn:epc:id:sgln:|https?://|[0-9]{13}).*"
 
             event_location_value:
@@ -158,20 +170,22 @@ classes:
                 description: Value holder for timezone offset
 
             read_point:
-                range: string
+                range: gs1:GlobalLocationNumber
                 description: Specific location where event occurred EPCIS readPoint
                 annotations:
                     sql_identifier: trc_hist_read_point
+                    gs1_aligned: true
 
             read_point_value:
                 range: string
                 description: Value holder for read point
 
             biz_location:
-                range: string
+                range: gs1:GlobalLocationNumber
                 description: Business location where objects are expected following event EPCIS bizLocation
                 annotations:
                     sql_identifier: trc_hist_biz_location
+                    gs1_aligned: true
 
             biz_location_value:
                 range: string
@@ -182,20 +196,23 @@ classes:
                 description: Declaration that this event is in error EPCIS errorDeclaration
 
             certification_info:
-                range: string
-                description: Reference to relevant certifications for this event
+                range: uri
+                multivalued: true
+                description: URI references to relevant certification documents or standards
                 annotations:
                     sql_identifier: trc_hist_certification_info
+                    reference_type: "certification"
 
             certification_info_value:
                 range: string
                 description: Value holder for certification info
 
             sensor_metadata:
-                range: string
-                description: IoT sensor data associated with event temperature humidity etc
+                range: epcis:SensorReport
+                description: IoT sensor data using EPCIS 2.0 SensorReport structure
                 annotations:
                     sql_identifier: trc_hist_sensor_metadata
+                    epcis_aligned: true
 
             sensor_metadata_value:
                 range: string
@@ -215,10 +232,11 @@ classes:
                 description: Value holder for transfer date
 
             previous_owner:
-                range: string
+                range: gs1:GlobalLocationNumber
                 description: Source party GLN - aligns with EPCIS source concept
                 annotations:
                     sql_identifier: trc_owner_previous_owner
+                    gs1_aligned: true
                 pattern: "^[0-9]{13}$"
 
             previous_owner_value:
@@ -226,10 +244,11 @@ classes:
                 description: Value holder for previous owner
 
             new_owner:
-                range: string
+                range: gs1:GlobalLocationNumber
                 description: Destination party GLN - aligns with EPCIS destination concept
                 annotations:
                     sql_identifier: trc_owner_new_owner
+                    gs1_aligned: true
                 pattern: "^[0-9]{13}$"
 
             new_owner_value:
@@ -248,10 +267,11 @@ classes:
                 description: Value holder for transfer type
 
             transfer_location:
-                range: string
+                range: gs1:GlobalLocationNumber
                 description: Physical location GLN - aligns with EPCIS bizLocation concept
                 annotations:
                     sql_identifier: trc_owner_transfer_location
+                    gs1_aligned: true
                 pattern: "^[0-9]{13}$"
 
             transfer_location_value:
@@ -259,22 +279,24 @@ classes:
                 description: Value holder for transfer location
 
             chain_of_custody_reference:
-                range: string
+                range: uri
                 multivalued: true
                 description: Previous event links EPCIS extensions
                 annotations:
                     sql_identifier: trc_owner_custody_chain
+                    epcis_aligned: true
 
             chain_of_custody_reference_value:
                 range: string
                 description: Value holder for custody chain references
 
             ownership_documentation:
-                range: string
+                range: uri
                 multivalued: true
                 description: Digital references EPCIS bizTransactionList URIs to documents
                 annotations:
                     sql_identifier: trc_owner_documentation
+                    epcis_aligned: true
 
             ownership_documentation_value:
                 range: string
@@ -302,10 +324,11 @@ classes:
                 description: Value holder for linked product identifier
 
             quantity_transferred:
-                range: integer
-                description: Number of units transferred
+                range: epcis:QuantityElement
+                description: Quantity transferred using EPCIS QuantityElement structure
                 annotations:
                     sql_identifier: trc_owner_quantity
+                    epcis_aligned: true
 
             quantity_transferred_value:
                 range: string
@@ -322,10 +345,11 @@ classes:
                 description: Value holder for transfer monetary value
 
             currency:
-                range: string
-                description: Currency code for transfer value ISO 4217
+                range: iso:4217
+                description: Currency code for transfer value using ISO 4217 standard
                 annotations:
                     sql_identifier: trc_owner_currency
+                    iso_4217: true
                 pattern: "^[A-Z]{3}$"
 
             currency_value:
@@ -379,10 +403,11 @@ classes:
                 description: Value holder for activity date
 
             facility_identifier:
-                range: string
-                description: Facility GLN where activity occurred - aligns with EPCIS bizLocation concept
+                range: gs1:GlobalLocationNumber
+                description: GLN or OSID of processing facility
                 annotations:
                     sql_identifier: trc_value_facility_id
+                    gs1_aligned: true
                 pattern: "^[0-9]{13}$"
 
             facility_identifier_value:
@@ -401,32 +426,35 @@ classes:
                 description: Value holder for process description
 
             input_products:
-                range: string
+                range: epcis:EPCList
                 multivalued: true
-                description: Input EPCs and quantities - aligns with EPCIS inputEPCList concept
+                description: Input EPCs and quantities using EPCIS inputEPCList structure
                 annotations:
                     sql_identifier: trc_value_input_products
+                    epcis_aligned: true
 
             input_products_value:
                 range: string
                 description: Value holder for input products
 
             output_products:
-                range: string
+                range: epcis:EPCList
                 multivalued: true
-                description: Output EPCs and quantities - aligns with EPCIS outputEPCList concept
+                description: Output EPCs and quantities using EPCIS outputEPCList structure
                 annotations:
                     sql_identifier: trc_value_output_products
+                    epcis_aligned: true
 
             output_products_value:
                 range: string
                 description: Value holder for output products
 
             transformation_id:
-                range: string
-                description: Links related transformations - aligns with EPCIS transformationID concept
+                range: epcis:TransformationID
+                description: Transformation identifier using EPCIS transformationID
                 annotations:
                     sql_identifier: trc_value_transformation_id
+                    epcis_aligned: true
 
             transformation_id_value:
                 range: string
@@ -465,14 +493,16 @@ classes:
                 range: string
                 description: Value holder for quality results
 
-            process_duration_minutes:
-                range: integer
-                description: Duration of the process in minutes DPP extension
+            process_duration:
+                range: duration
+                description: Process duration in ISO 8601 format (e.g. PT30M for 30 minutes)
                 annotations:
-                    sql_identifier: trc_value_duration_min
+                    sql_identifier: trc_value_duration
+                    iso_8601_duration: true
                     dpp_extension: true
+                pattern: "^P(?:\\d+Y)?(?:\\d+M)?(?:\\d+W)?(?:\\d+D)?(?:T(?:\\d+H)?(?:\\d+M)?(?:\\d+(?:\\.\\d+)?S)?)?$"
 
-            process_duration_minutes_value:
+            process_duration_value:
                 range: string
                 description: Value holder for process duration
 
@@ -508,12 +538,13 @@ classes:
                 description: Value holder for value added
 
             process_certification:
-                range: string
+                range: uri
                 multivalued: true
-                description: Certifications applicable to this process DPP extension
+                description: URI references to process certifications ISO standards or quality systems
                 annotations:
                     sql_identifier: trc_value_certifications
                     dpp_extension: true
+                    reference_type: "certification"
 
             process_certification_value:
                 range: string
@@ -524,7 +555,6 @@ classes:
         attributes:
             declaration_time:
                 range: datetime
-                required: true
                 description: When the error was declared
                 annotations:
                     sql_identifier: trc_hist_error_declaration_time
@@ -558,20 +588,23 @@ classes:
         description: Supply chain participants and their interactions with products
         attributes:
             actor_identifier:
-                range: string
+                range: gs1:PartyGlobalLocationNumber
                 description: Organization identifier GLN LEI or VAT
                 annotations:
                     sql_identifier: trc_actor_id
+                    gs1_aligned: true
+                pattern: "^([0-9]{13}|[A-Z0-9]{20}|[A-Z]{2}[A-Z0-9]+)$"
 
             actor_identifier_value:
                 range: string
                 description: Value holder for actor identifier
 
             actor_role:
-                range: string
-                description: Role in supply chain - aligns with CBV party role concepts
+                range: cbv:SourceDestinationType
+                description: Role in supply chain using CBV Source/Destination types
                 annotations:
                     sql_identifier: trc_actor_role
+                    cbv_aligned: true
 
             actor_role_value:
                 range: string
@@ -608,11 +641,12 @@ classes:
                 description: Value holder for responsibility scope
 
             certification_status:
-                range: string
+                range: uri
                 multivalued: true
-                description: Relevant certifications ISO organic fair trade
+                description: URI references to actor certifications ISO 9001 ISO 14001 organic fair trade
                 annotations:
                     sql_identifier: trc_actor_certifications
+                    reference_type: "certification"
 
             certification_status_value:
                 range: string
@@ -632,20 +666,23 @@ classes:
                 description: Value holder for shipment identifier
 
             transport_mode:
-                range: string
-                description: Mode of transport road rail sea air multimodal
+                range: unece:TransportModeCode
+                description: Mode of transport using UN/ECE Recommendation 19 codes
                 annotations:
                     sql_identifier: trc_logis_transport_mode
+                    unece_rec_19: true
 
             transport_mode_value:
                 range: string
                 description: Value holder for transport mode
 
             departure_location:
-                range: string
-                description: Origin UN/LOCODE
+                range: unece:UNLOCODE
+                description: Origin UN/LOCODE or GLN
                 annotations:
                     sql_identifier: trc_logis_departure_loc
+                    unece_aligned: true
+                pattern: "^([A-Z]{2}[A-Z0-9]{3}|[0-9]{13})$"
 
             departure_location_value:
                 range: string
@@ -662,10 +699,12 @@ classes:
                 description: Value holder for departure timestamp
 
             arrival_location:
-                range: string
-                description: Destination UN/LOCODE
+                range: unece:UNLOCODE
+                description: Destination UN/LOCODE or GLN
                 annotations:
                     sql_identifier: trc_logis_arrival_loc
+                    unece_aligned: true
+                pattern: "^([A-Z]{2}[A-Z0-9]{3}|[0-9]{13})$"
 
             arrival_location_value:
                 range: string
@@ -682,20 +721,22 @@ classes:
                 description: Value holder for arrival timestamp
 
             carrier_identifier:
-                range: string
+                range: gs1:PartyGlobalLocationNumber
                 description: Transport company GLN or identifier
                 annotations:
                     sql_identifier: trc_logis_carrier_id
+                    gs1_aligned: true
 
             carrier_identifier_value:
                 range: string
                 description: Value holder for carrier identifier
 
             route_information:
-                range: string
-                description: Planned route details
+                range: gs1:RouteInformation
+                description: Planned route using GS1 route information structure
                 annotations:
                     sql_identifier: trc_logis_route_info
+                    gs1_aligned: true
 
             route_information_value:
                 range: string
@@ -707,10 +748,11 @@ classes:
                 description: Distribution centers warehouses transshipment points
 
             transport_conditions:
-                range: string
-                description: Temperature humidity shock monitoring data
+                range: epcis:SensorReport
+                description: Transport conditions using EPCIS 2.0 SensorReport for temperature humidity shock
                 annotations:
                     sql_identifier: trc_logis_conditions
+                    epcis_aligned: true
 
             transport_conditions_value:
                 range: string
@@ -720,10 +762,12 @@ classes:
         description: Stop location during logistics movement
         attributes:
             stop_location:
-                range: string
-                description: UN/LOCODE of stop location
+                range: unece:UNLOCODE
+                description: UN/LOCODE or GLN of stop location
                 annotations:
                     sql_identifier: trc_logis_stop_location
+                    unece_aligned: true
+                pattern: "^([A-Z]{2}[A-Z0-9]{3}|[0-9]{13})$"
 
             stop_location_value:
                 range: string
@@ -740,10 +784,12 @@ classes:
                 description: Value holder for stop timestamp
 
             stop_duration:
-                range: integer
-                description: Duration at stop in minutes
+                range: duration
+                description: Stop duration in ISO 8601 format (e.g. PT2H30M for 2 hours 30 minutes)
                 annotations:
                     sql_identifier: trc_logis_stop_duration
+                    iso_8601_duration: true
+                pattern: "^P(?:\\d+Y)?(?:\\d+M)?(?:\\d+W)?(?:\\d+D)?(?:T(?:\\d+H)?(?:\\d+M)?(?:\\d+(?:\\.\\d+)?S)?)?$"
 
             stop_duration_value:
                 range: string
@@ -803,10 +849,11 @@ classes:
         description: Return channel information
         attributes:
             return_location:
-                range: string
-                description: GLN of return collection point
+                range: gs1:GlobalLocationNumber
+                description: Location where products can be returned GLN
                 annotations:
-                    sql_identifier: trc_reverse_return_loc
+                    sql_identifier: trc_reverse_return_location
+                    gs1_aligned: true
 
             return_location_value:
                 range: string
@@ -823,10 +870,12 @@ classes:
                 description: Value holder for return method
 
             return_documentation:
-                range: string
-                description: Required documentation for return
+                range: uri
+                multivalued: true
+                description: URI references to return authorization shipping labels RMA documents
                 annotations:
-                    sql_identifier: trc_reverse_docs
+                    sql_identifier: trc_reverse_return_docs
+                    reference_type: "documentation"
 
             return_documentation_value:
                 range: string
@@ -837,9 +886,10 @@ classes:
         attributes:
             refurbishment_date:
                 range: datetime
-                description: When refurbishment occurred
+                description: When refurbishment occurred ISO 8601 format
                 annotations:
                     sql_identifier: trc_reverse_refurb_date
+                    iso_8601: true
 
             refurbishment_date_value:
                 range: string
@@ -868,10 +918,11 @@ classes:
                 description: Value holder for components replaced
 
             refurbishment_certification:
-                range: string
-                description: Certification of refurbishment quality
+                range: uri
+                description: URI reference to refurbishment quality certification or standard
                 annotations:
                     sql_identifier: trc_reverse_refurb_cert
+                    reference_type: "certification"
 
             refurbishment_certification_value:
                 range: string
@@ -913,9 +964,12 @@ classes:
 
             recovery_percentage:
                 range: float
-                description: Percentage of materials recovered
+                description: Percentage of materials recovered (0-100)
                 annotations:
                     sql_identifier: trc_reverse_recovery_pct
+                    unit: "percent"
+                minimum_value: 0.0
+                maximum_value: 100.0
 
             recovery_percentage_value:
                 range: string
@@ -945,24 +999,284 @@ classes:
                 description: Value holder for disposal method
 
             disposal_facility:
-                range: string
+                range: gs1:GlobalLocationNumber
                 description: GLN or identifier of disposal facility
                 annotations:
                     sql_identifier: trc_reverse_disposal_facility
+                    gs1_aligned: true
 
             disposal_facility_value:
                 range: string
                 description: Value holder for disposal facility
 
             disposal_certification:
-                range: string
-                description: Certification of proper disposal
+                range: uri
+                description: URI reference to disposal certification or compliance document
                 annotations:
                     sql_identifier: trc_reverse_disposal_cert
+                    reference_type: "certification"
 
             disposal_certification_value:
                 range: string
                 description: Value holder for disposal certification
+
+    AggregationEvents:
+        description: Packaging hierarchy operations extending EPCIS AggregationEvent
+        attributes:
+            aggregation_event_id:
+                range: string
+                description: Unique identifier for aggregation operation - aligns with EPCIS eventID
+                annotations:
+                    sql_identifier: trc_agg_event_id
+                pattern: "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+
+            aggregation_event_id_value:
+                range: string
+                description: Value holder for aggregation event ID
+
+            aggregation_type:
+                range: epcis:Action
+                description: ADD for packing DELETE for unpacking - uses EPCIS Action directly
+                annotations:
+                    sql_identifier: trc_agg_type
+                    epcis_aligned: true
+
+            aggregation_type_value:
+                range: string
+                description: Value holder for aggregation type
+
+            parent_identifier:
+                range: string
+                description: Container pallet or case EPC being packed/unpacked - aligns with EPCIS parentID
+                annotations:
+                    sql_identifier: trc_agg_parent_id
+                pattern: "^(urn:epc:id:|[0-9]{14}:).*"
+
+            parent_identifier_value:
+                range: string
+                description: Value holder for parent identifier
+
+            child_identifiers:
+                range: epcis:EPCList
+                multivalued: true
+                description: Child EPCs being aggregated/disaggregated using EPCIS childEPCs structure
+                annotations:
+                    sql_identifier: trc_agg_child_ids
+                    epcis_aligned: true
+
+            child_identifiers_value:
+                range: string
+                description: Value holder for child identifiers
+
+            aggregation_location:
+                range: gs1:GlobalLocationNumber
+                description: GLN where operation occurred - aligns with EPCIS bizLocation
+                annotations:
+                    sql_identifier: trc_agg_location
+                    gs1_aligned: true
+                pattern: "^[0-9]{13}$"
+
+            aggregation_location_value:
+                range: string
+                description: Value holder for aggregation location
+
+            aggregation_timestamp:
+                range: datetime
+                description: When packing/unpacking happened - aligns with EPCIS eventTime
+                annotations:
+                    sql_identifier: trc_agg_timestamp
+
+            aggregation_timestamp_value:
+                range: string
+                description: Value holder for aggregation timestamp
+
+            packaging_level:
+                range: PackagingLevelEnum
+                description: Level in packaging hierarchy
+                annotations:
+                    sql_identifier: trc_agg_pack_level
+
+            packaging_level_value:
+                range: string
+                description: Value holder for packaging level
+
+            biz_step:
+                range: cbv:BizStep
+                description: Business step like packing commissioning etc - uses CBV directly
+                annotations:
+                    sql_identifier: trc_agg_biz_step
+                    epcis_cbv_aligned: true
+
+            biz_step_value:
+                range: string
+                description: Value holder for business step
+
+            disposition:
+                range: string
+                description: Business condition of aggregation - aligns with EPCIS disposition
+                annotations:
+                    sql_identifier: trc_agg_disposition
+
+            disposition_value:
+                range: string
+                description: Value holder for disposition
+
+            read_point:
+                range: gs1:GlobalLocationNumber
+                description: Specific read point where aggregation occurred - EPCIS readPoint
+                annotations:
+                    sql_identifier: trc_agg_read_point
+                    gs1_aligned: true
+
+            read_point_value:
+                range: string
+                description: Value holder for read point
+
+    SupplyChainIncidents:
+        description: Exception events and disruptions during supply chain operations
+        attributes:
+            incident_identifier:
+                range: string
+                description: Unique incident tracking ID
+                annotations:
+                    sql_identifier: trc_incident_id
+                pattern: "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+
+            incident_identifier_value:
+                range: string
+                description: Value holder for incident identifier
+
+            incident_type:
+                range: IncidentTypeEnum
+                description: Classification of incident type
+                annotations:
+                    sql_identifier: trc_incident_type
+
+            incident_type_value:
+                range: string
+                description: Value holder for incident type
+
+            incident_timestamp:
+                range: datetime
+                description: When incident occurred
+                annotations:
+                    sql_identifier: trc_incident_timestamp
+
+            incident_timestamp_value:
+                range: string
+                description: Value holder for incident timestamp
+
+            incident_location:
+                range: unece:UNLOCODE
+                description: GLN or UN/LOCODE where incident happened
+                annotations:
+                    sql_identifier: trc_incident_location
+                    unece_aligned: true
+                pattern: "^([0-9]{13}|[A-Z]{2}[A-Z0-9]{3}).*"
+
+            incident_location_value:
+                range: string
+                description: Value holder for incident location
+
+            affected_products:
+                range: epcis:EPCList
+                multivalued: true
+                description: Affected products using EPCIS EPCList structure
+                annotations:
+                    sql_identifier: trc_incident_affected_products
+                    epcis_aligned: true
+
+            affected_products_value:
+                range: string
+                description: Value holder for affected products
+
+            incident_severity:
+                range: SeverityLevelEnum
+                description: Severity level classification
+                annotations:
+                    sql_identifier: trc_incident_severity
+
+            incident_severity_value:
+                range: string
+                description: Value holder for incident severity
+
+            root_cause:
+                range: string
+                description: Identified cause of the incident
+                annotations:
+                    sql_identifier: trc_incident_root_cause
+
+            root_cause_value:
+                range: string
+                description: Value holder for root cause
+
+            corrective_actions:
+                range: string
+                multivalued: true
+                description: Actions taken to resolve or mitigate
+                annotations:
+                    sql_identifier: trc_incident_corrective_actions
+
+            corrective_actions_value:
+                range: string
+                description: Value holder for corrective actions
+
+            incident_documentation:
+                range: uri
+                multivalued: true
+                description: URI references to incident reports insurance claims photos
+                annotations:
+                    sql_identifier: trc_incident_documentation
+                    reference_type: "documentation"
+
+            incident_documentation_value:
+                range: string
+                description: Value holder for incident documentation
+
+            resolution_status:
+                range: ResolutionStatusEnum
+                description: Current status of incident resolution
+                annotations:
+                    sql_identifier: trc_incident_resolution_status
+
+            resolution_status_value:
+                range: string
+                description: Value holder for resolution status
+
+            linked_event_ids:
+                range: string
+                multivalued: true
+                description: IDs of related supply chain events
+                annotations:
+                    sql_identifier: trc_incident_linked_events
+                pattern: "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+
+            linked_event_ids_value:
+                range: string
+                description: Value holder for linked event IDs
+
+            estimated_impact:
+                range: iso:MonetaryAmount
+                description: Estimated financial impact using ISO monetary amount structure
+                annotations:
+                    sql_identifier: trc_incident_impact
+                    iso_4217: true
+
+            estimated_impact_value:
+                range: string
+                description: Value holder for estimated impact
+
+            reporter_identifier:
+                range: gs1:PartyGlobalLocationNumber
+                description: GLN or identifier of entity reporting the incident
+                annotations:
+                    sql_identifier: trc_incident_reporter
+                    gs1_aligned: true
+                pattern: "^[0-9]{13}$"
+
+            reporter_identifier_value:
+                range: string
+                description: Value holder for reporter identifier
 
 # Enumerations aligned with EPCIS/CBV standards
 enums:
@@ -1037,3 +1351,77 @@ enums:
                 description: Industrial composting
             SPECIALIZED_TREATMENT:
                 description: Specialized hazardous treatment
+
+    PackagingLevelEnum:
+        description: Levels in packaging hierarchy - aligns with EPCIS packaging concepts
+        permissible_values:
+            ITEM:
+                description: Individual item or unit level
+            INNER_PACK:
+                description: Inner pack or bundle
+            CASE:
+                description: Case or carton level
+            PALLET:
+                description: Pallet level
+            CONTAINER:
+                description: Container or trailer level
+            TRANSPORT_UNIT:
+                description: Full transport unit
+
+    IncidentTypeEnum:
+        description: Types of supply chain incidents and exceptions
+        permissible_values:
+            DAMAGE:
+                description: Physical damage to products
+            THEFT:
+                description: Theft or loss of products
+            DELAY:
+                description: Transportation or processing delay
+            CONTAMINATION:
+                description: Product contamination
+            COLD_CHAIN_BREAK:
+                description: Temperature excursion in cold chain
+            SECURITY_BREACH:
+                description: Unauthorized access or tampering
+            NATURAL_DISASTER:
+                description: Impact from natural disaster
+            RECALL:
+                description: Product recall activation
+            QUARANTINE:
+                description: Products placed in quarantine
+            DOCUMENTATION_ERROR:
+                description: Documentation or labeling error
+            SYSTEM_FAILURE:
+                description: IT or equipment system failure
+            REGULATORY_HOLD:
+                description: Regulatory inspection or hold
+
+    SeverityLevelEnum:
+        description: Severity classification for incidents
+        permissible_values:
+            CRITICAL:
+                description: Critical severity requiring immediate action
+            HIGH:
+                description: High severity with significant impact
+            MEDIUM:
+                description: Medium severity with moderate impact
+            LOW:
+                description: Low severity with minimal impact
+            INFORMATIONAL:
+                description: Informational only no immediate action required
+
+    ResolutionStatusEnum:
+        description: Status of incident resolution
+        permissible_values:
+            OPEN:
+                description: Incident is open and unresolved
+            IN_PROGRESS:
+                description: Resolution in progress
+            PENDING_VERIFICATION:
+                description: Resolution pending verification
+            RESOLVED:
+                description: Incident resolved
+            CLOSED:
+                description: Incident closed
+            ESCALATED:
+                description: Escalated to higher authority
