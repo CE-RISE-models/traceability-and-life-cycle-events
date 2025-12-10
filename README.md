@@ -341,6 +341,7 @@ https://codeberg.org/CE-RISE-models/traceability-and-life-cycle-events/src/tag/p
 
 Files available in that directory typically include:
 
+- schema.yaml
 - schema.json
 - shacl.ttl
 - model.ttl
