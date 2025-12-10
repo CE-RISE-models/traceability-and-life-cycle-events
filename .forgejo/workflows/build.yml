@@ -37,6 +37,14 @@ jobs:
                   echo "Generated files:"
                   ls -la generated/
 
+            - name: Include LinkML YAML schema
+              run: |
+                  echo "Copying LinkML YAML schema to generated/"
+                  mkdir -p generated
+                  cp model/model.yaml generated/schema.yaml
+                  echo "Files in generated/:"
+                  ls -la generated/
+
             - name: Extract project metadata
               run: |
                   echo "Extracting metadata from repository..."
@@ -59,7 +67,7 @@ jobs:
                           project_description = citation.get('abstract', project_description)
                           if 'repository-code' in citation:
                               repo_url = citation['repository-code']
-                  except:
+                  except Exception:
                       pass
 
                   # Try to extract from model/model.yaml as fallback
@@ -70,16 +78,16 @@ jobs:
                               project_title = model['title']
                           if 'description' in model:
                               project_description = model['description']
-                  except:
+                  except Exception:
                       pass
 
-                  # Export as environment variables
+                  # Export as environment variables (for sourcing later)
                   print(f"export PROJECT_TITLE='{project_title}'")
                   print(f"export PROJECT_DESCRIPTION='{project_description}'")
                   print(f"export REPO_URL='{repo_url}'")
                   EOF
 
-                  # Source the environment variables
+                  # For this step, just show what would be set
                   source set_env.sh
                   echo "Project Title: $PROJECT_TITLE"
                   echo "Project Description: $PROJECT_DESCRIPTION"
@@ -87,6 +95,12 @@ jobs:
 
             - name: Create index.html
               run: |
+                  # Load metadata into this step's environment
+                  source set_env.sh
+
+                  # Ensure generated directory exists
+                  mkdir -p generated
+
                   cat > generated/index.html << EOF
                   <!DOCTYPE html>
                   <html lang="en">
@@ -175,6 +189,12 @@ jobs:
 
                       <h2>Generated Schema Files</h2>
                       <ul class="files">
+                          <li>
+                              <a href="schema.yaml">LinkML YAML Schema</a>
+                              <div class="file-description">
+                                  Canonical LinkML YAML source of the data model
+                              </div>
+                          </li>
                           <li>
                               <a href="schema.json">JSON Schema</a>
                               <div class="file-description">
