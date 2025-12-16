@@ -1,0 +1,3722 @@
+WARNING:linkml.generators.owlgen:Ambiguous attribute: linked_product_identifier https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/linked_product_identifier
+WARNING:linkml.generators.owlgen:Ambiguous attribute: linked_product_identifier_value https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/linked_product_identifier_value
+WARNING:linkml.generators.owlgen:Ambiguous attribute: disposition https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/disposition
+WARNING:linkml.generators.owlgen:Ambiguous attribute: disposition_value https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/disposition_value
+WARNING:linkml.generators.owlgen:Ambiguous attribute: biz_step https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/biz_step
+WARNING:linkml.generators.owlgen:Ambiguous attribute: biz_step_value https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/biz_step_value
+WARNING:linkml.generators.owlgen:Ambiguous attribute: action https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/action
+WARNING:linkml.generators.owlgen:Ambiguous attribute: action_value https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/action_value
+WARNING:linkml.generators.owlgen:Ambiguous attribute: read_point https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/read_point
+WARNING:linkml.generators.owlgen:Ambiguous attribute: read_point_value https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/read_point_value
+WARNING:linkml.generators.owlgen:Ambiguous attribute: action https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/action
+WARNING:linkml.generators.owlgen:Ambiguous attribute: action_value https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/action_value
+WARNING:linkml.generators.owlgen:Ambiguous attribute: linked_product_identifier https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/linked_product_identifier
+WARNING:linkml.generators.owlgen:Ambiguous attribute: linked_product_identifier_value https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/linked_product_identifier_value
+WARNING:linkml.generators.owlgen:Ambiguous attribute: biz_step https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/biz_step
+WARNING:linkml.generators.owlgen:Ambiguous attribute: biz_step_value https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/biz_step_value
+WARNING:linkml.generators.owlgen:Ambiguous attribute: disposition https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/disposition
+WARNING:linkml.generators.owlgen:Ambiguous attribute: disposition_value https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/disposition_value
+WARNING:linkml.generators.owlgen:Ambiguous attribute: read_point https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/read_point
+WARNING:linkml.generators.owlgen:Ambiguous attribute: read_point_value https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/read_point_value
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix linkml: <https://w3id.org/linkml/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix pav: <http://purl.org/pav/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix trc: <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/.owl.ttl> a owl:Ontology ;
+    rdfs:label "traceability_and_life_cycle_events" ;
+    dcterms:license "https://creativecommons.org/licenses/by-nc/4.0/" ;
+    dcterms:title "Traceability and Life Cycle Events Data Model" ;
+    pav:version "0.0.1" ;
+    skos:definition "Dynamic event-based information throughout product supply chain journey aligned with GS1 EPCIS 2.0 standard" .
+
+trc:TraceabilityLifecycleEvents a owl:Class ;
+    rdfs:label "TraceabilityLifecycleEvents" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom trc:ActorTracking ;
+            owl:onProperty trc:actor_tracking ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom trc:ReverseLogistics ;
+            owl:onProperty trc:reverse_logistics ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:value_adding_activity ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom trc:ValueAddingActivityLocation ;
+            owl:onProperty trc:value_adding_activity ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:logistics_events ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom trc:AggregationEvents ;
+            owl:onProperty trc:aggregation_events ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:product_history ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:ownership_event ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom trc:SupplyChainIncidents ;
+            owl:onProperty trc:supply_chain_incidents ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom trc:LogisticsEvents ;
+            owl:onProperty trc:logistics_events ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:reverse_logistics ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom trc:OwnershipEvent ;
+            owl:onProperty trc:ownership_event ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:supply_chain_incidents ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:aggregation_events ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom trc:ProductHistory ;
+            owl:onProperty trc:product_history ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:actor_tracking ] ;
+    skos:definition "Root container for all traceability and lifecycle events in a product journey" ;
+    skos:inScheme trc: .
+
+trc:ActorTracking a owl:Class ;
+    rdfs:label "ActorTracking" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:intersectionOf ( xsd:string [ a rdfs:Datatype ;
+                                owl:onDatatype xsd:string ;
+                                owl:withRestrictions ( [ xsd:pattern "^([0-9]{13}|[A-Z0-9]{20}|[A-Z]{2}[A-Z0-9]+)$" ] ) ] ) ] ;
+            owl:onProperty trc:actor_identifier ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:actor_identifier ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:actor_role_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:action_performed_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:responsibility_scope ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:activity_timestamp ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:certification_status ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:action_performed ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:action_performed_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:actor_identifier_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:actor_identifier ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:action_performed ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:activity_timestamp ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:certification_status_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:certification_status_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:actor_role ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:actor_role ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:responsibility_scope_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:activity_timestamp_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:responsibility_scope ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:action_performed_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:activity_timestamp_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:action_performed ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:activity_timestamp_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:actor_role_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:dateTime ;
+            owl:onProperty trc:activity_timestamp ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:certification_status_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:actor_identifier_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:responsibility_scope_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:responsibility_scope_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:actor_role_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:anyURI ;
+            owl:onProperty trc:certification_status ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:actor_identifier_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:responsibility_scope ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:actor_role ] ;
+    skos:definition "Supply chain participants and their interactions with products" ;
+    skos:inScheme trc: .
+
+trc:AggregationEvents a owl:Class ;
+    rdfs:label "AggregationEvents" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:aggregation_type_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:read_point_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:aggregation_type ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:child_identifiers_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:child_identifiers_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:aggregation_type ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:packaging_level_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:biz_step_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:read_point ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:biz_step ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:parent_identifier ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:disposition ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:aggregation_timestamp_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:aggregation_event_id_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:parent_identifier_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:dateTime ;
+            owl:onProperty trc:aggregation_timestamp ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:aggregation_event_id ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:biz_step_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:disposition_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:aggregation_type ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:read_point ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:aggregation_location ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:packaging_level_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:aggregation_event_id_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:biz_step_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:packaging_level ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:aggregation_event_id_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:parent_identifier ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:child_identifiers_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:intersectionOf ( xsd:string [ a rdfs:Datatype ;
+                                owl:onDatatype xsd:string ;
+                                owl:withRestrictions ( [ xsd:pattern "^[0-9]{13}$" ] ) ] ) ] ;
+            owl:onProperty trc:aggregation_location ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:aggregation_type_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:aggregation_location ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:intersectionOf ( xsd:string [ a rdfs:Datatype ;
+                                owl:onDatatype xsd:string ;
+                                owl:withRestrictions ( [ xsd:pattern "^(urn:epc:id:|[0-9]{14}:).*" ] ) ] ) ] ;
+            owl:onProperty trc:parent_identifier ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:read_point ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:aggregation_location_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:read_point_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:disposition_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:packaging_level ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:aggregation_location_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:disposition_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:child_identifiers ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:child_identifiers ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:aggregation_timestamp_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:read_point_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:aggregation_type_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:aggregation_event_id ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:aggregation_timestamp ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:aggregation_timestamp_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:disposition ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:disposition ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:aggregation_timestamp ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:PackagingLevelEnum> ;
+            owl:onProperty trc:packaging_level ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:aggregation_location_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:parent_identifier_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:intersectionOf ( xsd:string [ a rdfs:Datatype ;
+                                owl:onDatatype xsd:string ;
+                                owl:withRestrictions ( [ xsd:pattern "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$" ] ) ] ) ] ;
+            owl:onProperty trc:aggregation_event_id ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:biz_step ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:parent_identifier_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:biz_step ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:packaging_level_value ] ;
+    skos:definition "Packaging hierarchy operations extending EPCIS AggregationEvent" ;
+    skos:inScheme trc: .
+
+trc:CustomerReturnChannel a owl:Class ;
+    rdfs:label "CustomerReturnChannel" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:return_location_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:return_method_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:return_documentation_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:return_location ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:anyURI ;
+            owl:onProperty trc:return_documentation ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:return_location_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:return_method ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:return_documentation ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:return_documentation_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:return_method_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:return_method ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:return_method_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:return_documentation_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:return_location ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ReturnMethodEnum> ;
+            owl:onProperty trc:return_method ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:return_location_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:return_location ] ;
+    skos:definition "Return channel information" ;
+    skos:inScheme trc: .
+
+trc:DisposalEvent a owl:Class ;
+    rdfs:label "DisposalEvent" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:disposal_facility_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:disposal_date_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:disposal_facility ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:disposal_method ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:disposal_certification ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:disposal_date_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:disposal_method ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:disposal_facility_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:disposal_facility ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:disposal_facility ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:DisposalMethodEnum> ;
+            owl:onProperty trc:disposal_method ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:disposal_certification ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:disposal_date ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:anyURI ;
+            owl:onProperty trc:disposal_certification ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:disposal_certification_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:disposal_date ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:disposal_certification_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:disposal_method_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:disposal_method_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:disposal_method_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:disposal_date_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:disposal_facility_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:dateTime ;
+            owl:onProperty trc:disposal_date ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:disposal_certification_value ] ;
+    skos:definition "Final disposal details" ;
+    skos:inScheme trc: .
+
+trc:ErrorDeclaration a owl:Class ;
+    rdfs:label "ErrorDeclaration" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:declaration_time ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:dateTime ;
+            owl:onProperty trc:declaration_time ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:corrective_event_ids ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:reason ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:reason ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:reason_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:corrective_event_ids_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:corrective_event_ids_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:corrective_event_ids ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:declaration_time ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:declaration_time_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:reason ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:corrective_event_ids_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:reason_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:declaration_time_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:declaration_time_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:reason_value ] ;
+    skos:definition "Declaration that an event was recorded in error EPCIS errorDeclaration" ;
+    skos:inScheme trc: .
+
+trc:IntermediateStop a owl:Class ;
+    rdfs:label "IntermediateStop" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:stop_timestamp_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:stop_location_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:stop_duration_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:stop_duration_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:dateTime ;
+            owl:onProperty trc:stop_timestamp ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:stop_duration ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:stop_timestamp_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:intersectionOf ( xsd:string [ a rdfs:Datatype ;
+                                owl:onDatatype xsd:string ;
+                                owl:withRestrictions ( [ xsd:pattern "^([A-Z]{2}[A-Z0-9]{3}|[0-9]{13})$" ] ) ] ) ] ;
+            owl:onProperty trc:stop_location ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:stop_timestamp_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:stop_location ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:stop_location_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:stop_duration ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:stop_location_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:stop_timestamp ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:stop_location ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:stop_duration_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:stop_timestamp ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:intersectionOf ( xsd:string [ a rdfs:Datatype ;
+                                owl:onDatatype xsd:string ;
+                                owl:withRestrictions ( [ xsd:pattern "^P(?:\\d+Y)?(?:\\d+M)?(?:\\d+W)?(?:\\d+D)?(?:T(?:\\d+H)?(?:\\d+M)?(?:\\d+(?:\\.\\d+)?S)?)?$" ] ) ] ) ] ;
+            owl:onProperty trc:stop_duration ] ;
+    skos:definition "Stop location during logistics movement" ;
+    skos:inScheme trc: .
+
+trc:LogisticsEvents a owl:Class ;
+    rdfs:label "LogisticsEvents" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:transport_conditions_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:intersectionOf ( xsd:string [ a rdfs:Datatype ;
+                                owl:onDatatype xsd:string ;
+                                owl:withRestrictions ( [ xsd:pattern "^([A-Z]{2}[A-Z0-9]{3}|[0-9]{13})$" ] ) ] ) ] ;
+            owl:onProperty trc:departure_location ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:departure_timestamp ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:shipment_identifier ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:transport_mode ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:intermediate_stops ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:departure_timestamp ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:carrier_identifier ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:route_information_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:arrival_timestamp_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:transport_conditions ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:transport_mode ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:arrival_location_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:carrier_identifier_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:transport_conditions ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:departure_location_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:shipment_identifier_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:arrival_timestamp ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:arrival_timestamp_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:transport_mode_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:shipment_identifier ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:transport_mode_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:dateTime ;
+            owl:onProperty trc:arrival_timestamp ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:dateTime ;
+            owl:onProperty trc:departure_timestamp ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:transport_conditions_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:departure_timestamp_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:route_information ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom trc:IntermediateStop ;
+            owl:onProperty trc:intermediate_stops ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:departure_location_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:route_information ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:departure_timestamp_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:arrival_timestamp ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:arrival_timestamp_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:transport_conditions_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:departure_location ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:arrival_location ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:route_information ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:transport_mode ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:departure_location_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:arrival_location_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:arrival_location_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:carrier_identifier ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:shipment_identifier ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:carrier_identifier_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:route_information_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:transport_mode_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:intersectionOf ( xsd:string [ a rdfs:Datatype ;
+                                owl:onDatatype xsd:string ;
+                                owl:withRestrictions ( [ xsd:pattern "^([A-Z]{2}[A-Z0-9]{3}|[0-9]{13})$" ] ) ] ) ] ;
+            owl:onProperty trc:arrival_location ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:transport_conditions ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:carrier_identifier_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:departure_location ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:departure_timestamp_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:carrier_identifier ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:route_information_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:shipment_identifier_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:arrival_location ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:shipment_identifier_value ] ;
+    skos:definition "Supply chain transportation tracking post-import - aligns with EPCIS ObjectEvent concepts" ;
+    skos:inScheme trc: .
+
+trc:OwnershipEvent a owl:Class ;
+    rdfs:label "OwnershipEvent" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:ownership_documentation_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:action_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:quantity_transferred ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:transfer_type ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:transfer_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:new_owner ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:transfer_location_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:linked_product_identifier_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:transfer_type ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:action ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:transfer_value_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:linked_product_identifier_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:ownership_status_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:action ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:dateTime ;
+            owl:onProperty trc:transfer_date ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:currency_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:ownership_documentation ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:new_owner_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:chain_of_custody_reference ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:linked_product_identifier_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:previous_owner ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:action_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:chain_of_custody_reference_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:chain_of_custody_reference_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:previous_owner_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:action ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:ownership_documentation_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:anyURI ;
+            owl:onProperty trc:chain_of_custody_reference ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:previous_owner_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:intersectionOf ( xsd:string [ a rdfs:Datatype ;
+                                owl:onDatatype xsd:string ;
+                                owl:withRestrictions ( [ xsd:pattern "^[A-Z]{3}$" ] ) ] ) ] ;
+            owl:onProperty trc:currency ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:previous_owner ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:ownership_status_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty trc:transfer_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:transfer_location_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:transfer_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:transfer_type_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:quantity_transferred_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:chain_of_custody_reference_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:new_owner_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:new_owner_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:transfer_date ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:transfer_date_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:action_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:transfer_date_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:quantity_transferred_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:transfer_type_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:transfer_location ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:currency_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:quantity_transferred ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:ownership_status ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:OwnershipStatusEnum> ;
+            owl:onProperty trc:ownership_status ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:transfer_date_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:intersectionOf ( xsd:string [ a rdfs:Datatype ;
+                                owl:onDatatype xsd:string ;
+                                owl:withRestrictions ( [ xsd:pattern "^(urn:epc:id:|[0-9]{14}:).*" ] ) ] ) ] ;
+            owl:onProperty trc:linked_product_identifier ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:transfer_location_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:transfer_type ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:currency_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:quantity_transferred_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:previous_owner_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:integer ;
+            owl:onProperty trc:quantity_transferred ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:transfer_value_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:transfer_type_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:transfer_value_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:intersectionOf ( xsd:string [ a rdfs:Datatype ;
+                                owl:onDatatype xsd:string ;
+                                owl:withRestrictions ( [ xsd:pattern "^[0-9]{13}$" ] ) ] ) ] ;
+            owl:onProperty trc:previous_owner ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:transfer_location ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:linked_product_identifier ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:currency ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:new_owner ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:currency ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:transfer_date ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:ownership_documentation_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:intersectionOf ( xsd:string [ a rdfs:Datatype ;
+                                owl:onDatatype xsd:string ;
+                                owl:withRestrictions ( [ xsd:pattern "^[0-9]{13}$" ] ) ] ) ] ;
+            owl:onProperty trc:transfer_location ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:ownership_status ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:linked_product_identifier ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:intersectionOf ( xsd:string [ a rdfs:Datatype ;
+                                owl:onDatatype xsd:string ;
+                                owl:withRestrictions ( [ xsd:pattern "^[0-9]{13}$" ] ) ] ) ] ;
+            owl:onProperty trc:new_owner ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:ownership_status_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:anyURI ;
+            owl:onProperty trc:ownership_documentation ] ;
+    skos:definition "Legal ownership and custody transfers extending EPCIS TransactionEvent" ;
+    skos:inScheme trc: .
+
+trc:ProductHistory a owl:Class ;
+    rdfs:label "ProductHistory" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:certification_info ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:biz_location ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:sensor_metadata ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:biz_step ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:biz_step_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:event_type ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:event_identifier ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:event_time_zone_offset_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:action ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:biz_location ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:intersectionOf ( xsd:string [ a rdfs:Datatype ;
+                                owl:onDatatype xsd:string ;
+                                owl:withRestrictions ( [ xsd:pattern "^(urn:epc:id:sgln:|https?://|[0-9]{13}).*" ] ) ] ) ] ;
+            owl:onProperty trc:event_location ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:error_declaration ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:linked_product_identifier ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:event_identifier_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:disposition_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:disposition_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:event_location_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:event_timestamp ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:sensor_metadata_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:event_time_zone_offset ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:certification_info_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:read_point_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:event_time_zone_offset ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:sensor_metadata ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:intersectionOf ( xsd:string [ a rdfs:Datatype ;
+                                owl:onDatatype xsd:string ;
+                                owl:withRestrictions ( [ xsd:pattern "^[+-][0-9]{2}:[0-9]{2}$" ] ) ] ) ] ;
+            owl:onProperty trc:event_time_zone_offset ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:read_point_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:event_type_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:read_point ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:linked_product_identifier_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:linked_product_identifier_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:event_type_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:action ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:event_description ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:certification_info_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:action_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:biz_location_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:event_description_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:intersectionOf ( xsd:string [ a rdfs:Datatype ;
+                                owl:onDatatype xsd:string ;
+                                owl:withRestrictions ( [ xsd:pattern "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$" ] ) ] ) ] ;
+            owl:onProperty trc:event_identifier ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:sensor_metadata ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:read_point ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:event_type_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:disposition ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:certification_info_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:biz_location_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:event_location_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:event_description_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:sensor_metadata_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:event_location ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:intersectionOf ( xsd:string [ a rdfs:Datatype ;
+                                owl:onDatatype xsd:string ;
+                                owl:withRestrictions ( [ xsd:pattern "^(urn:epc:id:|[0-9]{14}:).*" ] ) ] ) ] ;
+            owl:onProperty trc:linked_product_identifier ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:event_timestamp_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:event_description_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:event_description ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:disposition_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:biz_step_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:action ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:action_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:biz_step_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:biz_step ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:event_type ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:event_timestamp_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:event_location ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:error_declaration ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:biz_location ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:event_time_zone_offset_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:disposition ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:event_description ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:event_timestamp_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:read_point ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:event_identifier_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:biz_step ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:linked_product_identifier ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:sensor_metadata_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:event_timestamp ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:linked_product_identifier_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:action_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:disposition ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:dateTime ;
+            owl:onProperty trc:event_timestamp ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:event_location_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:biz_location_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:read_point_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:anyURI ;
+            owl:onProperty trc:certification_info ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:event_time_zone_offset_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:event_identifier ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom trc:ErrorDeclaration ;
+            owl:onProperty trc:error_declaration ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:event_type ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:event_identifier_value ] ;
+    skos:definition "EPCIS-compatible base event structure for complete product lifecycle audit trail" ;
+    skos:inScheme trc: .
+
+trc:RecyclingEvent a owl:Class ;
+    rdfs:label "RecyclingEvent" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:recycling_stream ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:recovery_percentage ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:recovery_percentage_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:materials_recovered ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:materials_recovered_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:recycling_stream_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:recovery_percentage ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:materials_recovered ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:recycling_stream ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:recovery_percentage_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:materials_recovered_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:recycling_date_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:RecyclingStreamEnum> ;
+            owl:onProperty trc:recycling_stream ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:recycling_date_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:recycling_stream_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:recycling_date ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:recycling_date ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:recycling_date_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:intersectionOf ( xsd:float [ a rdfs:Datatype ;
+                                owl:onDatatype xsd:float ;
+                                owl:withRestrictions ( [ xsd:minInclusive 0e+00 ] ) ] [ a rdfs:Datatype ;
+                                owl:onDatatype xsd:float ;
+                                owl:withRestrictions ( [ xsd:maxInclusive 1e+02 ] ) ] ) ] ;
+            owl:onProperty trc:recovery_percentage ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:recycling_stream_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:recovery_percentage_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:dateTime ;
+            owl:onProperty trc:recycling_date ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:materials_recovered_value ] ;
+    skos:definition "Material recovery and recycling details" ;
+    skos:inScheme trc: .
+
+trc:RefurbishmentEvent a owl:Class ;
+    rdfs:label "RefurbishmentEvent" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom xsd:dateTime ;
+            owl:onProperty trc:refurbishment_date ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:refurbishment_date_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:refurbishment_date ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:components_replaced ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:refurbishment_activities_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:refurbishment_activities ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:refurbishment_activities ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:components_replaced_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:refurbishment_certification_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:refurbishment_certification ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:refurbishment_certification_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:refurbishment_activities_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:refurbishment_certification_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:refurbishment_date_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:refurbishment_certification ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:components_replaced_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:components_replaced_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:refurbishment_activities_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:refurbishment_date ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:components_replaced ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:anyURI ;
+            owl:onProperty trc:refurbishment_certification ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:refurbishment_date_value ] ;
+    skos:definition "Product repair and refurbishment details" ;
+    skos:inScheme trc: .
+
+trc:ReverseLogistics a owl:Class ;
+    rdfs:label "ReverseLogistics" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:return_event_identifier_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:disposal_event ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:return_reason_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:recycling_event ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:return_initiation_date_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:recycling_event ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom trc:RefurbishmentEvent ;
+            owl:onProperty trc:refurbishment_event ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:customer_return_channels ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom trc:RecyclingEvent ;
+            owl:onProperty trc:recycling_event ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:return_event_identifier_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:return_initiation_date ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom trc:DisposalEvent ;
+            owl:onProperty trc:disposal_event ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:return_reason_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:return_event_identifier_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:refurbishment_event ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:return_initiation_date_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:return_event_identifier ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:dateTime ;
+            owl:onProperty trc:return_initiation_date ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:return_initiation_date_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:disposal_event ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:return_reason ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:return_initiation_date ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:return_reason ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:return_event_identifier ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ReturnReasonEnum> ;
+            owl:onProperty trc:return_reason ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:refurbishment_event ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:return_reason_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom trc:CustomerReturnChannel ;
+            owl:onProperty trc:customer_return_channels ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:return_event_identifier ] ;
+    skos:definition "End-of-life and return pathway management beyond EPCIS scope" ;
+    skos:inScheme trc: .
+
+trc:SupplyChainIncidents a owl:Class ;
+    rdfs:label "SupplyChainIncidents" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:estimated_impact_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:resolution_status_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:incident_severity_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:incident_identifier_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:root_cause_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:incident_timestamp ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:incident_location_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:incident_type_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:linked_event_ids_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:corrective_actions ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:root_cause ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:incident_severity_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:intersectionOf ( xsd:string [ a rdfs:Datatype ;
+                                owl:onDatatype xsd:string ;
+                                owl:withRestrictions ( [ xsd:pattern "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$" ] ) ] ) ] ;
+            owl:onProperty trc:incident_identifier ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:linked_event_ids_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:resolution_status_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:reporter_identifier_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:incident_type ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:estimated_impact_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:incident_documentation_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:corrective_actions_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:corrective_actions_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:intersectionOf ( xsd:string [ a rdfs:Datatype ;
+                                owl:onDatatype xsd:string ;
+                                owl:withRestrictions ( [ xsd:pattern "^[0-9]{13}$" ] ) ] ) ] ;
+            owl:onProperty trc:reporter_identifier ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:reporter_identifier_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:reporter_identifier_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:estimated_impact ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:anyURI ;
+            owl:onProperty trc:incident_documentation ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:root_cause_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:affected_products_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:corrective_actions ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:resolution_status ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:incident_timestamp_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:reporter_identifier ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:resolution_status ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:linked_event_ids_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum> ;
+            owl:onProperty trc:incident_type ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:root_cause ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:estimated_impact_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:incident_type_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:intersectionOf ( xsd:string [ a rdfs:Datatype ;
+                                owl:onDatatype xsd:string ;
+                                owl:withRestrictions ( [ xsd:pattern "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$" ] ) ] ) ] ;
+            owl:onProperty trc:linked_event_ids ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:affected_products_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:incident_documentation_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:root_cause_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:incident_timestamp ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:incident_location ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:dateTime ;
+            owl:onProperty trc:incident_timestamp ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:affected_products ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:SeverityLevelEnum> ;
+            owl:onProperty trc:incident_severity ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:linked_event_ids ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:affected_products ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:incident_severity ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:incident_severity_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:corrective_actions_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:estimated_impact ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ResolutionStatusEnum> ;
+            owl:onProperty trc:resolution_status ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:estimated_impact ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:affected_products_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:incident_identifier ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:incident_type_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:intersectionOf ( xsd:string [ a rdfs:Datatype ;
+                                owl:onDatatype xsd:string ;
+                                owl:withRestrictions ( [ xsd:pattern "^([0-9]{13}|[A-Z]{2}[A-Z0-9]{3}).*" ] ) ] ) ] ;
+            owl:onProperty trc:incident_location ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:root_cause ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:incident_identifier_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:incident_documentation ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:incident_identifier_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:incident_severity ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:resolution_status_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:incident_identifier ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:reporter_identifier ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:incident_timestamp_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:incident_location_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:incident_location_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:incident_location ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:incident_type ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:incident_timestamp_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:incident_documentation_value ] ;
+    skos:definition "Exception events and disruptions during supply chain operations" ;
+    skos:inScheme trc: .
+
+trc:ValueAddingActivityLocation a owl:Class ;
+    rdfs:label "ValueAddingActivityLocation" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:intersectionOf ( xsd:string [ a rdfs:Datatype ;
+                                owl:onDatatype xsd:string ;
+                                owl:withRestrictions ( [ xsd:pattern "^P(?:\\d+Y)?(?:\\d+M)?(?:\\d+W)?(?:\\d+D)?(?:T(?:\\d+H)?(?:\\d+M)?(?:\\d+(?:\\.\\d+)?S)?)?$" ] ) ] ) ] ;
+            owl:onProperty trc:process_duration ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:process_description_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:activity_identifier ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:activity_type ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:batch_identifier ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:activity_type_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:transformation_id_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:process_duration_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:activity_identifier_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:quality_check_results_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:quality_check_results_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:batch_identifier ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:input_products_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:quality_check_results ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:process_duration_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:batch_identifier_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:input_products ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:facility_identifier ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:activity_date ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:process_certification_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty trc:value_added ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:activity_type ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:intersectionOf ( xsd:string [ a rdfs:Datatype ;
+                                owl:onDatatype xsd:string ;
+                                owl:withRestrictions ( [ xsd:pattern "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$" ] ) ] ) ] ;
+            owl:onProperty trc:activity_identifier ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:input_products_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:operator_identifier_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:anyURI ;
+            owl:onProperty trc:process_certification ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:activity_type_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:boolean ;
+            owl:onProperty trc:quality_check_performed ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:input_products ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:operator_identifier ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:quality_check_performed ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:intersectionOf ( xsd:string [ a rdfs:Datatype ;
+                                owl:onDatatype xsd:string ;
+                                owl:withRestrictions ( [ xsd:pattern "^[0-9]{13}$" ] ) ] ) ] ;
+            owl:onProperty trc:facility_identifier ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:process_certification_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:value_added ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:value_added_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:input_products_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:batch_identifier ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:activity_date_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:quality_check_performed_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:value_added ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:process_certification_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:quality_check_results ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:operator_identifier_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:activity_type ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:process_step ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:process_duration ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:process_description ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:process_step_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:quality_check_performed_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:operator_identifier_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:output_products_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:process_step ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:output_products_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:quality_check_performed ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:process_duration ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:activity_identifier_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:process_step_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:operator_identifier ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:process_step ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:facility_identifier ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:process_description_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:transformation_id_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:process_description ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:value_added_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:batch_identifier_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:activity_type_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:output_products ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:output_products ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:batch_identifier_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:operator_identifier ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:transformation_id ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:transformation_id ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:dateTime ;
+            owl:onProperty trc:activity_date ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:output_products_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:quality_check_results ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:transformation_id_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:activity_date_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:transformation_id ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:value_added_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:activity_identifier_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:quality_check_performed_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:facility_identifier_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:facility_identifier_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:process_certification ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:activity_identifier ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:process_duration_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:process_description_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:facility_identifier_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:activity_date ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty trc:quality_check_results_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:activity_date_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty trc:process_description ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty trc:process_step_value ] ;
+    skos:definition "Transformation and processing events extending EPCIS TransformationEvent" ;
+    skos:inScheme trc: .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:DisposalMethodEnum#COMPOSTING> a owl:Class ;
+    rdfs:label "COMPOSTING" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:DisposalMethodEnum> ;
+    skos:definition "Industrial composting" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:DisposalMethodEnum#ENERGY_RECOVERY> a owl:Class ;
+    rdfs:label "ENERGY_RECOVERY" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:DisposalMethodEnum> ;
+    skos:definition "Waste-to-energy" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:DisposalMethodEnum#INCINERATION> a owl:Class ;
+    rdfs:label "INCINERATION" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:DisposalMethodEnum> ;
+    skos:definition "Incineration" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:DisposalMethodEnum#LANDFILL> a owl:Class ;
+    rdfs:label "LANDFILL" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:DisposalMethodEnum> ;
+    skos:definition "Landfill disposal" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:DisposalMethodEnum#SPECIALIZED_TREATMENT> a owl:Class ;
+    rdfs:label "SPECIALIZED_TREATMENT" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:DisposalMethodEnum> ;
+    skos:definition "Specialized hazardous treatment" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum#COLD_CHAIN_BREAK> a owl:Class ;
+    rdfs:label "COLD_CHAIN_BREAK" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum> ;
+    skos:definition "Temperature excursion in cold chain" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum#CONTAMINATION> a owl:Class ;
+    rdfs:label "CONTAMINATION" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum> ;
+    skos:definition "Product contamination" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum#DAMAGE> a owl:Class ;
+    rdfs:label "DAMAGE" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum> ;
+    skos:definition "Physical damage to products" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum#DELAY> a owl:Class ;
+    rdfs:label "DELAY" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum> ;
+    skos:definition "Transportation or processing delay" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum#DOCUMENTATION_ERROR> a owl:Class ;
+    rdfs:label "DOCUMENTATION_ERROR" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum> ;
+    skos:definition "Documentation or labeling error" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum#NATURAL_DISASTER> a owl:Class ;
+    rdfs:label "NATURAL_DISASTER" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum> ;
+    skos:definition "Impact from natural disaster" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum#QUARANTINE> a owl:Class ;
+    rdfs:label "QUARANTINE" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum> ;
+    skos:definition "Products placed in quarantine" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum#RECALL> a owl:Class ;
+    rdfs:label "RECALL" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum> ;
+    skos:definition "Product recall activation" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum#REGULATORY_HOLD> a owl:Class ;
+    rdfs:label "REGULATORY_HOLD" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum> ;
+    skos:definition "Regulatory inspection or hold" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum#SECURITY_BREACH> a owl:Class ;
+    rdfs:label "SECURITY_BREACH" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum> ;
+    skos:definition "Unauthorized access or tampering" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum#SYSTEM_FAILURE> a owl:Class ;
+    rdfs:label "SYSTEM_FAILURE" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum> ;
+    skos:definition "IT or equipment system failure" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum#THEFT> a owl:Class ;
+    rdfs:label "THEFT" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum> ;
+    skos:definition "Theft or loss of products" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:OwnershipStatusEnum#CONDITIONAL> a owl:Class ;
+    rdfs:label "CONDITIONAL" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:OwnershipStatusEnum> ;
+    skos:definition "Conditional ownership pending payment" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:OwnershipStatusEnum#CONSIGNED> a owl:Class ;
+    rdfs:label "CONSIGNED" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:OwnershipStatusEnum> ;
+    skos:definition "Owned but consigned to another party" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:OwnershipStatusEnum#DISPUTED> a owl:Class ;
+    rdfs:label "DISPUTED" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:OwnershipStatusEnum> ;
+    skos:definition "Ownership under dispute" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:OwnershipStatusEnum#FULL_OWNERSHIP> a owl:Class ;
+    rdfs:label "FULL_OWNERSHIP" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:OwnershipStatusEnum> ;
+    skos:definition "Complete legal ownership" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:OwnershipStatusEnum#IN_TRANSIT> a owl:Class ;
+    rdfs:label "IN_TRANSIT" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:OwnershipStatusEnum> ;
+    skos:definition "Ownership during transportation" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:OwnershipStatusEnum#LEASED> a owl:Class ;
+    rdfs:label "LEASED" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:OwnershipStatusEnum> ;
+    skos:definition "Under lease agreement" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:PackagingLevelEnum#CASE> a owl:Class ;
+    rdfs:label "CASE" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:PackagingLevelEnum> ;
+    skos:definition "Case or carton level" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:PackagingLevelEnum#CONTAINER> a owl:Class ;
+    rdfs:label "CONTAINER" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:PackagingLevelEnum> ;
+    skos:definition "Container or trailer level" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:PackagingLevelEnum#INNER_PACK> a owl:Class ;
+    rdfs:label "INNER_PACK" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:PackagingLevelEnum> ;
+    skos:definition "Inner pack or bundle" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:PackagingLevelEnum#ITEM> a owl:Class ;
+    rdfs:label "ITEM" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:PackagingLevelEnum> ;
+    skos:definition "Individual item or unit level" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:PackagingLevelEnum#PALLET> a owl:Class ;
+    rdfs:label "PALLET" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:PackagingLevelEnum> ;
+    skos:definition "Pallet level" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:PackagingLevelEnum#TRANSPORT_UNIT> a owl:Class ;
+    rdfs:label "TRANSPORT_UNIT" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:PackagingLevelEnum> ;
+    skos:definition "Full transport unit" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:RecyclingStreamEnum#BATTERIES> a owl:Class ;
+    rdfs:label "BATTERIES" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:RecyclingStreamEnum> ;
+    skos:definition "Battery recycling" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:RecyclingStreamEnum#ELECTRONICS> a owl:Class ;
+    rdfs:label "ELECTRONICS" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:RecyclingStreamEnum> ;
+    skos:definition "E-waste recycling" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:RecyclingStreamEnum#METALS> a owl:Class ;
+    rdfs:label "METALS" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:RecyclingStreamEnum> ;
+    skos:definition "Metal recycling" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:RecyclingStreamEnum#MIXED_MATERIALS> a owl:Class ;
+    rdfs:label "MIXED_MATERIALS" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:RecyclingStreamEnum> ;
+    skos:definition "Mixed material recycling" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:RecyclingStreamEnum#PLASTICS> a owl:Class ;
+    rdfs:label "PLASTICS" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:RecyclingStreamEnum> ;
+    skos:definition "Plastic recycling" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:RecyclingStreamEnum#TEXTILES> a owl:Class ;
+    rdfs:label "TEXTILES" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:RecyclingStreamEnum> ;
+    skos:definition "Textile recycling" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ResolutionStatusEnum#CLOSED> a owl:Class ;
+    rdfs:label "CLOSED" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ResolutionStatusEnum> ;
+    skos:definition "Incident closed" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ResolutionStatusEnum#ESCALATED> a owl:Class ;
+    rdfs:label "ESCALATED" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ResolutionStatusEnum> ;
+    skos:definition "Escalated to higher authority" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ResolutionStatusEnum#IN_PROGRESS> a owl:Class ;
+    rdfs:label "IN_PROGRESS" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ResolutionStatusEnum> ;
+    skos:definition "Resolution in progress" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ResolutionStatusEnum#OPEN> a owl:Class ;
+    rdfs:label "OPEN" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ResolutionStatusEnum> ;
+    skos:definition "Incident is open and unresolved" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ResolutionStatusEnum#PENDING_VERIFICATION> a owl:Class ;
+    rdfs:label "PENDING_VERIFICATION" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ResolutionStatusEnum> ;
+    skos:definition "Resolution pending verification" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ResolutionStatusEnum#RESOLVED> a owl:Class ;
+    rdfs:label "RESOLVED" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ResolutionStatusEnum> ;
+    skos:definition "Incident resolved" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ReturnMethodEnum#DROP_OFF_POINT> a owl:Class ;
+    rdfs:label "DROP_OFF_POINT" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ReturnMethodEnum> ;
+    skos:definition "Dropped at collection point" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ReturnMethodEnum#MAIL_RETURN> a owl:Class ;
+    rdfs:label "MAIL_RETURN" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ReturnMethodEnum> ;
+    skos:definition "Mailed back" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ReturnMethodEnum#PICKUP_SERVICE> a owl:Class ;
+    rdfs:label "PICKUP_SERVICE" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ReturnMethodEnum> ;
+    skos:definition "Pickup service collected" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ReturnMethodEnum#STORE_RETURN> a owl:Class ;
+    rdfs:label "STORE_RETURN" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ReturnMethodEnum> ;
+    skos:definition "Returned to retail store" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ReturnReasonEnum#CUSTOMER_DISSATISFACTION> a owl:Class ;
+    rdfs:label "CUSTOMER_DISSATISFACTION" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ReturnReasonEnum> ;
+    skos:definition "Customer not satisfied" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ReturnReasonEnum#DEFECT> a owl:Class ;
+    rdfs:label "DEFECT" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ReturnReasonEnum> ;
+    skos:definition "Product defect or malfunction" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ReturnReasonEnum#END_OF_LIFE> a owl:Class ;
+    rdfs:label "END_OF_LIFE" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ReturnReasonEnum> ;
+    skos:definition "Product reached end of life" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ReturnReasonEnum#PRODUCT_RECALL> a owl:Class ;
+    rdfs:label "PRODUCT_RECALL" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ReturnReasonEnum> ;
+    skos:definition "Manufacturer recall" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ReturnReasonEnum#WARRANTY_CLAIM> a owl:Class ;
+    rdfs:label "WARRANTY_CLAIM" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ReturnReasonEnum> ;
+    skos:definition "Warranty claim" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:SeverityLevelEnum#CRITICAL> a owl:Class ;
+    rdfs:label "CRITICAL" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:SeverityLevelEnum> ;
+    skos:definition "Critical severity requiring immediate action" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:SeverityLevelEnum#HIGH> a owl:Class ;
+    rdfs:label "HIGH" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:SeverityLevelEnum> ;
+    skos:definition "High severity with significant impact" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:SeverityLevelEnum#INFORMATIONAL> a owl:Class ;
+    rdfs:label "INFORMATIONAL" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:SeverityLevelEnum> ;
+    skos:definition "Informational only no immediate action required" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:SeverityLevelEnum#LOW> a owl:Class ;
+    rdfs:label "LOW" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:SeverityLevelEnum> ;
+    skos:definition "Low severity with minimal impact" .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:SeverityLevelEnum#MEDIUM> a owl:Class ;
+    rdfs:label "MEDIUM" ;
+    rdfs:subClassOf <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:SeverityLevelEnum> ;
+    skos:definition "Medium severity with moderate impact" .
+
+trc:actor_tracking a owl:ObjectProperty ;
+    rdfs:label "actor_tracking" ;
+    skos:definition "All supply chain participants and their interactions with products" ;
+    skos:inScheme trc: .
+
+trc:affected_products a owl:DatatypeProperty ;
+    rdfs:label "affected_products" ;
+    skos:definition "Affected products using EPCIS EPCList structure" ;
+    skos:inScheme trc: ;
+    trc:owl.filler "epcis:EPCList" ;
+    trc:sql_identifier "trc_incident_affected_products" .
+
+trc:aggregation_events a owl:ObjectProperty ;
+    rdfs:label "aggregation_events" ;
+    skos:definition "Packaging hierarchy operations - packing and unpacking of items into containers" ;
+    skos:inScheme trc: .
+
+trc:certification_info a owl:DatatypeProperty ;
+    rdfs:label "certification_info" ;
+    skos:definition "URI references to relevant certification documents or standards" ;
+    skos:inScheme trc: ;
+    trc:reference_type "certification" ;
+    trc:references "King et al." ;
+    trc:sql_identifier "trc_hist_certification_info" .
+
+trc:certification_status a owl:DatatypeProperty ;
+    rdfs:label "certification_status" ;
+    skos:definition "URI references to actor certifications ISO 9001 ISO 14001 organic fair trade" ;
+    skos:inScheme trc: ;
+    trc:reference_type "certification" ;
+    trc:references "King et al." ;
+    trc:sql_identifier "trc_actor_certifications" .
+
+trc:chain_of_custody_reference a owl:DatatypeProperty ;
+    rdfs:label "chain_of_custody_reference" ;
+    skos:definition "Previous event links EPCIS extensions" ;
+    skos:inScheme trc: ;
+    trc:epcis_aligned true ;
+    trc:sql_identifier "trc_owner_custody_chain" .
+
+trc:child_identifiers a owl:DatatypeProperty ;
+    rdfs:label "child_identifiers" ;
+    skos:definition "Child EPCs being aggregated/disaggregated using EPCIS childEPCs structure" ;
+    skos:inScheme trc: ;
+    trc:owl.filler "epcis:EPCList" ;
+    trc:sql_identifier "trc_agg_child_ids" .
+
+trc:components_replaced a owl:DatatypeProperty ;
+    rdfs:label "components_replaced" ;
+    skos:definition "Components that were replaced" ;
+    skos:inScheme trc: ;
+    trc:sql_identifier "trc_reverse_components" .
+
+trc:corrective_actions a owl:DatatypeProperty ;
+    rdfs:label "corrective_actions" ;
+    skos:definition "Actions taken to resolve or mitigate" ;
+    skos:inScheme trc: ;
+    trc:sql_identifier "trc_incident_corrective_actions" .
+
+trc:corrective_event_ids a owl:DatatypeProperty ;
+    rdfs:label "corrective_event_ids" ;
+    skos:definition "IDs of events that correct this error" ;
+    skos:inScheme trc: ;
+    trc:sql_identifier "trc_hist_corrective_event_ids" .
+
+trc:customer_return_channels a owl:ObjectProperty ;
+    rdfs:label "customer_return_channels" ;
+    skos:definition "Available return methods and locations" ;
+    skos:inScheme trc: .
+
+trc:incident_documentation a owl:DatatypeProperty ;
+    rdfs:label "incident_documentation" ;
+    skos:definition "URI references to incident reports insurance claims photos" ;
+    skos:inScheme trc: ;
+    trc:reference_type "documentation" ;
+    trc:sql_identifier "trc_incident_documentation" .
+
+trc:input_products a owl:DatatypeProperty ;
+    rdfs:label "input_products" ;
+    skos:definition "Input EPCs and quantities using EPCIS inputEPCList structure" ;
+    skos:inScheme trc: ;
+    trc:owl.filler "epcis:EPCList" ;
+    trc:sql_identifier "trc_value_input_products" .
+
+trc:intermediate_stops a owl:ObjectProperty ;
+    rdfs:label "intermediate_stops" ;
+    skos:definition "Distribution centers warehouses transshipment points" ;
+    skos:inScheme trc: .
+
+trc:linked_event_ids a owl:DatatypeProperty ;
+    rdfs:label "linked_event_ids" ;
+    skos:definition "IDs of related supply chain events" ;
+    skos:inScheme trc: ;
+    trc:sql_identifier "trc_incident_linked_events" .
+
+trc:logistics_events a owl:ObjectProperty ;
+    rdfs:label "logistics_events" ;
+    skos:definition "Supply chain transportation and movement tracking post-import" ;
+    skos:inScheme trc: .
+
+trc:materials_recovered a owl:DatatypeProperty ;
+    rdfs:label "materials_recovered" ;
+    skos:definition "List of recovered materials" ;
+    skos:inScheme trc: ;
+    trc:sql_identifier "trc_reverse_materials" .
+
+trc:output_products a owl:DatatypeProperty ;
+    rdfs:label "output_products" ;
+    skos:definition "Output EPCs and quantities using EPCIS outputEPCList structure" ;
+    skos:inScheme trc: ;
+    trc:owl.filler "epcis:EPCList" ;
+    trc:sql_identifier "trc_value_output_products" .
+
+trc:ownership_documentation a owl:DatatypeProperty ;
+    rdfs:label "ownership_documentation" ;
+    skos:definition "Digital references EPCIS bizTransactionList URIs to documents" ;
+    skos:inScheme trc: ;
+    trc:epcis_aligned true ;
+    trc:sql_identifier "trc_owner_documentation" .
+
+trc:ownership_event a owl:ObjectProperty ;
+    rdfs:label "ownership_event" ;
+    skos:definition "Legal ownership and custody transfers throughout supply chain" ;
+    skos:inScheme trc: .
+
+trc:process_certification a owl:DatatypeProperty ;
+    rdfs:label "process_certification" ;
+    skos:definition "URI references to process certifications ISO standards or quality systems" ;
+    skos:inScheme trc: ;
+    trc:dpp_extension true ;
+    trc:reference_type "certification" ;
+    trc:references "King et al." ;
+    trc:sql_identifier "trc_value_certifications" .
+
+trc:product_history a owl:ObjectProperty ;
+    rdfs:label "product_history" ;
+    skos:definition "Foundation for all lifecycle events with complete audit trail" ;
+    skos:inScheme trc: .
+
+trc:refurbishment_activities a owl:DatatypeProperty ;
+    rdfs:label "refurbishment_activities" ;
+    skos:definition "List of refurbishment activities performed" ;
+    skos:inScheme trc: ;
+    trc:references "King et al.; CE-RISE Deliverable 1.1" ;
+    trc:sql_identifier "trc_reverse_refurb_activities" .
+
+trc:return_documentation a owl:DatatypeProperty ;
+    rdfs:label "return_documentation" ;
+    skos:definition "URI references to return authorization shipping labels RMA documents" ;
+    skos:inScheme trc: ;
+    trc:reference_type "documentation" ;
+    trc:sql_identifier "trc_reverse_return_docs" .
+
+trc:reverse_logistics a owl:ObjectProperty ;
+    rdfs:label "reverse_logistics" ;
+    skos:definition "End-of-life and return pathway management" ;
+    skos:inScheme trc: .
+
+trc:supply_chain_incidents a owl:ObjectProperty ;
+    rdfs:label "supply_chain_incidents" ;
+    skos:definition "Exception events and disruptions during supply chain operations" ;
+    skos:inScheme trc: .
+
+trc:value_adding_activity a owl:ObjectProperty ;
+    rdfs:label "value_adding_activity" ;
+    skos:definition "Transformation and processing events that modify or enhance products" ;
+    skos:inScheme trc: .
+
+trc:action_performed a owl:DatatypeProperty ;
+    rdfs:label "action_performed" ;
+    skos:definition "Specific action taken by actor" ;
+    skos:inScheme trc: ;
+    trc:sql_identifier "trc_actor_action" .
+
+trc:action_performed_value a owl:DatatypeProperty ;
+    rdfs:label "action_performed_value" ;
+    skos:definition "Value holder for action performed" ;
+    skos:inScheme trc: .
+
+trc:activity_date a owl:DatatypeProperty ;
+    rdfs:label "activity_date" ;
+    skos:definition "When activity occurred - aligns with EPCIS eventTime concept" ;
+    skos:inScheme trc: ;
+    trc:references "CIRPASS" ;
+    trc:sql_identifier "trc_value_activity_date" .
+
+trc:activity_date_value a owl:DatatypeProperty ;
+    rdfs:label "activity_date_value" ;
+    skos:definition "Value holder for activity date" ;
+    skos:inScheme trc: .
+
+trc:activity_identifier a owl:DatatypeProperty ;
+    rdfs:label "activity_identifier" ;
+    skos:definition "Unique activity reference - aligns with EPCIS eventID concept" ;
+    skos:inScheme trc: ;
+    trc:sql_identifier "trc_value_activity_id" .
+
+trc:activity_identifier_value a owl:DatatypeProperty ;
+    rdfs:label "activity_identifier_value" ;
+    skos:definition "Value holder for activity identifier" ;
+    skos:inScheme trc: .
+
+trc:activity_timestamp a owl:DatatypeProperty ;
+    rdfs:label "activity_timestamp" ;
+    skos:definition "When actor interacted with product" ;
+    skos:inScheme trc: ;
+    trc:references "CIRPASS" ;
+    trc:sql_identifier "trc_actor_timestamp" .
+
+trc:activity_timestamp_value a owl:DatatypeProperty ;
+    rdfs:label "activity_timestamp_value" ;
+    skos:definition "Value holder for activity timestamp" ;
+    skos:inScheme trc: .
+
+trc:activity_type a owl:DatatypeProperty ;
+    rdfs:label "activity_type" ;
+    skos:definition "Uses CBV BizStep vocabulary directly - commissioning transformation decommissioning" ;
+    skos:inScheme trc: ;
+    trc:owl.filler "cbv:BizStep" ;
+    trc:sql_identifier "trc_value_activity_type" .
+
+trc:activity_type_value a owl:DatatypeProperty ;
+    rdfs:label "activity_type_value" ;
+    skos:definition "Value holder for activity type" ;
+    skos:inScheme trc: .
+
+trc:actor_identifier a owl:DatatypeProperty ;
+    rdfs:label "actor_identifier" ;
+    skos:definition "Organization identifier GLN LEI or VAT" ;
+    skos:inScheme trc: ;
+    trc:owl.filler "gs1:PartyGlobalLocationNumber" ;
+    trc:references "Berger et al.; ESPR" ;
+    trc:sql_identifier "trc_actor_id" .
+
+trc:actor_identifier_value a owl:DatatypeProperty ;
+    rdfs:label "actor_identifier_value" ;
+    skos:definition "Value holder for actor identifier" ;
+    skos:inScheme trc: .
+
+trc:actor_role a owl:DatatypeProperty ;
+    rdfs:label "actor_role" ;
+    skos:definition "Role in supply chain using CBV Source/Destination types" ;
+    skos:inScheme trc: ;
+    trc:owl.filler "cbv:SourceDestinationType" ;
+    trc:references "Berger et al." ;
+    trc:sql_identifier "trc_actor_role" .
+
+trc:actor_role_value a owl:DatatypeProperty ;
+    rdfs:label "actor_role_value" ;
+    skos:definition "Value holder for actor role" ;
+    skos:inScheme trc: .
+
+trc:affected_products_value a owl:DatatypeProperty ;
+    rdfs:label "affected_products_value" ;
+    skos:definition "Value holder for affected products" ;
+    skos:inScheme trc: .
+
+trc:aggregation_event_id a owl:DatatypeProperty ;
+    rdfs:label "aggregation_event_id" ;
+    skos:definition "Unique identifier for aggregation operation - aligns with EPCIS eventID" ;
+    skos:inScheme trc: ;
+    trc:sql_identifier "trc_agg_event_id" .
+
+trc:aggregation_event_id_value a owl:DatatypeProperty ;
+    rdfs:label "aggregation_event_id_value" ;
+    skos:definition "Value holder for aggregation event ID" ;
+    skos:inScheme trc: .
+
+trc:aggregation_location a owl:DatatypeProperty ;
+    rdfs:label "aggregation_location" ;
+    skos:definition "GLN where operation occurred - aligns with EPCIS bizLocation" ;
+    skos:inScheme trc: ;
+    trc:owl.filler "gs1:GlobalLocationNumber" ;
+    trc:sql_identifier "trc_agg_location" .
+
+trc:aggregation_location_value a owl:DatatypeProperty ;
+    rdfs:label "aggregation_location_value" ;
+    skos:definition "Value holder for aggregation location" ;
+    skos:inScheme trc: .
+
+trc:aggregation_timestamp a owl:DatatypeProperty ;
+    rdfs:label "aggregation_timestamp" ;
+    skos:definition "When packing/unpacking happened - aligns with EPCIS eventTime" ;
+    skos:inScheme trc: ;
+    trc:sql_identifier "trc_agg_timestamp" .
+
+trc:aggregation_timestamp_value a owl:DatatypeProperty ;
+    rdfs:label "aggregation_timestamp_value" ;
+    skos:definition "Value holder for aggregation timestamp" ;
+    skos:inScheme trc: .
+
+trc:aggregation_type a owl:DatatypeProperty ;
+    rdfs:label "aggregation_type" ;
+    skos:definition "ADD for packing DELETE for unpacking - uses EPCIS Action directly" ;
+    skos:inScheme trc: ;
+    trc:owl.filler "epcis:Action" ;
+    trc:sql_identifier "trc_agg_type" .
+
+trc:aggregation_type_value a owl:DatatypeProperty ;
+    rdfs:label "aggregation_type_value" ;
+    skos:definition "Value holder for aggregation type" ;
+    skos:inScheme trc: .
+
+trc:arrival_location a owl:DatatypeProperty ;
+    rdfs:label "arrival_location" ;
+    skos:definition "Destination UN/LOCODE or GLN" ;
+    skos:inScheme trc: ;
+    trc:owl.filler "unece:UNLOCODE" ;
+    trc:sql_identifier "trc_logis_arrival_loc" .
+
+trc:arrival_location_value a owl:DatatypeProperty ;
+    rdfs:label "arrival_location_value" ;
+    skos:definition "Value holder for arrival location" ;
+    skos:inScheme trc: .
+
+trc:arrival_timestamp a owl:DatatypeProperty ;
+    rdfs:label "arrival_timestamp" ;
+    skos:definition "Actual or estimated arrival" ;
+    skos:inScheme trc: ;
+    trc:sql_identifier "trc_logis_arrival_time" .
+
+trc:arrival_timestamp_value a owl:DatatypeProperty ;
+    rdfs:label "arrival_timestamp_value" ;
+    skos:definition "Value holder for arrival timestamp" ;
+    skos:inScheme trc: .
+
+trc:batch_identifier a owl:DatatypeProperty ;
+    rdfs:label "batch_identifier" ;
+    skos:definition "Batch or lot number for this processing run" ;
+    skos:inScheme trc: ;
+    trc:sql_identifier "trc_value_batch_id" .
+
+trc:batch_identifier_value a owl:DatatypeProperty ;
+    rdfs:label "batch_identifier_value" ;
+    skos:definition "Value holder for batch identifier" ;
+    skos:inScheme trc: .
+
+trc:biz_location a owl:DatatypeProperty ;
+    rdfs:label "biz_location" ;
+    skos:definition "Business location where objects are expected following event EPCIS bizLocation" ;
+    skos:inScheme trc: ;
+    trc:owl.filler "gs1:GlobalLocationNumber" ;
+    trc:references "CIRPASS" ;
+    trc:sql_identifier "trc_hist_biz_location" .
+
+trc:biz_location_value a owl:DatatypeProperty ;
+    rdfs:label "biz_location_value" ;
+    skos:definition "Value holder for business location" ;
+    skos:inScheme trc: .
+
+trc:carrier_identifier a owl:DatatypeProperty ;
+    rdfs:label "carrier_identifier" ;
+    skos:definition "Transport company GLN or identifier" ;
+    skos:inScheme trc: ;
+    trc:owl.filler "gs1:PartyGlobalLocationNumber" ;
+    trc:sql_identifier "trc_logis_carrier_id" .
+
+trc:carrier_identifier_value a owl:DatatypeProperty ;
+    rdfs:label "carrier_identifier_value" ;
+    skos:definition "Value holder for carrier identifier" ;
+    skos:inScheme trc: .
+
+trc:certification_info_value a owl:DatatypeProperty ;
+    rdfs:label "certification_info_value" ;
+    skos:definition "Value holder for certification info" ;
+    skos:inScheme trc: .
+
+trc:certification_status_value a owl:DatatypeProperty ;
+    rdfs:label "certification_status_value" ;
+    skos:definition "Value holder for certification status" ;
+    skos:inScheme trc: .
+
+trc:chain_of_custody_reference_value a owl:DatatypeProperty ;
+    rdfs:label "chain_of_custody_reference_value" ;
+    skos:definition "Value holder for custody chain references" ;
+    skos:inScheme trc: .
+
+trc:child_identifiers_value a owl:DatatypeProperty ;
+    rdfs:label "child_identifiers_value" ;
+    skos:definition "Value holder for child identifiers" ;
+    skos:inScheme trc: .
+
+trc:components_replaced_value a owl:DatatypeProperty ;
+    rdfs:label "components_replaced_value" ;
+    skos:definition "Value holder for components replaced" ;
+    skos:inScheme trc: .
+
+trc:corrective_actions_value a owl:DatatypeProperty ;
+    rdfs:label "corrective_actions_value" ;
+    skos:definition "Value holder for corrective actions" ;
+    skos:inScheme trc: .
+
+trc:corrective_event_ids_value a owl:DatatypeProperty ;
+    rdfs:label "corrective_event_ids_value" ;
+    skos:definition "Value holder for corrective event IDs" ;
+    skos:inScheme trc: .
+
+trc:currency a owl:DatatypeProperty ;
+    rdfs:label "currency" ;
+    skos:definition "Currency code for transfer value using ISO 4217 standard" ;
+    skos:inScheme trc: ;
+    trc:owl.filler "iso:4217" ;
+    trc:sql_identifier "trc_owner_currency" .
+
+trc:currency_value a owl:DatatypeProperty ;
+    rdfs:label "currency_value" ;
+    skos:definition "Value holder for currency" ;
+    skos:inScheme trc: .
+
+trc:declaration_time a owl:DatatypeProperty ;
+    rdfs:label "declaration_time" ;
+    skos:definition "When the error was declared" ;
+    skos:inScheme trc: ;
+    trc:sql_identifier "trc_hist_error_declaration_time" .
+
+trc:declaration_time_value a owl:DatatypeProperty ;
+    rdfs:label "declaration_time_value" ;
+    skos:definition "Value holder for declaration time" ;
+    skos:inScheme trc: .
+
+trc:departure_location a owl:DatatypeProperty ;
+    rdfs:label "departure_location" ;
+    skos:definition "Origin UN/LOCODE or GLN" ;
+    skos:inScheme trc: ;
+    trc:owl.filler "unece:UNLOCODE" ;
+    trc:references "CIRPASS" ;
+    trc:sql_identifier "trc_logis_departure_loc" .
+
+trc:departure_location_value a owl:DatatypeProperty ;
+    rdfs:label "departure_location_value" ;
+    skos:definition "Value holder for departure location" ;
+    skos:inScheme trc: .
+
+trc:departure_timestamp a owl:DatatypeProperty ;
+    rdfs:label "departure_timestamp" ;
+    skos:definition "Departure time with timezone" ;
+    skos:inScheme trc: ;
+    trc:sql_identifier "trc_logis_departure_time" .
+
+trc:departure_timestamp_value a owl:DatatypeProperty ;
+    rdfs:label "departure_timestamp_value" ;
+    skos:definition "Value holder for departure timestamp" ;
+    skos:inScheme trc: .
+
+trc:disposal_certification a owl:DatatypeProperty ;
+    rdfs:label "disposal_certification" ;
+    skos:definition "URI reference to disposal certification or compliance document" ;
+    skos:inScheme trc: ;
+    trc:reference_type "certification" ;
+    trc:references "King et al." ;
+    trc:sql_identifier "trc_reverse_disposal_cert" .
+
+trc:disposal_certification_value a owl:DatatypeProperty ;
+    rdfs:label "disposal_certification_value" ;
+    skos:definition "Value holder for disposal certification" ;
+    skos:inScheme trc: .
+
+trc:disposal_date a owl:DatatypeProperty ;
+    rdfs:label "disposal_date" ;
+    skos:definition "When disposal occurred" ;
+    skos:inScheme trc: ;
+    trc:references "ESPR; CE-RISE Deliverable 1.1" ;
+    trc:sql_identifier "trc_reverse_disposal_date" .
+
+trc:disposal_date_value a owl:DatatypeProperty ;
+    rdfs:label "disposal_date_value" ;
+    skos:definition "Value holder for disposal date" ;
+    skos:inScheme trc: .
+
+trc:disposal_event a owl:ObjectProperty ;
+    rdfs:label "disposal_event" ;
+    skos:definition "Final disposal method and certification" ;
+    skos:inScheme trc: .
+
+trc:disposal_facility a owl:DatatypeProperty ;
+    rdfs:label "disposal_facility" ;
+    skos:definition "GLN or identifier of disposal facility" ;
+    skos:inScheme trc: ;
+    trc:owl.filler "gs1:GlobalLocationNumber" ;
+    trc:references "Koppelaar et al." ;
+    trc:sql_identifier "trc_reverse_disposal_facility" .
+
+trc:disposal_facility_value a owl:DatatypeProperty ;
+    rdfs:label "disposal_facility_value" ;
+    skos:definition "Value holder for disposal facility" ;
+    skos:inScheme trc: .
+
+trc:disposal_method a owl:ObjectProperty ;
+    rdfs:label "disposal_method" ;
+    skos:definition "Method of disposal" ;
+    skos:inScheme trc: ;
+    trc:references "ESPR; CE-RISE Deliverable 1.1" ;
+    trc:sql_identifier "trc_reverse_disposal_method" .
+
+trc:disposal_method_value a owl:DatatypeProperty ;
+    rdfs:label "disposal_method_value" ;
+    skos:definition "Value holder for disposal method" ;
+    skos:inScheme trc: .
+
+trc:error_declaration a owl:ObjectProperty ;
+    rdfs:label "error_declaration" ;
+    skos:definition "Declaration that this event is in error EPCIS errorDeclaration" ;
+    skos:inScheme trc: .
+
+trc:estimated_impact a owl:DatatypeProperty ;
+    rdfs:label "estimated_impact" ;
+    skos:definition "Estimated financial impact using ISO monetary amount structure" ;
+    skos:inScheme trc: ;
+    trc:owl.filler "iso:MonetaryAmount" ;
+    trc:sql_identifier "trc_incident_impact" .
+
+trc:estimated_impact_value a owl:DatatypeProperty ;
+    rdfs:label "estimated_impact_value" ;
+    skos:definition "Value holder for estimated impact" ;
+    skos:inScheme trc: .
+
+trc:event_description a owl:DatatypeProperty ;
+    rdfs:label "event_description" ;
+    skos:definition "Human-readable event description extends EPCIS" ;
+    skos:inScheme trc: ;
+    trc:sql_identifier "trc_hist_event_description" .
+
+trc:event_description_value a owl:DatatypeProperty ;
+    rdfs:label "event_description_value" ;
+    skos:definition "Value holder for event description" ;
+    skos:inScheme trc: .
+
+trc:event_identifier a owl:DatatypeProperty ;
+    rdfs:label "event_identifier" ;
+    skos:definition "Unique identifier for each event - aligns with EPCIS eventID concept" ;
+    skos:inScheme trc: ;
+    trc:sql_identifier "trc_hist_event_id" .
+
+trc:event_identifier_value a owl:DatatypeProperty ;
+    rdfs:label "event_identifier_value" ;
+    skos:definition "Value holder for event identifier" ;
+    skos:inScheme trc: .
+
+trc:event_location a owl:DatatypeProperty ;
+    rdfs:label "event_location" ;
+    skos:definition "GLN or URI for location - aligns with EPCIS readPoint/bizLocation concepts" ;
+    skos:inScheme trc: ;
+    trc:owl.filler "gs1:GlobalLocationNumber" ;
+    trc:references "CIRPASS; Jensen et al." ;
+    trc:sql_identifier "trc_hist_event_location" .
+
+trc:event_location_value a owl:DatatypeProperty ;
+    rdfs:label "event_location_value" ;
+    skos:definition "Value holder for event location" ;
+    skos:inScheme trc: .
+
+trc:event_time_zone_offset a owl:DatatypeProperty ;
+    rdfs:label "event_time_zone_offset" ;
+    skos:definition "Time zone offset from UTC like +01:00 or -05:00" ;
+    skos:inScheme trc: ;
+    trc:sql_identifier "trc_hist_timezone_offset" .
+
+trc:event_time_zone_offset_value a owl:DatatypeProperty ;
+    rdfs:label "event_time_zone_offset_value" ;
+    skos:definition "Value holder for timezone offset" ;
+    skos:inScheme trc: .
+
+trc:event_timestamp a owl:DatatypeProperty ;
+    rdfs:label "event_timestamp" ;
+    skos:definition "ISO 8601 timestamp with timezone - aligns with EPCIS eventTime concept" ;
+    skos:inScheme trc: ;
+    trc:references "CIRPASS" ;
+    trc:sql_identifier "trc_hist_event_timestamp" .
+
+trc:event_timestamp_value a owl:DatatypeProperty ;
+    rdfs:label "event_timestamp_value" ;
+    skos:definition "Value holder for event timestamp" ;
+    skos:inScheme trc: .
+
+trc:event_type a owl:DatatypeProperty ;
+    rdfs:label "event_type" ;
+    skos:definition "Uses EPCIS EventType vocabulary directly - ObjectEvent TransactionEvent etc" ;
+    skos:inScheme trc: ;
+    trc:owl.filler "epcis:EventType" ;
+    trc:sql_identifier "trc_hist_event_type" .
+
+trc:event_type_value a owl:DatatypeProperty ;
+    rdfs:label "event_type_value" ;
+    skos:definition "Value holder for event type" ;
+    skos:inScheme trc: .
+
+trc:facility_identifier a owl:DatatypeProperty ;
+    rdfs:label "facility_identifier" ;
+    skos:definition "GLN or OSID of processing facility" ;
+    skos:inScheme trc: ;
+    trc:owl.filler "gs1:GlobalLocationNumber" ;
+    trc:references "ESPR; CIRPASS; King et al." ;
+    trc:sql_identifier "trc_value_facility_id" .
+
+trc:facility_identifier_value a owl:DatatypeProperty ;
+    rdfs:label "facility_identifier_value" ;
+    skos:definition "Value holder for facility identifier" ;
+    skos:inScheme trc: .
+
+trc:incident_documentation_value a owl:DatatypeProperty ;
+    rdfs:label "incident_documentation_value" ;
+    skos:definition "Value holder for incident documentation" ;
+    skos:inScheme trc: .
+
+trc:incident_identifier a owl:DatatypeProperty ;
+    rdfs:label "incident_identifier" ;
+    skos:definition "Unique incident tracking ID" ;
+    skos:inScheme trc: ;
+    trc:sql_identifier "trc_incident_id" .
+
+trc:incident_identifier_value a owl:DatatypeProperty ;
+    rdfs:label "incident_identifier_value" ;
+    skos:definition "Value holder for incident identifier" ;
+    skos:inScheme trc: .
+
+trc:incident_location a owl:DatatypeProperty ;
+    rdfs:label "incident_location" ;
+    skos:definition "GLN or UN/LOCODE where incident happened" ;
+    skos:inScheme trc: ;
+    trc:owl.filler "unece:UNLOCODE" ;
+    trc:sql_identifier "trc_incident_location" .
+
+trc:incident_location_value a owl:DatatypeProperty ;
+    rdfs:label "incident_location_value" ;
+    skos:definition "Value holder for incident location" ;
+    skos:inScheme trc: .
+
+trc:incident_severity a owl:ObjectProperty ;
+    rdfs:label "incident_severity" ;
+    skos:definition "Severity level classification" ;
+    skos:inScheme trc: ;
+    trc:sql_identifier "trc_incident_severity" .
+
+trc:incident_severity_value a owl:DatatypeProperty ;
+    rdfs:label "incident_severity_value" ;
+    skos:definition "Value holder for incident severity" ;
+    skos:inScheme trc: .
+
+trc:incident_timestamp a owl:DatatypeProperty ;
+    rdfs:label "incident_timestamp" ;
+    skos:definition "When incident occurred" ;
+    skos:inScheme trc: ;
+    trc:sql_identifier "trc_incident_timestamp" .
+
+trc:incident_timestamp_value a owl:DatatypeProperty ;
+    rdfs:label "incident_timestamp_value" ;
+    skos:definition "Value holder for incident timestamp" ;
+    skos:inScheme trc: .
+
+trc:incident_type a owl:ObjectProperty ;
+    rdfs:label "incident_type" ;
+    skos:definition "Classification of incident type" ;
+    skos:inScheme trc: ;
+    trc:sql_identifier "trc_incident_type" .
+
+trc:incident_type_value a owl:DatatypeProperty ;
+    rdfs:label "incident_type_value" ;
+    skos:definition "Value holder for incident type" ;
+    skos:inScheme trc: .
+
+trc:input_products_value a owl:DatatypeProperty ;
+    rdfs:label "input_products_value" ;
+    skos:definition "Value holder for input products" ;
+    skos:inScheme trc: .
+
+trc:linked_event_ids_value a owl:DatatypeProperty ;
+    rdfs:label "linked_event_ids_value" ;
+    skos:definition "Value holder for linked event IDs" ;
+    skos:inScheme trc: .
+
+trc:materials_recovered_value a owl:DatatypeProperty ;
+    rdfs:label "materials_recovered_value" ;
+    skos:definition "Value holder for materials recovered" ;
+    skos:inScheme trc: .
+
+trc:new_owner a owl:DatatypeProperty ;
+    rdfs:label "new_owner" ;
+    skos:definition "Destination party GLN - aligns with EPCIS destination concept" ;
+    skos:inScheme trc: ;
+    trc:owl.filler "gs1:GlobalLocationNumber" ;
+    trc:sql_identifier "trc_owner_new_owner" .
+
+trc:new_owner_value a owl:DatatypeProperty ;
+    rdfs:label "new_owner_value" ;
+    skos:definition "Value holder for new owner" ;
+    skos:inScheme trc: .
+
+trc:operator_identifier a owl:DatatypeProperty ;
+    rdfs:label "operator_identifier" ;
+    skos:definition "GLN or ID of operator performing activity" ;
+    skos:inScheme trc: ;
+    trc:references "ESPR; CIRPASS" ;
+    trc:sql_identifier "trc_value_operator_id" .
+
+trc:operator_identifier_value a owl:DatatypeProperty ;
+    rdfs:label "operator_identifier_value" ;
+    skos:definition "Value holder for operator identifier" ;
+    skos:inScheme trc: .
+
+trc:output_products_value a owl:DatatypeProperty ;
+    rdfs:label "output_products_value" ;
+    skos:definition "Value holder for output products" ;
+    skos:inScheme trc: .
+
+trc:ownership_documentation_value a owl:DatatypeProperty ;
+    rdfs:label "ownership_documentation_value" ;
+    skos:definition "Value holder for ownership documentation" ;
+    skos:inScheme trc: .
+
+trc:ownership_status a owl:ObjectProperty ;
+    rdfs:label "ownership_status" ;
+    skos:definition "Legal status of ownership after transfer DPP extension beyond EPCIS" ;
+    skos:inScheme trc: ;
+    trc:dpp_extension true ;
+    trc:sql_identifier "trc_owner_status" .
+
+trc:ownership_status_value a owl:DatatypeProperty ;
+    rdfs:label "ownership_status_value" ;
+    skos:definition "Value holder for ownership status" ;
+    skos:inScheme trc: .
+
+trc:packaging_level a owl:ObjectProperty ;
+    rdfs:label "packaging_level" ;
+    skos:definition "Level in packaging hierarchy" ;
+    skos:inScheme trc: ;
+    trc:sql_identifier "trc_agg_pack_level" .
+
+trc:packaging_level_value a owl:DatatypeProperty ;
+    rdfs:label "packaging_level_value" ;
+    skos:definition "Value holder for packaging level" ;
+    skos:inScheme trc: .
+
+trc:parent_identifier a owl:DatatypeProperty ;
+    rdfs:label "parent_identifier" ;
+    skos:definition "Container pallet or case EPC being packed/unpacked - aligns with EPCIS parentID" ;
+    skos:inScheme trc: ;
+    trc:sql_identifier "trc_agg_parent_id" .
+
+trc:parent_identifier_value a owl:DatatypeProperty ;
+    rdfs:label "parent_identifier_value" ;
+    skos:definition "Value holder for parent identifier" ;
+    skos:inScheme trc: .
+
+trc:previous_owner a owl:DatatypeProperty ;
+    rdfs:label "previous_owner" ;
+    skos:definition "Source party GLN - aligns with EPCIS source concept" ;
+    skos:inScheme trc: ;
+    trc:owl.filler "gs1:GlobalLocationNumber" ;
+    trc:sql_identifier "trc_owner_previous_owner" .
+
+trc:previous_owner_value a owl:DatatypeProperty ;
+    rdfs:label "previous_owner_value" ;
+    skos:definition "Value holder for previous owner" ;
+    skos:inScheme trc: .
+
+trc:process_certification_value a owl:DatatypeProperty ;
+    rdfs:label "process_certification_value" ;
+    skos:definition "Value holder for process certifications" ;
+    skos:inScheme trc: .
+
+trc:process_description a owl:DatatypeProperty ;
+    rdfs:label "process_description" ;
+    skos:definition "Detailed transformation process description EPCIS extension" ;
+    skos:inScheme trc: ;
+    trc:dpp_extension true ;
+    trc:sql_identifier "trc_value_process_desc" .
+
+trc:process_description_value a owl:DatatypeProperty ;
+    rdfs:label "process_description_value" ;
+    skos:definition "Value holder for process description" ;
+    skos:inScheme trc: .
+
+trc:process_duration a owl:DatatypeProperty ;
+    rdfs:label "process_duration" ;
+    skos:definition "Process duration in ISO 8601 format (e.g. PT30M for 30 minutes)" ;
+    skos:inScheme trc: ;
+    trc:dpp_extension true ;
+    trc:iso_8601_duration true ;
+    trc:sql_identifier "trc_value_duration" .
+
+trc:process_duration_value a owl:DatatypeProperty ;
+    rdfs:label "process_duration_value" ;
+    skos:definition "Value holder for process duration" ;
+    skos:inScheme trc: .
+
+trc:process_step a owl:DatatypeProperty ;
+    rdfs:label "process_step" ;
+    skos:definition "Specific process step within transformation EPCIS bizStep" ;
+    skos:inScheme trc: ;
+    trc:epcis_cbv_aligned true ;
+    trc:sql_identifier "trc_value_process_step" .
+
+trc:process_step_value a owl:DatatypeProperty ;
+    rdfs:label "process_step_value" ;
+    skos:definition "Value holder for process step" ;
+    skos:inScheme trc: .
+
+trc:quality_check_performed a owl:DatatypeProperty ;
+    rdfs:label "quality_check_performed" ;
+    skos:definition "Whether quality control was performed DPP extension" ;
+    skos:inScheme trc: ;
+    trc:dpp_extension true ;
+    trc:sql_identifier "trc_value_quality_check" .
+
+trc:quality_check_performed_value a owl:DatatypeProperty ;
+    rdfs:label "quality_check_performed_value" ;
+    skos:definition "Value holder for quality check flag" ;
+    skos:inScheme trc: .
+
+trc:quality_check_results a owl:DatatypeProperty ;
+    rdfs:label "quality_check_results" ;
+    skos:definition "Quality control test results DPP extension" ;
+    skos:inScheme trc: ;
+    trc:dpp_extension true ;
+    trc:references "King et al." ;
+    trc:sql_identifier "trc_value_quality_results" .
+
+trc:quality_check_results_value a owl:DatatypeProperty ;
+    rdfs:label "quality_check_results_value" ;
+    skos:definition "Value holder for quality results" ;
+    skos:inScheme trc: .
+
+trc:quantity_transferred a owl:DatatypeProperty ;
+    rdfs:label "quantity_transferred" ;
+    skos:definition "Quantity transferred using EPCIS QuantityElement structure" ;
+    skos:inScheme trc: ;
+    trc:owl.filler "epcis:QuantityElement" ;
+    trc:sql_identifier "trc_owner_quantity" .
+
+trc:quantity_transferred_value a owl:DatatypeProperty ;
+    rdfs:label "quantity_transferred_value" ;
+    skos:definition "Value holder for quantity transferred" ;
+    skos:inScheme trc: .
+
+trc:reason a owl:DatatypeProperty ;
+    rdfs:label "reason" ;
+    skos:definition "Reason for the error declaration" ;
+    skos:inScheme trc: ;
+    trc:sql_identifier "trc_hist_error_reason" .
+
+trc:reason_value a owl:DatatypeProperty ;
+    rdfs:label "reason_value" ;
+    skos:definition "Value holder for error reason" ;
+    skos:inScheme trc: .
+
+trc:recovery_percentage a owl:DatatypeProperty ;
+    rdfs:label "recovery_percentage" ;
+    skos:definition "Percentage of materials recovered (0-100)" ;
+    skos:inScheme trc: ;
+    trc:sql_identifier "trc_reverse_recovery_pct" ;
+    trc:unit "percent" .
+
+trc:recovery_percentage_value a owl:DatatypeProperty ;
+    rdfs:label "recovery_percentage_value" ;
+    skos:definition "Value holder for recovery percentage" ;
+    skos:inScheme trc: .
+
+trc:recycling_date a owl:DatatypeProperty ;
+    rdfs:label "recycling_date" ;
+    skos:definition "When recycling occurred" ;
+    skos:inScheme trc: ;
+    trc:references "ESPR; Battery Pass; CIRPASS; King et al.; CE-RISE Deliverable 1.1" ;
+    trc:sql_identifier "trc_reverse_recycle_date" .
+
+trc:recycling_date_value a owl:DatatypeProperty ;
+    rdfs:label "recycling_date_value" ;
+    skos:definition "Value holder for recycling date" ;
+    skos:inScheme trc: .
+
+trc:recycling_event a owl:ObjectProperty ;
+    rdfs:label "recycling_event" ;
+    skos:definition "Material recovery and recycling processes" ;
+    skos:inScheme trc: .
+
+trc:recycling_stream a owl:ObjectProperty ;
+    rdfs:label "recycling_stream" ;
+    skos:definition "Which recycling stream" ;
+    skos:inScheme trc: ;
+    trc:sql_identifier "trc_reverse_stream" .
+
+trc:recycling_stream_value a owl:DatatypeProperty ;
+    rdfs:label "recycling_stream_value" ;
+    skos:definition "Value holder for recycling stream" ;
+    skos:inScheme trc: .
+
+trc:refurbishment_activities_value a owl:DatatypeProperty ;
+    rdfs:label "refurbishment_activities_value" ;
+    skos:definition "Value holder for refurbishment activities" ;
+    skos:inScheme trc: .
+
+trc:refurbishment_certification a owl:DatatypeProperty ;
+    rdfs:label "refurbishment_certification" ;
+    skos:definition "URI reference to refurbishment quality certification or standard" ;
+    skos:inScheme trc: ;
+    trc:reference_type "certification" ;
+    trc:references "King et al." ;
+    trc:sql_identifier "trc_reverse_refurb_cert" .
+
+trc:refurbishment_certification_value a owl:DatatypeProperty ;
+    rdfs:label "refurbishment_certification_value" ;
+    skos:definition "Value holder for refurbishment certification" ;
+    skos:inScheme trc: .
+
+trc:refurbishment_date a owl:DatatypeProperty ;
+    rdfs:label "refurbishment_date" ;
+    skos:definition "When refurbishment occurred ISO 8601 format" ;
+    skos:inScheme trc: ;
+    trc:iso_8601 true ;
+    trc:references "King et al.; CE-RISE Deliverable 1.1" ;
+    trc:sql_identifier "trc_reverse_refurb_date" .
+
+trc:refurbishment_date_value a owl:DatatypeProperty ;
+    rdfs:label "refurbishment_date_value" ;
+    skos:definition "Value holder for refurbishment date" ;
+    skos:inScheme trc: .
+
+trc:refurbishment_event a owl:ObjectProperty ;
+    rdfs:label "refurbishment_event" ;
+    skos:definition "Repair and refurbishment activities" ;
+    skos:inScheme trc: .
+
+trc:reporter_identifier a owl:DatatypeProperty ;
+    rdfs:label "reporter_identifier" ;
+    skos:definition "GLN or identifier of entity reporting the incident" ;
+    skos:inScheme trc: ;
+    trc:owl.filler "gs1:PartyGlobalLocationNumber" ;
+    trc:sql_identifier "trc_incident_reporter" .
+
+trc:reporter_identifier_value a owl:DatatypeProperty ;
+    rdfs:label "reporter_identifier_value" ;
+    skos:definition "Value holder for reporter identifier" ;
+    skos:inScheme trc: .
+
+trc:resolution_status a owl:ObjectProperty ;
+    rdfs:label "resolution_status" ;
+    skos:definition "Current status of incident resolution" ;
+    skos:inScheme trc: ;
+    trc:sql_identifier "trc_incident_resolution_status" .
+
+trc:resolution_status_value a owl:DatatypeProperty ;
+    rdfs:label "resolution_status_value" ;
+    skos:definition "Value holder for resolution status" ;
+    skos:inScheme trc: .
+
+trc:responsibility_scope a owl:DatatypeProperty ;
+    rdfs:label "responsibility_scope" ;
+    skos:definition "Actor responsibility boundaries" ;
+    skos:inScheme trc: ;
+    trc:sql_identifier "trc_actor_responsibility" .
+
+trc:responsibility_scope_value a owl:DatatypeProperty ;
+    rdfs:label "responsibility_scope_value" ;
+    skos:definition "Value holder for responsibility scope" ;
+    skos:inScheme trc: .
+
+trc:return_documentation_value a owl:DatatypeProperty ;
+    rdfs:label "return_documentation_value" ;
+    skos:definition "Value holder for return documentation" ;
+    skos:inScheme trc: .
+
+trc:return_event_identifier a owl:DatatypeProperty ;
+    rdfs:label "return_event_identifier" ;
+    skos:definition "Unique return tracking ID" ;
+    skos:inScheme trc: ;
+    trc:sql_identifier "trc_reverse_event_id" .
+
+trc:return_event_identifier_value a owl:DatatypeProperty ;
+    rdfs:label "return_event_identifier_value" ;
+    skos:definition "Value holder for return event identifier" ;
+    skos:inScheme trc: .
+
+trc:return_initiation_date a owl:DatatypeProperty ;
+    rdfs:label "return_initiation_date" ;
+    skos:definition "When return process started" ;
+    skos:inScheme trc: ;
+    trc:sql_identifier "trc_reverse_init_date" .
+
+trc:return_initiation_date_value a owl:DatatypeProperty ;
+    rdfs:label "return_initiation_date_value" ;
+    skos:definition "Value holder for return initiation date" ;
+    skos:inScheme trc: .
+
+trc:return_location a owl:DatatypeProperty ;
+    rdfs:label "return_location" ;
+    skos:definition "Location where products can be returned GLN" ;
+    skos:inScheme trc: ;
+    trc:owl.filler "gs1:GlobalLocationNumber" ;
+    trc:sql_identifier "trc_reverse_return_location" .
+
+trc:return_location_value a owl:DatatypeProperty ;
+    rdfs:label "return_location_value" ;
+    skos:definition "Value holder for return location" ;
+    skos:inScheme trc: .
+
+trc:return_method a owl:ObjectProperty ;
+    rdfs:label "return_method" ;
+    skos:definition "How product can be returned" ;
+    skos:inScheme trc: ;
+    trc:sql_identifier "trc_reverse_method" .
+
+trc:return_method_value a owl:DatatypeProperty ;
+    rdfs:label "return_method_value" ;
+    skos:definition "Value holder for return method" ;
+    skos:inScheme trc: .
+
+trc:return_reason a owl:ObjectProperty ;
+    rdfs:label "return_reason" ;
+    skos:definition "Reason for return" ;
+    skos:inScheme trc: ;
+    trc:sql_identifier "trc_reverse_reason" .
+
+trc:return_reason_value a owl:DatatypeProperty ;
+    rdfs:label "return_reason_value" ;
+    skos:definition "Value holder for return reason" ;
+    skos:inScheme trc: .
+
+trc:root_cause a owl:DatatypeProperty ;
+    rdfs:label "root_cause" ;
+    skos:definition "Identified cause of the incident" ;
+    skos:inScheme trc: ;
+    trc:sql_identifier "trc_incident_root_cause" .
+
+trc:root_cause_value a owl:DatatypeProperty ;
+    rdfs:label "root_cause_value" ;
+    skos:definition "Value holder for root cause" ;
+    skos:inScheme trc: .
+
+trc:route_information a owl:DatatypeProperty ;
+    rdfs:label "route_information" ;
+    skos:definition "Planned route using GS1 route information structure" ;
+    skos:inScheme trc: ;
+    trc:owl.filler "gs1:RouteInformation" ;
+    trc:sql_identifier "trc_logis_route_info" .
+
+trc:route_information_value a owl:DatatypeProperty ;
+    rdfs:label "route_information_value" ;
+    skos:definition "Value holder for route information" ;
+    skos:inScheme trc: .
+
+trc:sensor_metadata a owl:DatatypeProperty ;
+    rdfs:label "sensor_metadata" ;
+    skos:definition "IoT sensor data using EPCIS 2.0 SensorReport structure" ;
+    skos:inScheme trc: ;
+    trc:owl.filler "epcis:SensorReport" ;
+    trc:sql_identifier "trc_hist_sensor_metadata" .
+
+trc:sensor_metadata_value a owl:DatatypeProperty ;
+    rdfs:label "sensor_metadata_value" ;
+    skos:definition "Value holder for sensor metadata" ;
+    skos:inScheme trc: .
+
+trc:shipment_identifier a owl:DatatypeProperty ;
+    rdfs:label "shipment_identifier" ;
+    skos:definition "Unique shipment reference carrier tracking number" ;
+    skos:inScheme trc: ;
+    trc:sql_identifier "trc_logis_shipment_id" .
+
+trc:shipment_identifier_value a owl:DatatypeProperty ;
+    rdfs:label "shipment_identifier_value" ;
+    skos:definition "Value holder for shipment identifier" ;
+    skos:inScheme trc: .
+
+trc:stop_duration a owl:DatatypeProperty ;
+    rdfs:label "stop_duration" ;
+    skos:definition "Stop duration in ISO 8601 format (e.g. PT2H30M for 2 hours 30 minutes)" ;
+    skos:inScheme trc: ;
+    trc:iso_8601_duration true ;
+    trc:sql_identifier "trc_logis_stop_duration" .
+
+trc:stop_duration_value a owl:DatatypeProperty ;
+    rdfs:label "stop_duration_value" ;
+    skos:definition "Value holder for stop duration" ;
+    skos:inScheme trc: .
+
+trc:stop_location a owl:DatatypeProperty ;
+    rdfs:label "stop_location" ;
+    skos:definition "UN/LOCODE or GLN of stop location" ;
+    skos:inScheme trc: ;
+    trc:owl.filler "unece:UNLOCODE" ;
+    trc:sql_identifier "trc_logis_stop_location" .
+
+trc:stop_location_value a owl:DatatypeProperty ;
+    rdfs:label "stop_location_value" ;
+    skos:definition "Value holder for stop location" ;
+    skos:inScheme trc: .
+
+trc:stop_timestamp a owl:DatatypeProperty ;
+    rdfs:label "stop_timestamp" ;
+    skos:definition "When arrived at stop" ;
+    skos:inScheme trc: ;
+    trc:sql_identifier "trc_logis_stop_time" .
+
+trc:stop_timestamp_value a owl:DatatypeProperty ;
+    rdfs:label "stop_timestamp_value" ;
+    skos:definition "Value holder for stop timestamp" ;
+    skos:inScheme trc: .
+
+trc:transfer_date a owl:DatatypeProperty ;
+    rdfs:label "transfer_date" ;
+    skos:definition "Precise timestamp of ownership change - aligns with EPCIS eventTime concept" ;
+    skos:inScheme trc: ;
+    trc:references "CIRPASS" ;
+    trc:sql_identifier "trc_owner_transfer_date" .
+
+trc:transfer_date_value a owl:DatatypeProperty ;
+    rdfs:label "transfer_date_value" ;
+    skos:definition "Value holder for transfer date" ;
+    skos:inScheme trc: .
+
+trc:transfer_location a owl:DatatypeProperty ;
+    rdfs:label "transfer_location" ;
+    skos:definition "Physical location GLN - aligns with EPCIS bizLocation concept" ;
+    skos:inScheme trc: ;
+    trc:owl.filler "gs1:GlobalLocationNumber" ;
+    trc:references "CIRPASS" ;
+    trc:sql_identifier "trc_owner_transfer_location" .
+
+trc:transfer_location_value a owl:DatatypeProperty ;
+    rdfs:label "transfer_location_value" ;
+    skos:definition "Value holder for transfer location" ;
+    skos:inScheme trc: .
+
+trc:transfer_type a owl:DatatypeProperty ;
+    rdfs:label "transfer_type" ;
+    skos:definition "Uses CBV Business Transaction Type vocabulary directly - po desadv inv rma etc" ;
+    skos:inScheme trc: ;
+    trc:owl.filler "cbv:BTT" ;
+    trc:sql_identifier "trc_owner_transfer_type" .
+
+trc:transfer_type_value a owl:DatatypeProperty ;
+    rdfs:label "transfer_type_value" ;
+    skos:definition "Value holder for transfer type" ;
+    skos:inScheme trc: .
+
+trc:transfer_value a owl:DatatypeProperty ;
+    rdfs:label "transfer_value" ;
+    skos:definition "Monetary value of transfer" ;
+    skos:inScheme trc: ;
+    trc:sql_identifier "trc_owner_transfer_value" .
+
+trc:transfer_value_value a owl:DatatypeProperty ;
+    rdfs:label "transfer_value_value" ;
+    skos:definition "Value holder for transfer monetary value" ;
+    skos:inScheme trc: .
+
+trc:transformation_id a owl:DatatypeProperty ;
+    rdfs:label "transformation_id" ;
+    skos:definition "Transformation identifier using EPCIS transformationID" ;
+    skos:inScheme trc: ;
+    trc:owl.filler "epcis:TransformationID" ;
+    trc:sql_identifier "trc_value_transformation_id" .
+
+trc:transformation_id_value a owl:DatatypeProperty ;
+    rdfs:label "transformation_id_value" ;
+    skos:definition "Value holder for transformation ID" ;
+    skos:inScheme trc: .
+
+trc:transport_conditions a owl:DatatypeProperty ;
+    rdfs:label "transport_conditions" ;
+    skos:definition "Transport conditions using EPCIS 2.0 SensorReport for temperature humidity shock" ;
+    skos:inScheme trc: ;
+    trc:owl.filler "epcis:SensorReport" ;
+    trc:sql_identifier "trc_logis_conditions" .
+
+trc:transport_conditions_value a owl:DatatypeProperty ;
+    rdfs:label "transport_conditions_value" ;
+    skos:definition "Value holder for transport conditions" ;
+    skos:inScheme trc: .
+
+trc:transport_mode a owl:DatatypeProperty ;
+    rdfs:label "transport_mode" ;
+    skos:definition "Mode of transport using UN/ECE Recommendation 19 codes" ;
+    skos:inScheme trc: ;
+    trc:owl.filler "unece:TransportModeCode" ;
+    trc:sql_identifier "trc_logis_transport_mode" .
+
+trc:transport_mode_value a owl:DatatypeProperty ;
+    rdfs:label "transport_mode_value" ;
+    skos:definition "Value holder for transport mode" ;
+    skos:inScheme trc: .
+
+trc:value_added a owl:DatatypeProperty ;
+    rdfs:label "value_added" ;
+    skos:definition "Economic value added by this activity DPP extension" ;
+    skos:inScheme trc: ;
+    trc:dpp_extension true ;
+    trc:sql_identifier "trc_value_added_amount" .
+
+trc:value_added_value a owl:DatatypeProperty ;
+    rdfs:label "value_added_value" ;
+    skos:definition "Value holder for value added" ;
+    skos:inScheme trc: .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ReturnMethodEnum> a owl:Class ;
+    rdfs:label "ReturnMethodEnum" ;
+    owl:unionOf ( <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ReturnMethodEnum#STORE_RETURN> <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ReturnMethodEnum#MAIL_RETURN> <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ReturnMethodEnum#PICKUP_SERVICE> <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ReturnMethodEnum#DROP_OFF_POINT> ) ;
+    skos:definition "How product was returned - DPP specific" ;
+    skos:inScheme trc: ;
+    linkml:permissible_values <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ReturnMethodEnum#DROP_OFF_POINT>,
+        <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ReturnMethodEnum#MAIL_RETURN>,
+        <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ReturnMethodEnum#PICKUP_SERVICE>,
+        <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ReturnMethodEnum#STORE_RETURN> .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:DisposalMethodEnum> a owl:Class ;
+    rdfs:label "DisposalMethodEnum" ;
+    owl:unionOf ( <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:DisposalMethodEnum#LANDFILL> <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:DisposalMethodEnum#INCINERATION> <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:DisposalMethodEnum#ENERGY_RECOVERY> <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:DisposalMethodEnum#COMPOSTING> <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:DisposalMethodEnum#SPECIALIZED_TREATMENT> ) ;
+    skos:definition "Final disposal methods - DPP specific" ;
+    skos:inScheme trc: ;
+    linkml:permissible_values <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:DisposalMethodEnum#COMPOSTING>,
+        <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:DisposalMethodEnum#ENERGY_RECOVERY>,
+        <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:DisposalMethodEnum#INCINERATION>,
+        <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:DisposalMethodEnum#LANDFILL>,
+        <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:DisposalMethodEnum#SPECIALIZED_TREATMENT> .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ReturnReasonEnum> a owl:Class ;
+    rdfs:label "ReturnReasonEnum" ;
+    owl:unionOf ( <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ReturnReasonEnum#DEFECT> <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ReturnReasonEnum#WARRANTY_CLAIM> <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ReturnReasonEnum#END_OF_LIFE> <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ReturnReasonEnum#PRODUCT_RECALL> <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ReturnReasonEnum#CUSTOMER_DISSATISFACTION> ) ;
+    skos:definition "Reasons for product return - DPP specific" ;
+    skos:inScheme trc: ;
+    linkml:permissible_values <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ReturnReasonEnum#CUSTOMER_DISSATISFACTION>,
+        <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ReturnReasonEnum#DEFECT>,
+        <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ReturnReasonEnum#END_OF_LIFE>,
+        <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ReturnReasonEnum#PRODUCT_RECALL>,
+        <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ReturnReasonEnum#WARRANTY_CLAIM> .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:SeverityLevelEnum> a owl:Class ;
+    rdfs:label "SeverityLevelEnum" ;
+    owl:unionOf ( <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:SeverityLevelEnum#CRITICAL> <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:SeverityLevelEnum#HIGH> <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:SeverityLevelEnum#MEDIUM> <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:SeverityLevelEnum#LOW> <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:SeverityLevelEnum#INFORMATIONAL> ) ;
+    skos:definition "Severity classification for incidents" ;
+    skos:inScheme trc: ;
+    linkml:permissible_values <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:SeverityLevelEnum#CRITICAL>,
+        <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:SeverityLevelEnum#HIGH>,
+        <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:SeverityLevelEnum#INFORMATIONAL>,
+        <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:SeverityLevelEnum#LOW>,
+        <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:SeverityLevelEnum#MEDIUM> .
+
+trc:action a owl:DatatypeProperty .
+
+trc:action_value a owl:DatatypeProperty .
+
+trc:biz_step a owl:DatatypeProperty .
+
+trc:biz_step_value a owl:DatatypeProperty .
+
+trc:disposition a owl:DatatypeProperty .
+
+trc:disposition_value a owl:DatatypeProperty .
+
+trc:linked_product_identifier a owl:DatatypeProperty .
+
+trc:linked_product_identifier_value a owl:DatatypeProperty .
+
+trc:read_point a owl:DatatypeProperty .
+
+trc:read_point_value a owl:DatatypeProperty .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:OwnershipStatusEnum> a owl:Class ;
+    rdfs:label "OwnershipStatusEnum" ;
+    owl:unionOf ( <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:OwnershipStatusEnum#FULL_OWNERSHIP> <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:OwnershipStatusEnum#CONDITIONAL> <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:OwnershipStatusEnum#CONSIGNED> <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:OwnershipStatusEnum#LEASED> <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:OwnershipStatusEnum#IN_TRANSIT> <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:OwnershipStatusEnum#DISPUTED> ) ;
+    skos:definition "Legal status of ownership - DPP extension beyond EPCIS standard" ;
+    skos:inScheme trc: ;
+    linkml:permissible_values <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:OwnershipStatusEnum#CONDITIONAL>,
+        <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:OwnershipStatusEnum#CONSIGNED>,
+        <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:OwnershipStatusEnum#DISPUTED>,
+        <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:OwnershipStatusEnum#FULL_OWNERSHIP>,
+        <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:OwnershipStatusEnum#IN_TRANSIT>,
+        <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:OwnershipStatusEnum#LEASED> .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:PackagingLevelEnum> a owl:Class ;
+    rdfs:label "PackagingLevelEnum" ;
+    owl:unionOf ( <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:PackagingLevelEnum#ITEM> <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:PackagingLevelEnum#INNER_PACK> <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:PackagingLevelEnum#CASE> <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:PackagingLevelEnum#PALLET> <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:PackagingLevelEnum#CONTAINER> <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:PackagingLevelEnum#TRANSPORT_UNIT> ) ;
+    skos:definition "Levels in packaging hierarchy - aligns with EPCIS packaging concepts" ;
+    skos:inScheme trc: ;
+    linkml:permissible_values <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:PackagingLevelEnum#CASE>,
+        <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:PackagingLevelEnum#CONTAINER>,
+        <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:PackagingLevelEnum#INNER_PACK>,
+        <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:PackagingLevelEnum#ITEM>,
+        <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:PackagingLevelEnum#PALLET>,
+        <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:PackagingLevelEnum#TRANSPORT_UNIT> .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:RecyclingStreamEnum> a owl:Class ;
+    rdfs:label "RecyclingStreamEnum" ;
+    owl:unionOf ( <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:RecyclingStreamEnum#ELECTRONICS> <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:RecyclingStreamEnum#PLASTICS> <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:RecyclingStreamEnum#METALS> <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:RecyclingStreamEnum#TEXTILES> <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:RecyclingStreamEnum#BATTERIES> <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:RecyclingStreamEnum#MIXED_MATERIALS> ) ;
+    skos:definition "Recycling pathways - DPP specific" ;
+    skos:inScheme trc: ;
+    linkml:permissible_values <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:RecyclingStreamEnum#BATTERIES>,
+        <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:RecyclingStreamEnum#ELECTRONICS>,
+        <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:RecyclingStreamEnum#METALS>,
+        <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:RecyclingStreamEnum#MIXED_MATERIALS>,
+        <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:RecyclingStreamEnum#PLASTICS>,
+        <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:RecyclingStreamEnum#TEXTILES> .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ResolutionStatusEnum> a owl:Class ;
+    rdfs:label "ResolutionStatusEnum" ;
+    owl:unionOf ( <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ResolutionStatusEnum#OPEN> <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ResolutionStatusEnum#IN_PROGRESS> <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ResolutionStatusEnum#PENDING_VERIFICATION> <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ResolutionStatusEnum#RESOLVED> <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ResolutionStatusEnum#CLOSED> <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ResolutionStatusEnum#ESCALATED> ) ;
+    skos:definition "Status of incident resolution" ;
+    skos:inScheme trc: ;
+    linkml:permissible_values <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ResolutionStatusEnum#CLOSED>,
+        <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ResolutionStatusEnum#ESCALATED>,
+        <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ResolutionStatusEnum#IN_PROGRESS>,
+        <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ResolutionStatusEnum#OPEN>,
+        <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ResolutionStatusEnum#PENDING_VERIFICATION>,
+        <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:ResolutionStatusEnum#RESOLVED> .
+
+<https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum> a owl:Class ;
+    rdfs:label "IncidentTypeEnum" ;
+    owl:unionOf ( <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum#DAMAGE> <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum#THEFT> <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum#DELAY> <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum#CONTAMINATION> <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum#COLD_CHAIN_BREAK> <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum#SECURITY_BREACH> <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum#NATURAL_DISASTER> <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum#RECALL> <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum#QUARANTINE> <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum#DOCUMENTATION_ERROR> <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum#SYSTEM_FAILURE> <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum#REGULATORY_HOLD> ) ;
+    skos:definition "Types of supply chain incidents and exceptions" ;
+    skos:inScheme trc: ;
+    linkml:permissible_values <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum#COLD_CHAIN_BREAK>,
+        <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum#CONTAMINATION>,
+        <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum#DAMAGE>,
+        <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum#DELAY>,
+        <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum#DOCUMENTATION_ERROR>,
+        <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum#NATURAL_DISASTER>,
+        <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum#QUARANTINE>,
+        <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum#RECALL>,
+        <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum#REGULATORY_HOLD>,
+        <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum#SECURITY_BREACH>,
+        <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum#SYSTEM_FAILURE>,
+        <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/:IncidentTypeEnum#THEFT> .
+
+
