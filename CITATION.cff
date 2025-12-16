@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 title: CE-RISE Traceability and Life Cycle Event
 message: >-
-  v0.0.1 - Initial project setup and full data model draft.
+  v0.0.2 - Added references from Beta release of the data model.
 type: software
 doi: 10.5281/zenodo.17803667
 authors:

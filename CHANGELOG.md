@@ -2,7 +2,12 @@
 
 All notable changes to the CE-RISE Traceability and Life Cycle Events Data Model will be documented in this file.
 
-## [0.0.1] - unreleased
+## [0.0.2] - 2025-12-16
+
+### Added
+- References from Beta release of the data model
+
+## [0.0.1] - 2025-12-03
 
 ### Added
 - Initial project structure and repository setup from template: https://ce-rise-models.codeberg.page/template-data-model/
