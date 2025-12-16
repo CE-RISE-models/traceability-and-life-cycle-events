@@ -78,6 +78,7 @@ classes:
                 description: ISO 8601 timestamp with timezone - aligns with EPCIS eventTime concept
                 annotations:
                     sql_identifier: trc_hist_event_timestamp
+                    references: "CIRPASS"
 
             event_timestamp_value:
                 range: string
@@ -100,6 +101,7 @@ classes:
                 annotations:
                     sql_identifier: trc_hist_event_location
                     owl.filler: gs1:GlobalLocationNumber
+                    references: "CIRPASS; Jensen et al."
                 pattern: "^(urn:epc:id:sgln:|https?://|[0-9]{13}).*"
 
             event_location_value:
@@ -176,6 +178,7 @@ classes:
                 annotations:
                     sql_identifier: trc_hist_read_point
                     owl.filler: gs1:GlobalLocationNumber
+                    references: "CIRPASS"
 
             read_point_value:
                 range: string
@@ -187,6 +190,7 @@ classes:
                 annotations:
                     sql_identifier: trc_hist_biz_location
                     owl.filler: gs1:GlobalLocationNumber
+                    references: "CIRPASS"
 
             biz_location_value:
                 range: string
@@ -203,6 +207,7 @@ classes:
                 annotations:
                     sql_identifier: trc_hist_certification_info
                     reference_type: "certification"
+                    references: "King et al."
 
             certification_info_value:
                 range: string
@@ -227,6 +232,7 @@ classes:
                 description: Precise timestamp of ownership change - aligns with EPCIS eventTime concept
                 annotations:
                     sql_identifier: trc_owner_transfer_date
+                    references: "CIRPASS"
 
             transfer_date_value:
                 range: string
@@ -273,6 +279,7 @@ classes:
                 annotations:
                     sql_identifier: trc_owner_transfer_location
                     owl.filler: gs1:GlobalLocationNumber
+                    references: "CIRPASS"
                 pattern: "^[0-9]{13}$"
 
             transfer_location_value:
@@ -398,6 +405,7 @@ classes:
                 range: datetime
                 description: When activity occurred - aligns with EPCIS eventTime concept
                 annotations:
+                    references: "CIRPASS"
                     sql_identifier: trc_value_activity_date
 
             activity_date_value:
@@ -410,6 +418,7 @@ classes:
                 annotations:
                     sql_identifier: trc_value_facility_id
                     owl.filler: gs1:GlobalLocationNumber
+                    references: "ESPR; CIRPASS; King et al."
                 pattern: "^[0-9]{13}$"
 
             facility_identifier_value:
@@ -490,6 +499,7 @@ classes:
                 annotations:
                     sql_identifier: trc_value_quality_results
                     dpp_extension: true
+                    references: "King et al."
 
             quality_check_results_value:
                 range: string
@@ -513,6 +523,7 @@ classes:
                 description: GLN or ID of operator performing activity
                 annotations:
                     sql_identifier: trc_value_operator_id
+                    references: "ESPR; CIRPASS"
 
             operator_identifier_value:
                 range: string
@@ -547,6 +558,7 @@ classes:
                     sql_identifier: trc_value_certifications
                     dpp_extension: true
                     reference_type: "certification"
+                    references: "King et al."
 
             process_certification_value:
                 range: string
@@ -595,6 +607,7 @@ classes:
                 annotations:
                     sql_identifier: trc_actor_id
                     owl.filler: gs1:PartyGlobalLocationNumber
+                    references: "Berger et al.; ESPR"
                 pattern: "^([0-9]{13}|[A-Z0-9]{20}|[A-Z]{2}[A-Z0-9]+)$"
 
             actor_identifier_value:
@@ -607,6 +620,7 @@ classes:
                 annotations:
                     sql_identifier: trc_actor_role
                     owl.filler: cbv:SourceDestinationType
+                    references: "Berger et al."
 
             actor_role_value:
                 range: string
@@ -617,6 +631,7 @@ classes:
                 description: When actor interacted with product
                 annotations:
                     sql_identifier: trc_actor_timestamp
+                    references: "CIRPASS"
 
             activity_timestamp_value:
                 range: string
@@ -649,6 +664,7 @@ classes:
                 annotations:
                     sql_identifier: trc_actor_certifications
                     reference_type: "certification"
+                    references: "King et al."
 
             certification_status_value:
                 range: string
@@ -684,6 +700,7 @@ classes:
                 annotations:
                     sql_identifier: trc_logis_departure_loc
                     owl.filler: unece:UNLOCODE
+                    references: "CIRPASS"
                 pattern: "^([A-Z]{2}[A-Z0-9]{3}|[0-9]{13})$"
 
             departure_location_value:
@@ -892,6 +909,7 @@ classes:
                 annotations:
                     sql_identifier: trc_reverse_refurb_date
                     iso_8601: true
+                    references: "King et al.; CE-RISE Deliverable 1.1"
 
             refurbishment_date_value:
                 range: string
@@ -903,6 +921,7 @@ classes:
                 description: List of refurbishment activities performed
                 annotations:
                     sql_identifier: trc_reverse_refurb_activities
+                    references: "King et al.; CE-RISE Deliverable 1.1"
 
             refurbishment_activities_value:
                 range: string
@@ -925,6 +944,7 @@ classes:
                 annotations:
                     sql_identifier: trc_reverse_refurb_cert
                     reference_type: "certification"
+                    references: "King et al."
 
             refurbishment_certification_value:
                 range: string
@@ -938,6 +958,7 @@ classes:
                 description: When recycling occurred
                 annotations:
                     sql_identifier: trc_reverse_recycle_date
+                    references: "ESPR; Battery Pass; CIRPASS; King et al.; CE-RISE Deliverable 1.1"
 
             recycling_date_value:
                 range: string
@@ -985,6 +1006,7 @@ classes:
                 description: When disposal occurred
                 annotations:
                     sql_identifier: trc_reverse_disposal_date
+                    references: "ESPR; CE-RISE Deliverable 1.1"
 
             disposal_date_value:
                 range: string
@@ -995,6 +1017,7 @@ classes:
                 description: Method of disposal
                 annotations:
                     sql_identifier: trc_reverse_disposal_method
+                    references: "ESPR; CE-RISE Deliverable 1.1"
 
             disposal_method_value:
                 range: string
@@ -1006,6 +1029,7 @@ classes:
                 annotations:
                     sql_identifier: trc_reverse_disposal_facility
                     owl.filler: gs1:GlobalLocationNumber
+                    references: "Koppelaar et al."
 
             disposal_facility_value:
                 range: string
@@ -1017,6 +1041,7 @@ classes:
                 annotations:
                     sql_identifier: trc_reverse_disposal_cert
                     reference_type: "certification"
+                    references: "King et al."
 
             disposal_certification_value:
                 range: string
