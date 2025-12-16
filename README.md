@@ -1,6 +1,6 @@
 # CE-RISE Traceability and Life Cycle Event
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17803667.svg)](https://doi.org/10.5281/zenodo.17803667) [![Schemas](https://img.shields.io/badge/Generated%20Schema%20Files-JSON%2C%20SHACL%2C%20OWL-32CD32)](https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17803667.svg)](https://doi.org/10.5281/zenodo.17803667) [![Schemas](https://img.shields.io/badge/Schema%20Files-LinkML%2C%20JSON%2C%20SHACL%2C%20OWL-32CD32)](https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/)
 
 The Traceability and Life Cycle Events data model captures **dynamic event-based information** throughout a product's journey in the supply chain and its entire lifecycle. This model is part of the CE-RISE Digital Product Passport architecture, focusing specifically on time-stamped events that occur during supply chain operations.
 
@@ -341,6 +341,7 @@ https://codeberg.org/CE-RISE-models/traceability-and-life-cycle-events/src/tag/p
 
 Files available in that directory typically include:
 
+- schema.yaml
 - schema.json
 - shacl.ttl
 - model.ttl
