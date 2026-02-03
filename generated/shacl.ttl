@@ -1,0 +1,1430 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix trc: <https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+trc:TraceabilityLifecycleEvents a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Root container for all traceability and lifecycle events for products, materials, batches, or commodities throughout their supply chain journey" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class trc:AggregationEvents ;
+            sh:description "Packaging hierarchy operations - packing and unpacking of items into containers" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 6 ;
+            sh:path trc:aggregation_events ],
+        [ sh:class trc:ValueAddingActivityLocation ;
+            sh:description "Transformation and processing events that modify or enhance entities (products, materials, batches, commodities)" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 2 ;
+            sh:path trc:value_adding_activity ],
+        [ sh:class trc:OwnershipEvent ;
+            sh:description "Legal ownership and custody transfers throughout supply chain" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 1 ;
+            sh:path trc:ownership_event ],
+        [ sh:class trc:ActorTracking ;
+            sh:description "All supply chain participants and their interactions with entities (products, materials, batches, commodities)" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 3 ;
+            sh:path trc:actor_tracking ],
+        [ sh:class trc:ReverseLogistics ;
+            sh:description "End-of-life and return pathway management" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 5 ;
+            sh:path trc:reverse_logistics ],
+        [ sh:class trc:SupplyChainIncidents ;
+            sh:description "Exception events and disruptions during supply chain operations" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 7 ;
+            sh:path trc:supply_chain_incidents ],
+        [ sh:class trc:LogisticsEvents ;
+            sh:description "Supply chain transportation and movement tracking post-import" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 4 ;
+            sh:path trc:logistics_events ],
+        [ sh:class trc:EntityHistory ;
+            sh:description "Foundation for all lifecycle events with complete audit trail for products, materials, batches, or commodities" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 0 ;
+            sh:path trc:entity_history ] ;
+    sh:targetClass trc:TraceabilityLifecycleEvents .
+
+trc:ActorTracking a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Supply chain participants and their interactions with entities (products, materials, batches, commodities)" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Value holder for responsibility scope" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 9 ;
+            sh:path trc:responsibility_scope_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Specific action taken by actor" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 6 ;
+            sh:path trc:action_performed ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for certification status" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 11 ;
+            sh:path trc:certification_status_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for activity timestamp" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path trc:activity_timestamp_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Actor responsibility boundaries" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 8 ;
+            sh:path trc:responsibility_scope ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for action performed" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 7 ;
+            sh:path trc:action_performed_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for actor role" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path trc:actor_role_value ],
+        [ sh:datatype xsd:dateTime ;
+            sh:description "When actor interacted with entity (product, material, batch, commodity)" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path trc:activity_timestamp ],
+        [ sh:datatype xsd:string ;
+            sh:description "Organization identifier GLN LEI or VAT" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path trc:actor_identifier ;
+            sh:pattern "^([0-9]{13}|[A-Z0-9]{20}|[A-Z]{2}[A-Z0-9]+)$" ],
+        [ sh:datatype xsd:anyURI ;
+            sh:description "URI references to actor certifications ISO 9001 ISO 14001 organic fair trade" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 10 ;
+            sh:path trc:certification_status ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for actor identifier" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path trc:actor_identifier_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Role in supply chain using CBV Source/Destination types" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path trc:actor_role ] ;
+    sh:targetClass trc:ActorTracking .
+
+trc:AggregationEvents a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Packaging hierarchy operations extending EPCIS AggregationEvent" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Unique identifier for aggregation operation - aligns with EPCIS eventID" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path trc:aggregation_event_id ;
+            sh:pattern "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$" ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for aggregation type" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path trc:aggregation_type_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for packaging level" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 13 ;
+            sh:path trc:packaging_level_value ],
+        [ sh:datatype xsd:dateTime ;
+            sh:description "When packing/unpacking happened - aligns with EPCIS eventTime" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 10 ;
+            sh:path trc:aggregation_timestamp ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for business step" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 15 ;
+            sh:path trc:biz_step_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for aggregation location" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 9 ;
+            sh:path trc:aggregation_location_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for aggregation event ID" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path trc:aggregation_event_id_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Container pallet or case EPC being packed/unpacked - aligns with EPCIS parentID" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path trc:parent_identifier ;
+            sh:pattern "^(urn:epc:id:|[0-9]{14}:).*" ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for read point" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 19 ;
+            sh:path trc:read_point_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Specific read point where aggregation occurred - EPCIS readPoint" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 18 ;
+            sh:path trc:read_point ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for disposition" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 17 ;
+            sh:path trc:disposition_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for aggregation timestamp" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 11 ;
+            sh:path trc:aggregation_timestamp_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Child EPCs being aggregated/disaggregated using EPCIS childEPCs structure" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 6 ;
+            sh:path trc:child_identifiers ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for child identifiers" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 7 ;
+            sh:path trc:child_identifiers_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Business condition of aggregation - aligns with EPCIS disposition" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 16 ;
+            sh:path trc:disposition ],
+        [ sh:datatype xsd:string ;
+            sh:description "ADD for packing DELETE for unpacking - uses EPCIS Action directly" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path trc:aggregation_type ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for parent identifier" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path trc:parent_identifier_value ],
+        [ sh:description "Level in packaging hierarchy" ;
+            sh:in ( "ITEM" "INNER_PACK" "CASE" "PALLET" "CONTAINER" "TRANSPORT_UNIT" ) ;
+            sh:maxCount 1 ;
+            sh:order 12 ;
+            sh:path trc:packaging_level ],
+        [ sh:datatype xsd:string ;
+            sh:description "Business step like packing commissioning etc - uses CBV directly" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 14 ;
+            sh:path trc:biz_step ],
+        [ sh:datatype xsd:string ;
+            sh:description "GLN where operation occurred - aligns with EPCIS bizLocation" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 8 ;
+            sh:path trc:aggregation_location ;
+            sh:pattern "^[0-9]{13}$" ] ;
+    sh:targetClass trc:AggregationEvents .
+
+trc:CustomerReturnChannel a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Return channel information" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Value holder for return documentation" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path trc:return_documentation_value ],
+        [ sh:datatype xsd:anyURI ;
+            sh:description "URI references to return authorization shipping labels RMA documents" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path trc:return_documentation ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for return location" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path trc:return_location_value ],
+        [ sh:description "How entity (product, material, batch, commodity) can be returned" ;
+            sh:in ( "STORE_RETURN" "MAIL_RETURN" "PICKUP_SERVICE" "DROP_OFF_POINT" ) ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path trc:return_method ],
+        [ sh:datatype xsd:string ;
+            sh:description "Location where entities (products, materials, batches, commodities) can be returned - GLN identifier" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path trc:return_location ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for return method" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path trc:return_method_value ] ;
+    sh:targetClass trc:CustomerReturnChannel .
+
+trc:DisposalEvent a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Final disposal details" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:dateTime ;
+            sh:description "When disposal occurred" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path trc:disposal_date ],
+        [ sh:datatype xsd:anyURI ;
+            sh:description "URI reference to disposal certification or compliance document" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 6 ;
+            sh:path trc:disposal_certification ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for disposal facility" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path trc:disposal_facility_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for disposal date" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path trc:disposal_date_value ],
+        [ sh:description "Method of disposal" ;
+            sh:in ( "LANDFILL" "INCINERATION" "ENERGY_RECOVERY" "COMPOSTING" "SPECIALIZED_TREATMENT" ) ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path trc:disposal_method ],
+        [ sh:datatype xsd:string ;
+            sh:description "GLN or identifier of disposal facility" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path trc:disposal_facility ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for disposal certification" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 7 ;
+            sh:path trc:disposal_certification_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for disposal method" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path trc:disposal_method_value ] ;
+    sh:targetClass trc:DisposalEvent .
+
+trc:EntityHistory a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "EPCIS-compatible base event structure for complete lifecycle audit trail of products, materials, batches, or commodities" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Value holder for disposition" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 13 ;
+            sh:path trc:disposition_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for event location" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 7 ;
+            sh:path trc:event_location_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for event timestamp" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path trc:event_timestamp_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for certification info" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 26 ;
+            sh:path trc:certification_info_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Unique identifier for each event - aligns with EPCIS eventID concept" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path trc:event_identifier ;
+            sh:pattern "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$" ],
+        [ sh:datatype xsd:string ;
+            sh:description "EPC URI, GTIN plus serial, batch number, or lot identifier for the tracked entity (product, material, batch, commodity) - aligns with EPCIS epcList concept" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 10 ;
+            sh:path trc:linked_entity_identifier ;
+            sh:pattern "^(urn:epc:id:|[0-9]{14}:).*" ],
+        [ sh:datatype xsd:string ;
+            sh:description "Uses EPCIS Action vocabulary directly - ADD OBSERVE DELETE" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 16 ;
+            sh:path trc:action ],
+        [ sh:datatype xsd:string ;
+            sh:description "Specific location where event occurred EPCIS readPoint" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 20 ;
+            sh:path trc:read_point ],
+        [ sh:datatype xsd:string ;
+            sh:description "Human-readable event description extends EPCIS" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 8 ;
+            sh:path trc:event_description ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for business location" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 23 ;
+            sh:path trc:biz_location_value ],
+        [ sh:class trc:ErrorDeclaration ;
+            sh:description "Declaration that this event is in error EPCIS errorDeclaration" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 24 ;
+            sh:path trc:error_declaration ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for business step" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 15 ;
+            sh:path trc:biz_step_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for read point" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 21 ;
+            sh:path trc:read_point_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Business state of objects - aligns with EPCIS disposition concept" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 12 ;
+            sh:path trc:disposition ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for action" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 17 ;
+            sh:path trc:action_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for linked entity identifier" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 11 ;
+            sh:path trc:linked_entity_identifier_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Time zone offset from UTC like +01:00 or -05:00" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 18 ;
+            sh:path trc:event_time_zone_offset ;
+            sh:pattern "^[+-][0-9]{2}:[0-9]{2}$" ],
+        [ sh:datatype xsd:string ;
+            sh:description "Uses EPCIS EventType vocabulary directly - ObjectEvent TransactionEvent etc" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path trc:event_type ],
+        [ sh:datatype xsd:string ;
+            sh:description "Business location where objects are expected following event EPCIS bizLocation" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 22 ;
+            sh:path trc:biz_location ],
+        [ sh:datatype xsd:dateTime ;
+            sh:description "ISO 8601 timestamp with timezone - aligns with EPCIS eventTime concept" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path trc:event_timestamp ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for event description" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 9 ;
+            sh:path trc:event_description_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "GLN or URI for location - aligns with EPCIS readPoint/bizLocation concepts" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 6 ;
+            sh:path trc:event_location ;
+            sh:pattern "^(urn:epc:id:sgln:|https?://|[0-9]{13}).*" ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for event type" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path trc:event_type_value ],
+        [ sh:datatype xsd:anyURI ;
+            sh:description "URI references to relevant certification documents or standards" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 25 ;
+            sh:path trc:certification_info ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for timezone offset" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 19 ;
+            sh:path trc:event_time_zone_offset_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "IoT sensor data using EPCIS 2.0 SensorReport structure" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 27 ;
+            sh:path trc:sensor_metadata ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for event identifier" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path trc:event_identifier_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for sensor metadata" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 28 ;
+            sh:path trc:sensor_metadata_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Uses CBV BizStep vocabulary directly" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 14 ;
+            sh:path trc:biz_step ] ;
+    sh:targetClass trc:EntityHistory .
+
+trc:ErrorDeclaration a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Declaration that an event was recorded in error EPCIS errorDeclaration" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Value holder for declaration time" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path trc:declaration_time_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for error reason" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path trc:reason_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for corrective event IDs" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path trc:corrective_event_ids_value ],
+        [ sh:datatype xsd:dateTime ;
+            sh:description "When the error was declared" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path trc:declaration_time ],
+        [ sh:datatype xsd:string ;
+            sh:description "Reason for the error declaration" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path trc:reason ],
+        [ sh:datatype xsd:string ;
+            sh:description "IDs of events that correct this error" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path trc:corrective_event_ids ] ;
+    sh:targetClass trc:ErrorDeclaration .
+
+trc:IntermediateStop a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Stop location during logistics movement" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Value holder for stop duration" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path trc:stop_duration_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for stop location" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path trc:stop_location_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "UN/LOCODE or GLN of stop location" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path trc:stop_location ;
+            sh:pattern "^([A-Z]{2}[A-Z0-9]{3}|[0-9]{13})$" ],
+        [ sh:datatype xsd:string ;
+            sh:description "Stop duration in ISO 8601 format (e.g. PT2H30M for 2 hours 30 minutes)" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path trc:stop_duration ;
+            sh:pattern "^P(?:\\d+Y)?(?:\\d+M)?(?:\\d+W)?(?:\\d+D)?(?:T(?:\\d+H)?(?:\\d+M)?(?:\\d+(?:\\.\\d+)?S)?)?$" ],
+        [ sh:datatype xsd:dateTime ;
+            sh:description "When arrived at stop" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path trc:stop_timestamp ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for stop timestamp" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path trc:stop_timestamp_value ] ;
+    sh:targetClass trc:IntermediateStop .
+
+trc:LogisticsEvents a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Supply chain transportation tracking post-import - aligns with EPCIS ObjectEvent concepts" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:dateTime ;
+            sh:description "Actual or estimated arrival" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 10 ;
+            sh:path trc:arrival_timestamp ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for departure location" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path trc:departure_location_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Mode of transport using UN/ECE Recommendation 19 codes" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path trc:transport_mode ],
+        [ sh:datatype xsd:string ;
+            sh:description "Transport company GLN or identifier" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 12 ;
+            sh:path trc:carrier_identifier ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for arrival timestamp" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 11 ;
+            sh:path trc:arrival_timestamp_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for transport conditions" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 18 ;
+            sh:path trc:transport_conditions_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for carrier identifier" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 13 ;
+            sh:path trc:carrier_identifier_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for departure timestamp" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 7 ;
+            sh:path trc:departure_timestamp_value ],
+        [ sh:class trc:IntermediateStop ;
+            sh:description "Distribution centers warehouses transshipment points" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 16 ;
+            sh:path trc:intermediate_stops ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for shipment identifier" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path trc:shipment_identifier_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Origin UN/LOCODE or GLN" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path trc:departure_location ;
+            sh:pattern "^([A-Z]{2}[A-Z0-9]{3}|[0-9]{13})$" ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for route information" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 15 ;
+            sh:path trc:route_information_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Planned route using GS1 route information structure" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 14 ;
+            sh:path trc:route_information ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for arrival location" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 9 ;
+            sh:path trc:arrival_location_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Destination UN/LOCODE or GLN" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 8 ;
+            sh:path trc:arrival_location ;
+            sh:pattern "^([A-Z]{2}[A-Z0-9]{3}|[0-9]{13})$" ],
+        [ sh:datatype xsd:string ;
+            sh:description "Unique shipment reference carrier tracking number" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path trc:shipment_identifier ],
+        [ sh:datatype xsd:dateTime ;
+            sh:description "Departure time with timezone" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 6 ;
+            sh:path trc:departure_timestamp ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for transport mode" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path trc:transport_mode_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Transport conditions using EPCIS 2.0 SensorReport for temperature humidity shock" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 17 ;
+            sh:path trc:transport_conditions ] ;
+    sh:targetClass trc:LogisticsEvents .
+
+trc:OwnershipEvent a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Legal ownership and custody transfers extending EPCIS TransactionEvent" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:anyURI ;
+            sh:description "Previous event links EPCIS extensions" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 10 ;
+            sh:path trc:chain_of_custody_reference ],
+        [ sh:datatype xsd:integer ;
+            sh:description "Quantity transferred using EPCIS QuantityElement structure" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 18 ;
+            sh:path trc:quantity_transferred ],
+        [ sh:datatype xsd:dateTime ;
+            sh:description "Precise timestamp of ownership change - aligns with EPCIS eventTime concept" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path trc:transfer_date ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for quantity transferred" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 19 ;
+            sh:path trc:quantity_transferred_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for transfer type" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 7 ;
+            sh:path trc:transfer_type_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "EPCIS action ADD OBSERVE DELETE" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 14 ;
+            sh:path trc:action ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for action" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 15 ;
+            sh:path trc:action_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for custody chain references" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 11 ;
+            sh:path trc:chain_of_custody_reference_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Currency code for transfer value using ISO 4217 standard" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 22 ;
+            sh:path trc:currency ;
+            sh:pattern "^[A-Z]{3}$" ],
+        [ sh:datatype xsd:string ;
+            sh:description "Uses CBV Business Transaction Type vocabulary directly - po desadv inv rma etc" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 6 ;
+            sh:path trc:transfer_type ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for previous owner" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path trc:previous_owner_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for transfer location" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 9 ;
+            sh:path trc:transfer_location_value ],
+        [ sh:datatype xsd:anyURI ;
+            sh:description "Digital references EPCIS bizTransactionList URIs to documents" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 12 ;
+            sh:path trc:ownership_documentation ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for transfer monetary value" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 21 ;
+            sh:path trc:transfer_value_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Source party GLN - aligns with EPCIS source concept" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path trc:previous_owner ;
+            sh:pattern "^[0-9]{13}$" ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for linked entity identifier" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 17 ;
+            sh:path trc:linked_entity_identifier_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for transfer date" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path trc:transfer_date_value ],
+        [ sh:datatype xsd:float ;
+            sh:description "Monetary value of transfer" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 20 ;
+            sh:path trc:transfer_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Physical location GLN - aligns with EPCIS bizLocation concept" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 8 ;
+            sh:path trc:transfer_location ;
+            sh:pattern "^[0-9]{13}$" ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for ownership documentation" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 13 ;
+            sh:path trc:ownership_documentation_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for new owner" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path trc:new_owner_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Destination party GLN - aligns with EPCIS destination concept" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path trc:new_owner ;
+            sh:pattern "^[0-9]{13}$" ],
+        [ sh:description "Legal status of ownership after transfer DPP extension beyond EPCIS" ;
+            sh:in ( "FULL_OWNERSHIP" "CONDITIONAL" "CONSIGNED" "LEASED" "IN_TRANSIT" "DISPUTED" ) ;
+            sh:maxCount 1 ;
+            sh:order 24 ;
+            sh:path trc:ownership_status ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for ownership status" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 25 ;
+            sh:path trc:ownership_status_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for currency" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 23 ;
+            sh:path trc:currency_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Reference to entities (products, materials, batches, commodities) being transferred - aligns with EPCIS epcList concept" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 16 ;
+            sh:path trc:linked_entity_identifier ;
+            sh:pattern "^(urn:epc:id:|[0-9]{14}:).*" ] ;
+    sh:targetClass trc:OwnershipEvent .
+
+trc:RecyclingEvent a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Material and product recovery and recycling details" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Value holder for materials recovered" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path trc:materials_recovered_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for recycling date" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path trc:recycling_date_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for recycling stream" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path trc:recycling_stream_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for recovery percentage" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 7 ;
+            sh:path trc:recovery_percentage_value ],
+        [ sh:datatype xsd:dateTime ;
+            sh:description "When recycling occurred" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path trc:recycling_date ],
+        [ sh:description "Which recycling stream" ;
+            sh:in ( "ELECTRONICS" "PLASTICS" "METALS" "TEXTILES" "BATTERIES" "MIXED_MATERIALS" ) ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path trc:recycling_stream ],
+        [ sh:datatype xsd:float ;
+            sh:description "Percentage of materials recovered (0-100)" ;
+            sh:maxCount 1 ;
+            sh:maxInclusive 1e+02 ;
+            sh:minInclusive 0e+00 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 6 ;
+            sh:path trc:recovery_percentage ],
+        [ sh:datatype xsd:string ;
+            sh:description "List of recovered materials" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path trc:materials_recovered ] ;
+    sh:targetClass trc:RecyclingEvent .
+
+trc:RefurbishmentEvent a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Entity (product, material, component) repair and refurbishment details" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:dateTime ;
+            sh:description "When refurbishment occurred ISO 8601 format" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path trc:refurbishment_date ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for refurbishment activities" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path trc:refurbishment_activities_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for components replaced" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path trc:components_replaced_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "List of refurbishment activities performed" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path trc:refurbishment_activities ],
+        [ sh:datatype xsd:string ;
+            sh:description "Components that were replaced" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path trc:components_replaced ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for refurbishment date" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path trc:refurbishment_date_value ],
+        [ sh:datatype xsd:anyURI ;
+            sh:description "URI reference to refurbishment quality certification or standard" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 6 ;
+            sh:path trc:refurbishment_certification ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for refurbishment certification" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 7 ;
+            sh:path trc:refurbishment_certification_value ] ;
+    sh:targetClass trc:RefurbishmentEvent .
+
+trc:ReverseLogistics a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "End-of-life and return pathway management beyond EPCIS scope" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Value holder for return event identifier" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path trc:return_event_identifier_value ],
+        [ sh:class trc:CustomerReturnChannel ;
+            sh:description "Available return methods and locations" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 6 ;
+            sh:path trc:customer_return_channels ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for return reason" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path trc:return_reason_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Unique return tracking ID" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path trc:return_event_identifier ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for return initiation date" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path trc:return_initiation_date_value ],
+        [ sh:description "Reason for return" ;
+            sh:in ( "DEFECT" "WARRANTY_CLAIM" "END_OF_LIFE" "PRODUCT_RECALL" "CUSTOMER_DISSATISFACTION" ) ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path trc:return_reason ],
+        [ sh:class trc:DisposalEvent ;
+            sh:description "Final disposal method and certification" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 9 ;
+            sh:path trc:disposal_event ],
+        [ sh:class trc:RefurbishmentEvent ;
+            sh:description "Repair and refurbishment activities" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 7 ;
+            sh:path trc:refurbishment_event ],
+        [ sh:class trc:RecyclingEvent ;
+            sh:description "Material and product recovery and recycling processes" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 8 ;
+            sh:path trc:recycling_event ],
+        [ sh:datatype xsd:dateTime ;
+            sh:description "When return process started" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path trc:return_initiation_date ] ;
+    sh:targetClass trc:ReverseLogistics .
+
+trc:SupplyChainIncidents a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Exception events and disruptions during supply chain operations" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Value holder for incident documentation" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 17 ;
+            sh:path trc:incident_documentation_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for estimated impact" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 23 ;
+            sh:path trc:estimated_impact_value ],
+        [ sh:description "Severity level classification" ;
+            sh:in ( "CRITICAL" "HIGH" "MEDIUM" "LOW" "INFORMATIONAL" ) ;
+            sh:maxCount 1 ;
+            sh:order 10 ;
+            sh:path trc:incident_severity ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for incident identifier" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path trc:incident_identifier_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Unique incident tracking ID" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path trc:incident_identifier ;
+            sh:pattern "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$" ],
+        [ sh:datatype xsd:dateTime ;
+            sh:description "When incident occurred" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path trc:incident_timestamp ],
+        [ sh:description "Current status of incident resolution" ;
+            sh:in ( "OPEN" "IN_PROGRESS" "PENDING_VERIFICATION" "RESOLVED" "CLOSED" "ESCALATED" ) ;
+            sh:maxCount 1 ;
+            sh:order 18 ;
+            sh:path trc:resolution_status ],
+        [ sh:datatype xsd:anyURI ;
+            sh:description "URI references to incident reports insurance claims photos" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 16 ;
+            sh:path trc:incident_documentation ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for incident location" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 7 ;
+            sh:path trc:incident_location_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for reporter identifier" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 25 ;
+            sh:path trc:reporter_identifier_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for linked event IDs" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 21 ;
+            sh:path trc:linked_event_ids_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for resolution status" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 19 ;
+            sh:path trc:resolution_status_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for incident timestamp" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path trc:incident_timestamp_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Identified cause of the incident" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 12 ;
+            sh:path trc:root_cause ],
+        [ sh:datatype xsd:string ;
+            sh:description "GLN or identifier of entity reporting the incident" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 24 ;
+            sh:path trc:reporter_identifier ;
+            sh:pattern "^[0-9]{13}$" ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for incident severity" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 11 ;
+            sh:path trc:incident_severity_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "IDs of related supply chain events" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 20 ;
+            sh:path trc:linked_event_ids ;
+            sh:pattern "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$" ],
+        [ sh:datatype xsd:string ;
+            sh:description "EPCs, GTINs, batch numbers, or lot identifiers of affected entities (products, materials, batches, commodities)" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 8 ;
+            sh:path trc:affected_entities ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for corrective actions" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 15 ;
+            sh:path trc:corrective_actions_value ],
+        [ sh:description "Classification of incident type" ;
+            sh:in ( "DAMAGE" "THEFT" "DELAY" "CONTAMINATION" "COLD_CHAIN_BREAK" "SECURITY_BREACH" "NATURAL_DISASTER" "RECALL" "QUARANTINE" "DOCUMENTATION_ERROR" "SYSTEM_FAILURE" "REGULATORY_HOLD" ) ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path trc:incident_type ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for incident type" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path trc:incident_type_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for affected entities" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 9 ;
+            sh:path trc:affected_entities_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Actions taken to resolve or mitigate" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 14 ;
+            sh:path trc:corrective_actions ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for root cause" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 13 ;
+            sh:path trc:root_cause_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "GLN or UN/LOCODE where incident happened" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 6 ;
+            sh:path trc:incident_location ;
+            sh:pattern "^([0-9]{13}|[A-Z]{2}[A-Z0-9]{3}).*" ],
+        [ sh:datatype xsd:string ;
+            sh:description "Estimated financial impact using ISO monetary amount structure" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 22 ;
+            sh:path trc:estimated_impact ] ;
+    sh:targetClass trc:SupplyChainIncidents .
+
+trc:ValueAddingActivityLocation a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Transformation and processing events extending EPCIS TransformationEvent" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:dateTime ;
+            sh:description "When activity occurred - aligns with EPCIS eventTime concept" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path trc:activity_date ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for activity identifier" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path trc:activity_identifier_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Process duration in ISO 8601 format (e.g. PT30M for 30 minutes)" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 22 ;
+            sh:path trc:process_duration ;
+            sh:pattern "^P(?:\\d+Y)?(?:\\d+M)?(?:\\d+W)?(?:\\d+D)?(?:T(?:\\d+H)?(?:\\d+M)?(?:\\d+(?:\\.\\d+)?S)?)?$" ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for operator identifier" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 25 ;
+            sh:path trc:operator_identifier_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for quality results" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 21 ;
+            sh:path trc:quality_check_results_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for process description" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 9 ;
+            sh:path trc:process_description_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Transformation identifier using EPCIS transformationID" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 14 ;
+            sh:path trc:transformation_id ],
+        [ sh:datatype xsd:string ;
+            sh:description "Specific process step within transformation EPCIS bizStep" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 16 ;
+            sh:path trc:process_step ],
+        [ sh:datatype xsd:string ;
+            sh:description "GLN or ID of operator performing activity" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 24 ;
+            sh:path trc:operator_identifier ],
+        [ sh:datatype xsd:string ;
+            sh:description "Input entities (components, materials, batches, commodities) consumed in transformation - aligns with EPCIS inputEPCList" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 10 ;
+            sh:path trc:input_entities ],
+        [ sh:datatype xsd:string ;
+            sh:description "Output entities (products, materials, batches, commodities) resulting from transformation - aligns with EPCIS outputEPCList" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 12 ;
+            sh:path trc:output_entities ],
+        [ sh:datatype xsd:string ;
+            sh:description "GLN or OSID of processing facility" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 6 ;
+            sh:path trc:facility_identifier ;
+            sh:pattern "^[0-9]{13}$" ],
+        [ sh:datatype xsd:string ;
+            sh:description "Detailed transformation process description EPCIS extension" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 8 ;
+            sh:path trc:process_description ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for quality check flag" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 19 ;
+            sh:path trc:quality_check_performed_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for transformation ID" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 15 ;
+            sh:path trc:transformation_id_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Uses CBV BizStep vocabulary directly - commissioning transformation decommissioning" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path trc:activity_type ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for value added" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 29 ;
+            sh:path trc:value_added_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for process step" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 17 ;
+            sh:path trc:process_step_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Batch or lot number for this processing run" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 26 ;
+            sh:path trc:batch_identifier ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for process certifications" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 31 ;
+            sh:path trc:process_certification_value ],
+        [ sh:datatype xsd:anyURI ;
+            sh:description "URI references to process certifications ISO standards or quality systems" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 30 ;
+            sh:path trc:process_certification ],
+        [ sh:datatype xsd:string ;
+            sh:description "Unique activity reference - aligns with EPCIS eventID concept" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path trc:activity_identifier ;
+            sh:pattern "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$" ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for process duration" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 23 ;
+            sh:path trc:process_duration_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for activity date" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path trc:activity_date_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for activity type" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path trc:activity_type_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for input entities" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 11 ;
+            sh:path trc:input_entities_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for batch identifier" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 27 ;
+            sh:path trc:batch_identifier_value ],
+        [ sh:datatype xsd:float ;
+            sh:description "Economic value added by this activity DPP extension" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 28 ;
+            sh:path trc:value_added ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for output entities" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 13 ;
+            sh:path trc:output_entities_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Quality control test results DPP extension" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 20 ;
+            sh:path trc:quality_check_results ],
+        [ sh:datatype xsd:boolean ;
+            sh:description "Whether quality control was performed DPP extension" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 18 ;
+            sh:path trc:quality_check_performed ],
+        [ sh:datatype xsd:string ;
+            sh:description "Value holder for facility identifier" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 7 ;
+            sh:path trc:facility_identifier_value ] ;
+    sh:targetClass trc:ValueAddingActivityLocation .
+
+

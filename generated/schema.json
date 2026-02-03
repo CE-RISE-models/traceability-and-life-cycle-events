@@ -1,0 +1,2011 @@
+{
+    "$defs": {
+        "ActorTracking": {
+            "additionalProperties": false,
+            "description": "Supply chain participants and their interactions with entities (products, materials, batches, commodities)",
+            "properties": {
+                "action_performed": {
+                    "description": "Specific action taken by actor",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "action_performed_value": {
+                    "description": "Value holder for action performed",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "activity_timestamp": {
+                    "description": "When actor interacted with entity (product, material, batch, commodity)",
+                    "format": "date-time",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "activity_timestamp_value": {
+                    "description": "Value holder for activity timestamp",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "actor_identifier": {
+                    "description": "Organization identifier GLN LEI or VAT",
+                    "pattern": "^([0-9]{13}|[A-Z0-9]{20}|[A-Z]{2}[A-Z0-9]+)$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "actor_identifier_value": {
+                    "description": "Value holder for actor identifier",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "actor_role": {
+                    "description": "Role in supply chain using CBV Source/Destination types",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "actor_role_value": {
+                    "description": "Value holder for actor role",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "certification_status": {
+                    "description": "URI references to actor certifications ISO 9001 ISO 14001 organic fair trade",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "certification_status_value": {
+                    "description": "Value holder for certification status",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "responsibility_scope": {
+                    "description": "Actor responsibility boundaries",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "responsibility_scope_value": {
+                    "description": "Value holder for responsibility scope",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "ActorTracking",
+            "type": "object"
+        },
+        "AggregationEvents": {
+            "additionalProperties": false,
+            "description": "Packaging hierarchy operations extending EPCIS AggregationEvent",
+            "properties": {
+                "aggregation_event_id": {
+                    "description": "Unique identifier for aggregation operation - aligns with EPCIS eventID",
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "aggregation_event_id_value": {
+                    "description": "Value holder for aggregation event ID",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "aggregation_location": {
+                    "description": "GLN where operation occurred - aligns with EPCIS bizLocation",
+                    "pattern": "^[0-9]{13}$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "aggregation_location_value": {
+                    "description": "Value holder for aggregation location",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "aggregation_timestamp": {
+                    "description": "When packing/unpacking happened - aligns with EPCIS eventTime",
+                    "format": "date-time",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "aggregation_timestamp_value": {
+                    "description": "Value holder for aggregation timestamp",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "aggregation_type": {
+                    "description": "ADD for packing DELETE for unpacking - uses EPCIS Action directly",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "aggregation_type_value": {
+                    "description": "Value holder for aggregation type",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "biz_step": {
+                    "description": "Business step like packing commissioning etc - uses CBV directly",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "biz_step_value": {
+                    "description": "Value holder for business step",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "child_identifiers": {
+                    "description": "Child EPCs being aggregated/disaggregated using EPCIS childEPCs structure",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "child_identifiers_value": {
+                    "description": "Value holder for child identifiers",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "disposition": {
+                    "description": "Business condition of aggregation - aligns with EPCIS disposition",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "disposition_value": {
+                    "description": "Value holder for disposition",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "packaging_level": {
+                    "$ref": "#/$defs/PackagingLevelEnum",
+                    "description": "Level in packaging hierarchy"
+                },
+                "packaging_level_value": {
+                    "description": "Value holder for packaging level",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "parent_identifier": {
+                    "description": "Container pallet or case EPC being packed/unpacked - aligns with EPCIS parentID",
+                    "pattern": "^(urn:epc:id:|[0-9]{14}:).*",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "parent_identifier_value": {
+                    "description": "Value holder for parent identifier",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "read_point": {
+                    "description": "Specific read point where aggregation occurred - EPCIS readPoint",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "read_point_value": {
+                    "description": "Value holder for read point",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "AggregationEvents",
+            "type": "object"
+        },
+        "CustomerReturnChannel": {
+            "additionalProperties": false,
+            "description": "Return channel information",
+            "properties": {
+                "return_documentation": {
+                    "description": "URI references to return authorization shipping labels RMA documents",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "return_documentation_value": {
+                    "description": "Value holder for return documentation",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "return_location": {
+                    "description": "Location where entities (products, materials, batches, commodities) can be returned - GLN identifier",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "return_location_value": {
+                    "description": "Value holder for return location",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "return_method": {
+                    "$ref": "#/$defs/ReturnMethodEnum",
+                    "description": "How entity (product, material, batch, commodity) can be returned"
+                },
+                "return_method_value": {
+                    "description": "Value holder for return method",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "CustomerReturnChannel",
+            "type": "object"
+        },
+        "DisposalEvent": {
+            "additionalProperties": false,
+            "description": "Final disposal details",
+            "properties": {
+                "disposal_certification": {
+                    "description": "URI reference to disposal certification or compliance document",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "disposal_certification_value": {
+                    "description": "Value holder for disposal certification",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "disposal_date": {
+                    "description": "When disposal occurred",
+                    "format": "date-time",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "disposal_date_value": {
+                    "description": "Value holder for disposal date",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "disposal_facility": {
+                    "description": "GLN or identifier of disposal facility",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "disposal_facility_value": {
+                    "description": "Value holder for disposal facility",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "disposal_method": {
+                    "$ref": "#/$defs/DisposalMethodEnum",
+                    "description": "Method of disposal"
+                },
+                "disposal_method_value": {
+                    "description": "Value holder for disposal method",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "DisposalEvent",
+            "type": "object"
+        },
+        "DisposalMethodEnum": {
+            "description": "Final disposal methods - DPP specific",
+            "enum": [
+                "LANDFILL",
+                "INCINERATION",
+                "ENERGY_RECOVERY",
+                "COMPOSTING",
+                "SPECIALIZED_TREATMENT"
+            ],
+            "title": "DisposalMethodEnum",
+            "type": "string"
+        },
+        "EntityHistory": {
+            "additionalProperties": false,
+            "description": "EPCIS-compatible base event structure for complete lifecycle audit trail of products, materials, batches, or commodities",
+            "properties": {
+                "action": {
+                    "description": "Uses EPCIS Action vocabulary directly - ADD OBSERVE DELETE",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "action_value": {
+                    "description": "Value holder for action",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "biz_location": {
+                    "description": "Business location where objects are expected following event EPCIS bizLocation",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "biz_location_value": {
+                    "description": "Value holder for business location",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "biz_step": {
+                    "description": "Uses CBV BizStep vocabulary directly",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "biz_step_value": {
+                    "description": "Value holder for business step",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "certification_info": {
+                    "description": "URI references to relevant certification documents or standards",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "certification_info_value": {
+                    "description": "Value holder for certification info",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "disposition": {
+                    "description": "Business state of objects - aligns with EPCIS disposition concept",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "disposition_value": {
+                    "description": "Value holder for disposition",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "error_declaration": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ErrorDeclaration"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Declaration that this event is in error EPCIS errorDeclaration"
+                },
+                "event_description": {
+                    "description": "Human-readable event description extends EPCIS",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "event_description_value": {
+                    "description": "Value holder for event description",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "event_identifier": {
+                    "description": "Unique identifier for each event - aligns with EPCIS eventID concept",
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "event_identifier_value": {
+                    "description": "Value holder for event identifier",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "event_location": {
+                    "description": "GLN or URI for location - aligns with EPCIS readPoint/bizLocation concepts",
+                    "pattern": "^(urn:epc:id:sgln:|https?://|[0-9]{13}).*",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "event_location_value": {
+                    "description": "Value holder for event location",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "event_time_zone_offset": {
+                    "description": "Time zone offset from UTC like +01:00 or -05:00",
+                    "pattern": "^[+-][0-9]{2}:[0-9]{2}$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "event_time_zone_offset_value": {
+                    "description": "Value holder for timezone offset",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "event_timestamp": {
+                    "description": "ISO 8601 timestamp with timezone - aligns with EPCIS eventTime concept",
+                    "format": "date-time",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "event_timestamp_value": {
+                    "description": "Value holder for event timestamp",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "event_type": {
+                    "description": "Uses EPCIS EventType vocabulary directly - ObjectEvent TransactionEvent etc",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "event_type_value": {
+                    "description": "Value holder for event type",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "linked_entity_identifier": {
+                    "description": "EPC URI, GTIN plus serial, batch number, or lot identifier for the tracked entity (product, material, batch, commodity) - aligns with EPCIS epcList concept",
+                    "pattern": "^(urn:epc:id:|[0-9]{14}:).*",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "linked_entity_identifier_value": {
+                    "description": "Value holder for linked entity identifier",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "read_point": {
+                    "description": "Specific location where event occurred EPCIS readPoint",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "read_point_value": {
+                    "description": "Value holder for read point",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "sensor_metadata": {
+                    "description": "IoT sensor data using EPCIS 2.0 SensorReport structure",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "sensor_metadata_value": {
+                    "description": "Value holder for sensor metadata",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "EntityHistory",
+            "type": "object"
+        },
+        "ErrorDeclaration": {
+            "additionalProperties": false,
+            "description": "Declaration that an event was recorded in error EPCIS errorDeclaration",
+            "properties": {
+                "corrective_event_ids": {
+                    "description": "IDs of events that correct this error",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "corrective_event_ids_value": {
+                    "description": "Value holder for corrective event IDs",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "declaration_time": {
+                    "description": "When the error was declared",
+                    "format": "date-time",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "declaration_time_value": {
+                    "description": "Value holder for declaration time",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "reason": {
+                    "description": "Reason for the error declaration",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "reason_value": {
+                    "description": "Value holder for error reason",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "ErrorDeclaration",
+            "type": "object"
+        },
+        "IncidentTypeEnum": {
+            "description": "Types of supply chain incidents and exceptions",
+            "enum": [
+                "DAMAGE",
+                "THEFT",
+                "DELAY",
+                "CONTAMINATION",
+                "COLD_CHAIN_BREAK",
+                "SECURITY_BREACH",
+                "NATURAL_DISASTER",
+                "RECALL",
+                "QUARANTINE",
+                "DOCUMENTATION_ERROR",
+                "SYSTEM_FAILURE",
+                "REGULATORY_HOLD"
+            ],
+            "title": "IncidentTypeEnum",
+            "type": "string"
+        },
+        "IntermediateStop": {
+            "additionalProperties": false,
+            "description": "Stop location during logistics movement",
+            "properties": {
+                "stop_duration": {
+                    "description": "Stop duration in ISO 8601 format (e.g. PT2H30M for 2 hours 30 minutes)",
+                    "pattern": "^P(?:\\d+Y)?(?:\\d+M)?(?:\\d+W)?(?:\\d+D)?(?:T(?:\\d+H)?(?:\\d+M)?(?:\\d+(?:\\.\\d+)?S)?)?$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "stop_duration_value": {
+                    "description": "Value holder for stop duration",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "stop_location": {
+                    "description": "UN/LOCODE or GLN of stop location",
+                    "pattern": "^([A-Z]{2}[A-Z0-9]{3}|[0-9]{13})$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "stop_location_value": {
+                    "description": "Value holder for stop location",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "stop_timestamp": {
+                    "description": "When arrived at stop",
+                    "format": "date-time",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "stop_timestamp_value": {
+                    "description": "Value holder for stop timestamp",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "IntermediateStop",
+            "type": "object"
+        },
+        "LogisticsEvents": {
+            "additionalProperties": false,
+            "description": "Supply chain transportation tracking post-import - aligns with EPCIS ObjectEvent concepts",
+            "properties": {
+                "arrival_location": {
+                    "description": "Destination UN/LOCODE or GLN",
+                    "pattern": "^([A-Z]{2}[A-Z0-9]{3}|[0-9]{13})$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "arrival_location_value": {
+                    "description": "Value holder for arrival location",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "arrival_timestamp": {
+                    "description": "Actual or estimated arrival",
+                    "format": "date-time",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "arrival_timestamp_value": {
+                    "description": "Value holder for arrival timestamp",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "carrier_identifier": {
+                    "description": "Transport company GLN or identifier",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "carrier_identifier_value": {
+                    "description": "Value holder for carrier identifier",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "departure_location": {
+                    "description": "Origin UN/LOCODE or GLN",
+                    "pattern": "^([A-Z]{2}[A-Z0-9]{3}|[0-9]{13})$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "departure_location_value": {
+                    "description": "Value holder for departure location",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "departure_timestamp": {
+                    "description": "Departure time with timezone",
+                    "format": "date-time",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "departure_timestamp_value": {
+                    "description": "Value holder for departure timestamp",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "intermediate_stops": {
+                    "description": "Distribution centers warehouses transshipment points",
+                    "items": {
+                        "$ref": "#/$defs/IntermediateStop"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "route_information": {
+                    "description": "Planned route using GS1 route information structure",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "route_information_value": {
+                    "description": "Value holder for route information",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "shipment_identifier": {
+                    "description": "Unique shipment reference carrier tracking number",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "shipment_identifier_value": {
+                    "description": "Value holder for shipment identifier",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "transport_conditions": {
+                    "description": "Transport conditions using EPCIS 2.0 SensorReport for temperature humidity shock",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "transport_conditions_value": {
+                    "description": "Value holder for transport conditions",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "transport_mode": {
+                    "description": "Mode of transport using UN/ECE Recommendation 19 codes",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "transport_mode_value": {
+                    "description": "Value holder for transport mode",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "LogisticsEvents",
+            "type": "object"
+        },
+        "OwnershipEvent": {
+            "additionalProperties": false,
+            "description": "Legal ownership and custody transfers extending EPCIS TransactionEvent",
+            "properties": {
+                "action": {
+                    "description": "EPCIS action ADD OBSERVE DELETE",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "action_value": {
+                    "description": "Value holder for action",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "chain_of_custody_reference": {
+                    "description": "Previous event links EPCIS extensions",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "chain_of_custody_reference_value": {
+                    "description": "Value holder for custody chain references",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "currency": {
+                    "description": "Currency code for transfer value using ISO 4217 standard",
+                    "pattern": "^[A-Z]{3}$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "currency_value": {
+                    "description": "Value holder for currency",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "linked_entity_identifier": {
+                    "description": "Reference to entities (products, materials, batches, commodities) being transferred - aligns with EPCIS epcList concept",
+                    "pattern": "^(urn:epc:id:|[0-9]{14}:).*",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "linked_entity_identifier_value": {
+                    "description": "Value holder for linked entity identifier",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "new_owner": {
+                    "description": "Destination party GLN - aligns with EPCIS destination concept",
+                    "pattern": "^[0-9]{13}$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "new_owner_value": {
+                    "description": "Value holder for new owner",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "ownership_documentation": {
+                    "description": "Digital references EPCIS bizTransactionList URIs to documents",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "ownership_documentation_value": {
+                    "description": "Value holder for ownership documentation",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "ownership_status": {
+                    "$ref": "#/$defs/OwnershipStatusEnum",
+                    "description": "Legal status of ownership after transfer DPP extension beyond EPCIS"
+                },
+                "ownership_status_value": {
+                    "description": "Value holder for ownership status",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "previous_owner": {
+                    "description": "Source party GLN - aligns with EPCIS source concept",
+                    "pattern": "^[0-9]{13}$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "previous_owner_value": {
+                    "description": "Value holder for previous owner",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "quantity_transferred": {
+                    "description": "Quantity transferred using EPCIS QuantityElement structure",
+                    "type": [
+                        "integer",
+                        "null"
+                    ]
+                },
+                "quantity_transferred_value": {
+                    "description": "Value holder for quantity transferred",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "transfer_date": {
+                    "description": "Precise timestamp of ownership change - aligns with EPCIS eventTime concept",
+                    "format": "date-time",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "transfer_date_value": {
+                    "description": "Value holder for transfer date",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "transfer_location": {
+                    "description": "Physical location GLN - aligns with EPCIS bizLocation concept",
+                    "pattern": "^[0-9]{13}$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "transfer_location_value": {
+                    "description": "Value holder for transfer location",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "transfer_type": {
+                    "description": "Uses CBV Business Transaction Type vocabulary directly - po desadv inv rma etc",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "transfer_type_value": {
+                    "description": "Value holder for transfer type",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "transfer_value": {
+                    "description": "Monetary value of transfer",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "transfer_value_value": {
+                    "description": "Value holder for transfer monetary value",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "OwnershipEvent",
+            "type": "object"
+        },
+        "OwnershipStatusEnum": {
+            "description": "Legal status of ownership - DPP extension beyond EPCIS standard",
+            "enum": [
+                "FULL_OWNERSHIP",
+                "CONDITIONAL",
+                "CONSIGNED",
+                "LEASED",
+                "IN_TRANSIT",
+                "DISPUTED"
+            ],
+            "title": "OwnershipStatusEnum",
+            "type": "string"
+        },
+        "PackagingLevelEnum": {
+            "description": "Levels in packaging hierarchy - aligns with EPCIS packaging concepts",
+            "enum": [
+                "ITEM",
+                "INNER_PACK",
+                "CASE",
+                "PALLET",
+                "CONTAINER",
+                "TRANSPORT_UNIT"
+            ],
+            "title": "PackagingLevelEnum",
+            "type": "string"
+        },
+        "RecyclingEvent": {
+            "additionalProperties": false,
+            "description": "Material and product recovery and recycling details",
+            "properties": {
+                "materials_recovered": {
+                    "description": "List of recovered materials",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "materials_recovered_value": {
+                    "description": "Value holder for materials recovered",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "recovery_percentage": {
+                    "description": "Percentage of materials recovered (0-100)",
+                    "maximum": 100.0,
+                    "minimum": 0.0,
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "recovery_percentage_value": {
+                    "description": "Value holder for recovery percentage",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "recycling_date": {
+                    "description": "When recycling occurred",
+                    "format": "date-time",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "recycling_date_value": {
+                    "description": "Value holder for recycling date",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "recycling_stream": {
+                    "$ref": "#/$defs/RecyclingStreamEnum",
+                    "description": "Which recycling stream"
+                },
+                "recycling_stream_value": {
+                    "description": "Value holder for recycling stream",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "RecyclingEvent",
+            "type": "object"
+        },
+        "RecyclingStreamEnum": {
+            "description": "Recycling pathways - DPP specific",
+            "enum": [
+                "ELECTRONICS",
+                "PLASTICS",
+                "METALS",
+                "TEXTILES",
+                "BATTERIES",
+                "MIXED_MATERIALS"
+            ],
+            "title": "RecyclingStreamEnum",
+            "type": "string"
+        },
+        "RefurbishmentEvent": {
+            "additionalProperties": false,
+            "description": "Entity (product, material, component) repair and refurbishment details",
+            "properties": {
+                "components_replaced": {
+                    "description": "Components that were replaced",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "components_replaced_value": {
+                    "description": "Value holder for components replaced",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "refurbishment_activities": {
+                    "description": "List of refurbishment activities performed",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "refurbishment_activities_value": {
+                    "description": "Value holder for refurbishment activities",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "refurbishment_certification": {
+                    "description": "URI reference to refurbishment quality certification or standard",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "refurbishment_certification_value": {
+                    "description": "Value holder for refurbishment certification",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "refurbishment_date": {
+                    "description": "When refurbishment occurred ISO 8601 format",
+                    "format": "date-time",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "refurbishment_date_value": {
+                    "description": "Value holder for refurbishment date",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "RefurbishmentEvent",
+            "type": "object"
+        },
+        "ResolutionStatusEnum": {
+            "description": "Status of incident resolution",
+            "enum": [
+                "OPEN",
+                "IN_PROGRESS",
+                "PENDING_VERIFICATION",
+                "RESOLVED",
+                "CLOSED",
+                "ESCALATED"
+            ],
+            "title": "ResolutionStatusEnum",
+            "type": "string"
+        },
+        "ReturnMethodEnum": {
+            "description": "How product was returned - DPP specific",
+            "enum": [
+                "STORE_RETURN",
+                "MAIL_RETURN",
+                "PICKUP_SERVICE",
+                "DROP_OFF_POINT"
+            ],
+            "title": "ReturnMethodEnum",
+            "type": "string"
+        },
+        "ReturnReasonEnum": {
+            "description": "Reasons for product return - DPP specific",
+            "enum": [
+                "DEFECT",
+                "WARRANTY_CLAIM",
+                "END_OF_LIFE",
+                "PRODUCT_RECALL",
+                "CUSTOMER_DISSATISFACTION"
+            ],
+            "title": "ReturnReasonEnum",
+            "type": "string"
+        },
+        "ReverseLogistics": {
+            "additionalProperties": false,
+            "description": "End-of-life and return pathway management beyond EPCIS scope",
+            "properties": {
+                "customer_return_channels": {
+                    "description": "Available return methods and locations",
+                    "items": {
+                        "$ref": "#/$defs/CustomerReturnChannel"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "disposal_event": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/DisposalEvent"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Final disposal method and certification"
+                },
+                "recycling_event": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/RecyclingEvent"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Material and product recovery and recycling processes"
+                },
+                "refurbishment_event": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/RefurbishmentEvent"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Repair and refurbishment activities"
+                },
+                "return_event_identifier": {
+                    "description": "Unique return tracking ID",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "return_event_identifier_value": {
+                    "description": "Value holder for return event identifier",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "return_initiation_date": {
+                    "description": "When return process started",
+                    "format": "date-time",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "return_initiation_date_value": {
+                    "description": "Value holder for return initiation date",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "return_reason": {
+                    "$ref": "#/$defs/ReturnReasonEnum",
+                    "description": "Reason for return"
+                },
+                "return_reason_value": {
+                    "description": "Value holder for return reason",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "ReverseLogistics",
+            "type": "object"
+        },
+        "SeverityLevelEnum": {
+            "description": "Severity classification for incidents",
+            "enum": [
+                "CRITICAL",
+                "HIGH",
+                "MEDIUM",
+                "LOW",
+                "INFORMATIONAL"
+            ],
+            "title": "SeverityLevelEnum",
+            "type": "string"
+        },
+        "SupplyChainIncidents": {
+            "additionalProperties": false,
+            "description": "Exception events and disruptions during supply chain operations",
+            "properties": {
+                "affected_entities": {
+                    "description": "EPCs, GTINs, batch numbers, or lot identifiers of affected entities (products, materials, batches, commodities)",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "affected_entities_value": {
+                    "description": "Value holder for affected entities",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "corrective_actions": {
+                    "description": "Actions taken to resolve or mitigate",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "corrective_actions_value": {
+                    "description": "Value holder for corrective actions",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "estimated_impact": {
+                    "description": "Estimated financial impact using ISO monetary amount structure",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "estimated_impact_value": {
+                    "description": "Value holder for estimated impact",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "incident_documentation": {
+                    "description": "URI references to incident reports insurance claims photos",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "incident_documentation_value": {
+                    "description": "Value holder for incident documentation",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "incident_identifier": {
+                    "description": "Unique incident tracking ID",
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "incident_identifier_value": {
+                    "description": "Value holder for incident identifier",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "incident_location": {
+                    "description": "GLN or UN/LOCODE where incident happened",
+                    "pattern": "^([0-9]{13}|[A-Z]{2}[A-Z0-9]{3}).*",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "incident_location_value": {
+                    "description": "Value holder for incident location",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "incident_severity": {
+                    "$ref": "#/$defs/SeverityLevelEnum",
+                    "description": "Severity level classification"
+                },
+                "incident_severity_value": {
+                    "description": "Value holder for incident severity",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "incident_timestamp": {
+                    "description": "When incident occurred",
+                    "format": "date-time",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "incident_timestamp_value": {
+                    "description": "Value holder for incident timestamp",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "incident_type": {
+                    "$ref": "#/$defs/IncidentTypeEnum",
+                    "description": "Classification of incident type"
+                },
+                "incident_type_value": {
+                    "description": "Value holder for incident type",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "linked_event_ids": {
+                    "description": "IDs of related supply chain events",
+                    "items": {
+                        "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "linked_event_ids_value": {
+                    "description": "Value holder for linked event IDs",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "reporter_identifier": {
+                    "description": "GLN or identifier of entity reporting the incident",
+                    "pattern": "^[0-9]{13}$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "reporter_identifier_value": {
+                    "description": "Value holder for reporter identifier",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "resolution_status": {
+                    "$ref": "#/$defs/ResolutionStatusEnum",
+                    "description": "Current status of incident resolution"
+                },
+                "resolution_status_value": {
+                    "description": "Value holder for resolution status",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "root_cause": {
+                    "description": "Identified cause of the incident",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "root_cause_value": {
+                    "description": "Value holder for root cause",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "SupplyChainIncidents",
+            "type": "object"
+        },
+        "TraceabilityLifecycleEvents": {
+            "additionalProperties": false,
+            "description": "Root container for all traceability and lifecycle events for products, materials, batches, or commodities throughout their supply chain journey",
+            "properties": {
+                "actor_tracking": {
+                    "description": "All supply chain participants and their interactions with entities (products, materials, batches, commodities)",
+                    "items": {
+                        "$ref": "#/$defs/ActorTracking"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "aggregation_events": {
+                    "description": "Packaging hierarchy operations - packing and unpacking of items into containers",
+                    "items": {
+                        "$ref": "#/$defs/AggregationEvents"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "entity_history": {
+                    "description": "Foundation for all lifecycle events with complete audit trail for products, materials, batches, or commodities",
+                    "items": {
+                        "$ref": "#/$defs/EntityHistory"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "logistics_events": {
+                    "description": "Supply chain transportation and movement tracking post-import",
+                    "items": {
+                        "$ref": "#/$defs/LogisticsEvents"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "ownership_event": {
+                    "description": "Legal ownership and custody transfers throughout supply chain",
+                    "items": {
+                        "$ref": "#/$defs/OwnershipEvent"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "reverse_logistics": {
+                    "description": "End-of-life and return pathway management",
+                    "items": {
+                        "$ref": "#/$defs/ReverseLogistics"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "supply_chain_incidents": {
+                    "description": "Exception events and disruptions during supply chain operations",
+                    "items": {
+                        "$ref": "#/$defs/SupplyChainIncidents"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "value_adding_activity": {
+                    "description": "Transformation and processing events that modify or enhance entities (products, materials, batches, commodities)",
+                    "items": {
+                        "$ref": "#/$defs/ValueAddingActivityLocation"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "title": "TraceabilityLifecycleEvents",
+            "type": "object"
+        },
+        "ValueAddingActivityLocation": {
+            "additionalProperties": false,
+            "description": "Transformation and processing events extending EPCIS TransformationEvent",
+            "properties": {
+                "activity_date": {
+                    "description": "When activity occurred - aligns with EPCIS eventTime concept",
+                    "format": "date-time",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "activity_date_value": {
+                    "description": "Value holder for activity date",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "activity_identifier": {
+                    "description": "Unique activity reference - aligns with EPCIS eventID concept",
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "activity_identifier_value": {
+                    "description": "Value holder for activity identifier",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "activity_type": {
+                    "description": "Uses CBV BizStep vocabulary directly - commissioning transformation decommissioning",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "activity_type_value": {
+                    "description": "Value holder for activity type",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "batch_identifier": {
+                    "description": "Batch or lot number for this processing run",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "batch_identifier_value": {
+                    "description": "Value holder for batch identifier",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "facility_identifier": {
+                    "description": "GLN or OSID of processing facility",
+                    "pattern": "^[0-9]{13}$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "facility_identifier_value": {
+                    "description": "Value holder for facility identifier",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "input_entities": {
+                    "description": "Input entities (components, materials, batches, commodities) consumed in transformation - aligns with EPCIS inputEPCList",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "input_entities_value": {
+                    "description": "Value holder for input entities",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "operator_identifier": {
+                    "description": "GLN or ID of operator performing activity",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "operator_identifier_value": {
+                    "description": "Value holder for operator identifier",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "output_entities": {
+                    "description": "Output entities (products, materials, batches, commodities) resulting from transformation - aligns with EPCIS outputEPCList",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "output_entities_value": {
+                    "description": "Value holder for output entities",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "process_certification": {
+                    "description": "URI references to process certifications ISO standards or quality systems",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "process_certification_value": {
+                    "description": "Value holder for process certifications",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "process_description": {
+                    "description": "Detailed transformation process description EPCIS extension",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "process_description_value": {
+                    "description": "Value holder for process description",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "process_duration": {
+                    "description": "Process duration in ISO 8601 format (e.g. PT30M for 30 minutes)",
+                    "pattern": "^P(?:\\d+Y)?(?:\\d+M)?(?:\\d+W)?(?:\\d+D)?(?:T(?:\\d+H)?(?:\\d+M)?(?:\\d+(?:\\.\\d+)?S)?)?$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "process_duration_value": {
+                    "description": "Value holder for process duration",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "process_step": {
+                    "description": "Specific process step within transformation EPCIS bizStep",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "process_step_value": {
+                    "description": "Value holder for process step",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "quality_check_performed": {
+                    "description": "Whether quality control was performed DPP extension",
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "quality_check_performed_value": {
+                    "description": "Value holder for quality check flag",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "quality_check_results": {
+                    "description": "Quality control test results DPP extension",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "quality_check_results_value": {
+                    "description": "Value holder for quality results",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "transformation_id": {
+                    "description": "Transformation identifier using EPCIS transformationID",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "transformation_id_value": {
+                    "description": "Value holder for transformation ID",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "value_added": {
+                    "description": "Economic value added by this activity DPP extension",
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "value_added_value": {
+                    "description": "Value holder for value added",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "ValueAddingActivityLocation",
+            "type": "object"
+        }
+    },
+    "$id": "https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/",
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "additionalProperties": true,
+    "description": "Root container for all traceability and lifecycle events for products, materials, batches, or commodities throughout their supply chain journey",
+    "metamodel_version": "1.7.0",
+    "properties": {
+        "actor_tracking": {
+            "description": "All supply chain participants and their interactions with entities (products, materials, batches, commodities)",
+            "items": {
+                "$ref": "#/$defs/ActorTracking"
+            },
+            "type": [
+                "array",
+                "null"
+            ]
+        },
+        "aggregation_events": {
+            "description": "Packaging hierarchy operations - packing and unpacking of items into containers",
+            "items": {
+                "$ref": "#/$defs/AggregationEvents"
+            },
+            "type": [
+                "array",
+                "null"
+            ]
+        },
+        "entity_history": {
+            "description": "Foundation for all lifecycle events with complete audit trail for products, materials, batches, or commodities",
+            "items": {
+                "$ref": "#/$defs/EntityHistory"
+            },
+            "type": [
+                "array",
+                "null"
+            ]
+        },
+        "logistics_events": {
+            "description": "Supply chain transportation and movement tracking post-import",
+            "items": {
+                "$ref": "#/$defs/LogisticsEvents"
+            },
+            "type": [
+                "array",
+                "null"
+            ]
+        },
+        "ownership_event": {
+            "description": "Legal ownership and custody transfers throughout supply chain",
+            "items": {
+                "$ref": "#/$defs/OwnershipEvent"
+            },
+            "type": [
+                "array",
+                "null"
+            ]
+        },
+        "reverse_logistics": {
+            "description": "End-of-life and return pathway management",
+            "items": {
+                "$ref": "#/$defs/ReverseLogistics"
+            },
+            "type": [
+                "array",
+                "null"
+            ]
+        },
+        "supply_chain_incidents": {
+            "description": "Exception events and disruptions during supply chain operations",
+            "items": {
+                "$ref": "#/$defs/SupplyChainIncidents"
+            },
+            "type": [
+                "array",
+                "null"
+            ]
+        },
+        "value_adding_activity": {
+            "description": "Transformation and processing events that modify or enhance entities (products, materials, batches, commodities)",
+            "items": {
+                "$ref": "#/$defs/ValueAddingActivityLocation"
+            },
+            "type": [
+                "array",
+                "null"
+            ]
+        }
+    },
+    "title": "traceability_and_life_cycle_events",
+    "type": "object",
+    "version": "0.0.3"
+}
+
