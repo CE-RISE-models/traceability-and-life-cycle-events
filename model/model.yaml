@@ -1,9 +1,9 @@
 id: https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/
 name: traceability_and_life_cycle_events
 title: Traceability and Life Cycle Events Data Model
-description: Dynamic event-based information throughout product supply chain journey aligned with GS1 EPCIS 2.0 standard
+description: Dynamic event-based information throughout supply chain journey for products, materials, batches, and commodities aligned with GS1 EPCIS 2.0 standard. Supports both Digital Product Passports (DPP) and Digital Material Passports (DMP).
 license: https://creativecommons.org/licenses/by-nc/4.0/
-version: 0.0.1
+version: 0.0.3
 
 prefixes:
     linkml: https://w3id.org/linkml/
@@ -23,12 +23,12 @@ default_range: string
 # Root class
 classes:
     TraceabilityLifecycleEvents:
-        description: Root container for all traceability and lifecycle events in a product journey
+        description: Root container for all traceability and lifecycle events for products, materials, batches, or commodities throughout their supply chain journey
         tree_root: true
         attributes:
-            product_history:
-                range: ProductHistory
-                description: Foundation for all lifecycle events with complete audit trail
+            entity_history:
+                range: EntityHistory
+                description: Foundation for all lifecycle events with complete audit trail for products, materials, batches, or commodities
                 multivalued: true
             ownership_event:
                 range: OwnershipEvent
@@ -36,11 +36,11 @@ classes:
                 multivalued: true
             value_adding_activity:
                 range: ValueAddingActivityLocation
-                description: Transformation and processing events that modify or enhance products
+                description: Transformation and processing events that modify or enhance entities (products, materials, batches, commodities)
                 multivalued: true
             actor_tracking:
                 range: ActorTracking
-                description: All supply chain participants and their interactions with products
+                description: All supply chain participants and their interactions with entities (products, materials, batches, commodities)
                 multivalued: true
             logistics_events:
                 range: LogisticsEvents
@@ -59,8 +59,8 @@ classes:
                 description: Exception events and disruptions during supply chain operations
                 multivalued: true
 
-    ProductHistory:
-        description: EPCIS-compatible base event structure for complete product lifecycle audit trail
+    EntityHistory:
+        description: EPCIS-compatible base event structure for complete lifecycle audit trail of products, materials, batches, or commodities
         attributes:
             event_identifier:
                 range: string
@@ -118,16 +118,16 @@ classes:
                 range: string
                 description: Value holder for event description
 
-            linked_product_identifier:
+            linked_entity_identifier:
                 range: string
-                description: EPC URI or GTIN plus serial reference - aligns with EPCIS epcList concept
+                description: EPC URI, GTIN plus serial, batch number, or lot identifier for the tracked entity (product, material, batch, commodity) - aligns with EPCIS epcList concept
                 annotations:
-                    sql_identifier: trc_hist_linked_product_id
+                    sql_identifier: trc_hist_linked_entity_id
                 pattern: "^(urn:epc:id:|[0-9]{14}:).*"
 
-            linked_product_identifier_value:
+            linked_entity_identifier_value:
                 range: string
-                description: Value holder for linked product identifier
+                description: Value holder for linked entity identifier
 
             disposition:
                 range: string
@@ -321,16 +321,16 @@ classes:
                 range: string
                 description: Value holder for action
 
-            linked_product_identifier:
+            linked_entity_identifier:
                 range: string
-                description: Reference to products being transferred - aligns with EPCIS epcList concept
+                description: Reference to entities (products, materials, batches, commodities) being transferred - aligns with EPCIS epcList concept
                 annotations:
-                    sql_identifier: trc_owner_linked_product
+                    sql_identifier: trc_owner_linked_entity
                 pattern: "^(urn:epc:id:|[0-9]{14}:).*"
 
-            linked_product_identifier_value:
+            linked_entity_identifier_value:
                 range: string
-                description: Value holder for linked product identifier
+                description: Value holder for linked entity identifier
 
             quantity_transferred:
                 range: integer
@@ -436,29 +436,29 @@ classes:
                 range: string
                 description: Value holder for process description
 
-            input_products:
+            input_entities:
                 range: string
                 multivalued: true
-                description: Input EPCs and quantities using EPCIS inputEPCList structure
+                description: Input entities (components, materials, batches, commodities) consumed in transformation - aligns with EPCIS inputEPCList
                 annotations:
-                    sql_identifier: trc_value_input_products
+                    sql_identifier: trc_value_input_entities
                     owl.filler: epcis:EPCList
 
-            input_products_value:
+            input_entities_value:
                 range: string
-                description: Value holder for input products
+                description: Value holder for input entities
 
-            output_products:
+            output_entities:
                 range: string
                 multivalued: true
-                description: Output EPCs and quantities using EPCIS outputEPCList structure
+                description: Output entities (products, materials, batches, commodities) resulting from transformation - aligns with EPCIS outputEPCList
                 annotations:
-                    sql_identifier: trc_value_output_products
+                    sql_identifier: trc_value_output_entities
                     owl.filler: epcis:EPCList
 
-            output_products_value:
+            output_entities_value:
                 range: string
-                description: Value holder for output products
+                description: Value holder for output entities
 
             transformation_id:
                 range: string
@@ -599,7 +599,7 @@ classes:
                 description: Value holder for corrective event IDs
 
     ActorTracking:
-        description: Supply chain participants and their interactions with products
+        description: Supply chain participants and their interactions with entities (products, materials, batches, commodities)
         attributes:
             actor_identifier:
                 range: string
@@ -628,7 +628,7 @@ classes:
 
             activity_timestamp:
                 range: datetime
-                description: When actor interacted with product
+                description: When actor interacted with entity (product, material, batch, commodity)
                 annotations:
                     sql_identifier: trc_actor_timestamp
                     references: "CIRPASS"
@@ -858,7 +858,7 @@ classes:
 
             recycling_event:
                 range: RecyclingEvent
-                description: Material recovery and recycling processes
+                description: Material and product recovery and recycling processes
 
             disposal_event:
                 range: DisposalEvent
@@ -869,7 +869,7 @@ classes:
         attributes:
             return_location:
                 range: string
-                description: Location where products can be returned GLN
+                description: Location where entities (products, materials, batches, commodities) can be returned - GLN identifier
                 annotations:
                     sql_identifier: trc_reverse_return_location
                     owl.filler: gs1:GlobalLocationNumber
@@ -880,7 +880,7 @@ classes:
 
             return_method:
                 range: ReturnMethodEnum
-                description: How product can be returned
+                description: How entity (product, material, batch, commodity) can be returned
                 annotations:
                     sql_identifier: trc_reverse_method
 
@@ -901,7 +901,7 @@ classes:
                 description: Value holder for return documentation
 
     RefurbishmentEvent:
-        description: Product repair and refurbishment details
+        description: Entity (product, material, component) repair and refurbishment details
         attributes:
             refurbishment_date:
                 range: datetime
@@ -951,7 +951,7 @@ classes:
                 description: Value holder for refurbishment certification
 
     RecyclingEvent:
-        description: Material recovery and recycling details
+        description: Material and product recovery and recycling details
         attributes:
             recycling_date:
                 range: datetime
@@ -1205,17 +1205,17 @@ classes:
                 range: string
                 description: Value holder for incident location
 
-            affected_products:
+            affected_entities:
                 range: string
                 multivalued: true
-                description: Affected products using EPCIS EPCList structure
+                description: EPCs, GTINs, batch numbers, or lot identifiers of affected entities (products, materials, batches, commodities)
                 annotations:
-                    sql_identifier: trc_incident_affected_products
+                    sql_identifier: trc_incident_affected_entities
                     owl.filler: epcis:EPCList
 
-            affected_products_value:
+            affected_entities_value:
                 range: string
-                description: Value holder for affected products
+                description: Value holder for affected entities
 
             incident_severity:
                 range: SeverityLevelEnum

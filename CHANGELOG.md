@@ -2,6 +2,20 @@
 
 All notable changes to the CE-RISE Traceability and Life Cycle Events Data Model will be documented in this file.
 
+## [0.0.3] - 2026-02-03
+
+### Breaking Changes
+- **BREAKING**: Renamed classes and fields from "product" to "entity" terminology (`ProductHistory` → `EntityHistory`, `linked_product_identifier` → `linked_entity_identifier`, `input_products` → `input_entities`, etc.)
+- **BREAKING**: Updated SQL identifiers to reflect entity terminology
+
+### Added
+- Explicit support for Digital Material Passports (DMP) alongside Digital Product Passports (DPP)
+- Unified "entity" terminology supporting products, materials, batches, and commodities
+- DMP-related keywords to citation metadata
+
+### Changed
+- All documentation now uses "entity" terminology with explicit coverage of products, materials, batches, and commodities
+
 ## [0.0.2] - 2025-12-16
 
 ### Added

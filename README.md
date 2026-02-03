@@ -2,7 +2,9 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17803667.svg)](https://doi.org/10.5281/zenodo.17803667) [![Schemas](https://img.shields.io/badge/Schema%20Files-LinkML%2C%20JSON%2C%20SHACL%2C%20OWL-32CD32)](https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/)
 
-The Traceability and Life Cycle Events data model captures **dynamic event-based information** throughout a product's journey in the supply chain and its entire lifecycle. This model is part of the CE-RISE Digital Product Passport architecture, focusing specifically on time-stamped events that occur during supply chain operations.
+The Traceability and Life Cycle Events data model captures **dynamic event-based information** throughout the supply chain journey and entire lifecycle of products, materials, batches, and commodities. This model is part of the CE-RISE Digital Product Passport (DPP) and Digital Material Passport (DMP) architecture, focusing specifically on time-stamped events that occur during supply chain operations.
+
+**Applicability**: This model supports tracking of any entity type - individual products, material batches, components, commodities, or assemblies - using the same event-based framework.
 
 ---
 
@@ -10,8 +12,8 @@ The Traceability and Life Cycle Events data model captures **dynamic event-based
 
 This model is designed to be **compatible with GS1 EPCIS 2.0** (Electronic Product Code Information Services), the global standard for supply chain visibility, while extending it with additional fields required for Digital Product Passports. Built using [LinkML](https://linkml.io/), it generates multiple schema formats (JSON Schema, SHACL, OWL).
 
-**Core Philosophy**: This model answers critical questions about product journey and lifecycle:
-- **"Where has this product been?"** → Supply chain events and logistics tracking
+**Core Philosophy**: This model answers critical questions about entity journey and lifecycle (whether product, material, batch, or commodity):
+- **"Where has this entity been?"** → Supply chain events and logistics tracking
 - **"Who has handled it?"** → Ownership transfers and actor involvement
 - **"What happened to it?"** → Value-adding activities and transformations
 - **"How did it move?"** → Transportation events during supply chain journey
@@ -20,20 +22,20 @@ This model is designed to be **compatible with GS1 EPCIS 2.0** (Electronic Produ
 ## Model Boundaries Within CE-RISE Architecture
 
 ### What This Model INCLUDES:
-- **Supply chain custody and movement events** - All time-stamped events showing product location and status changes
-- **Business transaction and ownership transfers** - Legal custody changes and commercial transactions
-- **Product transformations during supply chain** - Value-adding activities, processing, packaging operations
-- **Actor interactions and responsibilities** - Who handled the product when and in what capacity
+- **Supply chain custody and movement events** - All time-stamped events showing entity location and status changes for products, materials, batches, or commodities
+- **Business transaction and ownership transfers** - Legal custody changes and commercial transactions for any tracked entity
+- **Entity transformations during supply chain** - Value-adding activities, processing, packaging operations on products or materials
+- **Actor interactions and responsibilities** - Who handled the entity when and in what capacity
 - **Transportation and logistics operations** - Movement between locations with carrier and route details
-- **Return and reverse logistics pathways** - Product returns, refurbishment routing, and end-of-life collection
+- **Return and reverse logistics pathways** - Returns, refurbishment routing, and end-of-life collection for products and materials
 - **Supply chain inventory operations** - Stock movements, transfers, and custody changes at facilities (integrated in LogisticsEvents)
-- **Packaging hierarchy events** - Aggregation and disaggregation operations for items, cases, pallets, containers (Step 7)
+- **Packaging hierarchy events** - Aggregation and disaggregation operations for items, batches, cases, pallets, containers (Step 7)
 - **Supply chain incidents and exceptions** - Damage, theft, delays, contamination, and other disruptions during operations (Step 8)
 
 ### What This Model EXCLUDES (handled by other CE-RISE models):
-- **Static product identity and specifications** → `product-profile` model (identity, manufacturing origin, materials, initial import/export data)
+- **Static identity and specifications** → `product-profile` or `material-profile` models (identity, manufacturing origin, composition, initial import/export data)
 - **Diagnostic and test results** → `diagnostic-results` model (service reports, condition assessments, quality test outputs)
-- **Usage patterns and maintenance activities** → `usage-and-maintenance` model (how product is used, maintenance schedules, repair records)
+- **Usage patterns and maintenance activities** → `usage-and-maintenance` model (how entity is used, maintenance schedules, repair records)
 - **Environmental impact calculations** → `integrated-lca` model (carbon footprint, resource consumption, impact assessments)
 - **Regulatory compliance status and certifications** → `compliance-and-standards` model (regulatory approvals, compliance evidence, certificates)
 - **Data quality and provenance metadata** → `uncertainty-and-quality` model (data validation, uncertainty, lineage tracking)
@@ -62,14 +64,14 @@ Each event type inherits EPCIS's four dimensions (What, When, Where, Why) and ex
 ### Core Hierarchy
 
 ```
-TraceabilityLifecycleEvents (root)
-├── 1. ProductHistory
+TraceabilityLifecycleEvents (root - for products, materials, batches, commodities)
+├── 1. EntityHistory
 │   ├── EventIdentifier
 │   ├── EventTimestamp
 │   ├── EventType
 │   ├── EventLocation
 │   ├── EventDescription
-│   └── LinkedProductIdentifier
+│   └── LinkedEntityIdentifier (EPC URI, GTIN+serial, batch number, lot ID)
 ├── 2. OwnershipEvent
 │   ├── TransferDate
 │   ├── PreviousOwner (GLN, LEI, organization details)
@@ -84,8 +86,8 @@ TraceabilityLifecycleEvents (root)
 │   ├── ActivityDate
 │   ├── FacilityIdentifier (GLN, OSID)
 │   ├── ProcessDescription
-│   ├── InputProducts (components/materials consumed)
-│   └── OutputProducts (resulting products)
+│   ├── InputEntities (components/materials/batches consumed)
+│   └── OutputEntities (resulting products/materials/batches)
 ├── 4. ActorTracking
 │   ├── ActorIdentifier (GLN, LEI, VAT)
 │   ├── ActorRole (manufacturer, distributor, retailer, service provider)
@@ -156,14 +158,14 @@ TraceabilityLifecycleEvents (root)
 
 
 
-#### **Step 1: ProductHistory**
-Foundation for all lifecycle events with complete audit trail (EPCIS-compatible base structure):
+#### **Step 1: EntityHistory**
+Foundation for all lifecycle events with complete audit trail for products, materials, batches, or commodities (EPCIS-compatible base structure):
 - **EventIdentifier**: Unique identifier for each event (UUID format, maps to EPCIS eventID)
 - **EventTimestamp**: ISO 8601 timestamp with timezone (EPCIS eventTime)
 - **EventType**: EPCIS event types (ObjectEvent, TransactionEvent, TransformationEvent, etc.)
 - **EventLocation**: GLN or URI for location (EPCIS readPoint/bizLocation)
 - **EventDescription**: Human-readable event description (extends EPCIS)
-- **LinkedProductIdentifier**: EPC URI or GTIN + serial (EPCIS epcList)
+- **LinkedEntityIdentifier**: EPC URI, GTIN + serial, batch number, or lot identifier for tracked entity (EPCIS epcList)
 - **Disposition**: Business state (uses EPCIS disposition vocabulary directly)
 - **BizStep**: Business process step (uses cbv:BizStep directly)
 - **Action**: How event relates to lifecycle (uses epcis:Action directly)
@@ -180,21 +182,21 @@ Legal ownership and custody transfers throughout supply chain (extends EPCIS Tra
 
 
 #### **Step 3: ValueAddingActivityLocation**
-Transformation and processing events that modify or enhance products (EPCIS TransformationEvent):
+Transformation and processing events that modify or enhance entities - products, materials, batches, or commodities (EPCIS TransformationEvent):
 - **ActivityIdentifier**: Unique activity reference (EPCIS eventID)
 - **ActivityType**: Activity type (uses cbv:BizStep directly - commissioning/transformation/decommissioning)
 - **ActivityDate**: When occurred (EPCIS eventTime)
 - **FacilityIdentifier**: Facility GLN (EPCIS bizLocation)
 - **ProcessDescription**: Transformation details (EPCIS extensions)
-- **InputProducts**: Input EPCs and quantities (EPCIS inputEPCList/inputQuantityList)
-- **OutputProducts**: Output EPCs and quantities (EPCIS outputEPCList/outputQuantityList)
+- **InputEntities**: Input EPCs, batch numbers, or lot identifiers and quantities (EPCIS inputEPCList/inputQuantityList)
+- **OutputEntities**: Output EPCs, batch numbers, or lot identifiers and quantities (EPCIS outputEPCList/outputQuantityList)
 - **TransformationID**: Links related transformations (EPCIS transformationID)
 
 #### **Step 4: ActorTracking**
-All supply chain participants and their interactions with products:
+All supply chain participants and their interactions with entities (products, materials, batches, commodities):
 - **ActorIdentifier**: Organization identifier (GLN/LEI/VAT)
 - **ActorRole**: MANUFACTURER/DISTRIBUTOR/WHOLESALER/RETAILER/SERVICE_PROVIDER/TRANSPORTER
-- **ActivityTimestamp**: When actor interacted with product
+- **ActivityTimestamp**: When actor interacted with entity
 - **ActionPerformed**: Specific action taken
 - **ResponsibilityScope**: Actor's responsibility boundaries
 - **CertificationStatus**: Relevant certifications (ISO, organic, fair trade)
@@ -212,27 +214,27 @@ Supply chain transportation and movement tracking (post-import):
 - **IntermediateStops**: Distribution centers, warehouses, and transshipment points
 - **TransportConditions**: Temperature, humidity, shock monitoring data
   
-*Note: Initial import/export and customs data are captured in the Product Profile model. This tracks subsequent domestic and international movements within the supply chain.*
+*Note: Initial import/export and customs data are captured in the Product Profile or Material Profile models. This tracks subsequent domestic and international movements within the supply chain.*
 
 #### **Step 6: ReverseLogistics**
-End-of-life and return pathway management:
+End-of-life and return pathway management for products and materials:
 - **ReturnEventIdentifier**: Unique return tracking ID
 - **ReturnInitiationDate**: When return process started
 - **ReturnReason**: DEFECT/WARRANTY_CLAIM/END_OF_LIFE/PRODUCT_RECALL/CUSTOMER_DISSATISFACTION
 - **CustomerReturnChannels**: Available return methods and locations
-- **RefurbishmentEvent**: Repair and refurbishment activities
-- **RecyclingEvent**: Material recovery and recycling processes
+- **RefurbishmentEvent**: Repair and refurbishment activities for products or materials
+- **RecyclingEvent**: Material and product recovery and recycling processes
 - **DisposalEvent**: Final disposal method and certification
 
 #### **Step 7: AggregationEvents**
-Packaging hierarchy operations (extends EPCIS AggregationEvent):
+Packaging hierarchy operations for products, materials, and batches (extends EPCIS AggregationEvent):
 - **AggregationEventID**: Unique identifier for aggregation operation (EPCIS eventID)
 - **AggregationType**: PACK (aggregation) or UNPACK (disaggregation) operation
-- **ParentIdentifier**: Container, pallet, or case EPC being packed/unpacked (EPCIS parentID)
-- **ChildIdentifiers**: Items being aggregated/disaggregated (EPCIS childEPCs)
+- **ParentIdentifier**: Container, pallet, batch, or case EPC being packed/unpacked (EPCIS parentID)
+- **ChildIdentifiers**: Items, sub-batches, or materials being aggregated/disaggregated (EPCIS childEPCs)
 - **AggregationLocation**: GLN where operation occurred (EPCIS bizLocation)
 - **AggregationTimestamp**: When packing/unpacking happened (EPCIS eventTime)
-- **PackagingHierarchyLevel**: Level in packaging hierarchy (item/case/pallet/container)
+- **PackagingHierarchyLevel**: Level in packaging hierarchy (item/batch/case/pallet/container)
 
 #### **Step 8: SupplyChainIncidents**
 Exception and disruption management during supply chain operations:
@@ -240,7 +242,7 @@ Exception and disruption management during supply chain operations:
 - **IncidentType**: DAMAGE/THEFT/DELAY/CONTAMINATION/COLD_CHAIN_BREAK/SECURITY_BREACH
 - **IncidentTimestamp**: When incident occurred
 - **IncidentLocation**: GLN or UN/LOCODE where incident happened
-- **AffectedProducts**: EPCs or GTINs of affected products
+- **AffectedEntities**: EPCs, GTINs, batch numbers, or lot identifiers of affected entities (products, materials, batches, commodities)
 - **IncidentSeverity**: CRITICAL/HIGH/MEDIUM/LOW severity level
 - **RootCause**: Identified cause of the incident
 - **CorrectiveActions**: Actions taken to resolve or mitigate
@@ -279,14 +281,16 @@ Every data point in the model includes a `sql_identifier` annotation that serves
 - **Reasonable Length**: Abbreviated but meaningful names that balance clarity with practical database usage
 
 **Examples:**
-- `trc_hist_event_id` - Event identifier in Product History
+- `trc_hist_event_id` - Event identifier in Entity History
+- `trc_hist_linked_entity_id` - Linked entity identifier (product, material, batch, commodity)
 - `trc_owner_transfer_date` - Transfer date in Ownership Events
-- `trc_value_activity_type` - Activity type in Value-Adding Activities
+- `trc_value_input_entities` - Input entities in Value-Adding Activities
+- `trc_value_output_entities` - Output entities in Value-Adding Activities
 - `trc_actor_gln` - Actor GLN in Actor Tracking
 - `trc_logis_shipment_id` - Shipment identifier in Logistics Events
 - `trc_reverse_return_reason` - Return reason in Reverse Logistics
 - `trc_agg_parent_id` - Parent identifier in Aggregation Events
-- `trc_incident_type` - Incident type in Supply Chain Incidents
+- `trc_incident_affected_entities` - Affected entities in Supply Chain Incidents
 
 This identifier system enables seamless integration with databases and ensures clear data model composition when combining with other CE-RISE data models.
 
@@ -299,9 +303,9 @@ This identifier system enables seamless integration with databases and ensures c
 
 | Step | Component | Supply Chain Focus | Solutions Implemented | Status | Missing/TODO |
 |------|-----------|-------------------|----------------------|--------|--------------|
-| **1** | **ProductHistory** | • Foundation event structure<br>• EPCIS compatibility<br>• Event audit trails<br>• Product identity linking | • UUID-based event identifiers<br>• ISO 8601 timestamps<br>• EPCIS EventType alignment<br>• CBV BizStep integration<br>• Links to product-profile identifiers | **COMPLETE** | - |
+| **1** | **EntityHistory** | • Foundation event structure<br>• EPCIS compatibility<br>• Event audit trails<br>• Entity identity linking (products, materials, batches, commodities) | • UUID-based event identifiers<br>• ISO 8601 timestamps<br>• EPCIS EventType alignment<br>• CBV BizStep integration<br>• Links to product-profile or material-profile identifiers | **COMPLETE** | - |
 | **2** | **OwnershipEvent** | • Business transaction tracking<br>• Custody chain management<br>• Legal ownership transfers<br>• Supply chain transparency | • GLN-based party identification<br>• CBV BTT vocabulary<br>• Chain of custody references<br>• Digital document linking<br>• Transaction event structure | **COMPLETE** | - |
-| **3** | **ValueAddingActivityLocation** | • Supply chain transformations<br>• Processing and packaging<br>• Input/output tracking<br>• Facility-based activities | • CBV BizStep vocabulary<br>• Input/output product arrays<br>• Facility GLN identification<br>• Transformation event structure<br>• Process documentation | **COMPLETE** | - |
+| **3** | **ValueAddingActivityLocation** | • Supply chain transformations<br>• Processing and packaging<br>• Input/output tracking<br>• Facility-based activities | • CBV BizStep vocabulary<br>• Input/output entity arrays<br>• Facility GLN identification<br>• Transformation event structure<br>• Process documentation | **COMPLETE** | - |
 | **4** | **ActorTracking** | • Supply chain participant roles<br>• Actor responsibility tracking<br>• Certification management<br>• Performance accountability | • Multiple identifier support<br>• Role-based tracking<br>• Activity timestamps<br>• Responsibility definitions<br>• Certification status tracking | **COMPLETE** | - |
 | **5** | **LogisticsEvents** | • Transportation tracking<br>• Multi-modal logistics<br>• Route optimization<br>• Condition monitoring | • UN/LOCODE standards<br>• Multi-modal support<br>• Intermediate stops<br>• Carrier identification<br>• Transport conditions | **COMPLETE** | - |
 | **6** | **ReverseLogistics** | • Return pathway management<br>• End-of-life collection<br>• Reverse supply chains<br>• Recovery operations | • Return reason classification<br>• Multi-channel returns<br>• Refurbishment tracking<br>• Recovery documentation<br>• Disposal certification | **COMPLETE** | - |

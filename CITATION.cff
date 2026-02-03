@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 title: CE-RISE Traceability and Life Cycle Event
 message: >-
-  v0.0.2 - Added references from Beta release of the data model.
+  v0.0.3 - Updated to support both Digital Product Passports (DPP) and Digital Material Passports (DMP) with unified entity terminology.
 type: software
 doi: 10.5281/zenodo.17803667
 authors:
@@ -17,7 +17,7 @@ identifiers:
 repository-code: 'https://codeberg.org/CE-RISE_models/traceability-and-life-cycle-events'
 url: 'https://ce-rise-models.codeberg.page/traceability-and-life-cycle-events/'
 abstract: >-
-  The Traceability and Life Cycle Events data model captures dynamic event-based information throughout a product's journey in the supply chain and its entire lifecycle. This model is part of the CE-RISE Digital Product Passport architecture, focusing specifically on time-stamped events that occur during supply chain operations.
+  The Traceability and Life Cycle Events data model captures dynamic event-based information throughout the supply chain journey and entire lifecycle of products, materials, batches, and commodities. This model is part of the CE-RISE Digital Product Passport (DPP) and Digital Material Passport (DMP) architecture, focusing specifically on time-stamped events that occur during supply chain operations. Compatible with GS1 EPCIS 2.0 standard.
 keywords:
   - CE-RISE
   - Data Model
@@ -25,4 +25,11 @@ keywords:
   - Open Source
   - Open Science
   - Digital Product Passport
+  - DPP
+  - Digital Material Passport
+  - DMP
+  - Traceability
+  - Supply Chain Events
+  - EPCIS
+  - GS1
 license: CC-BY-NC-4.0
