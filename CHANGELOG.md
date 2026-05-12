@@ -2,6 +2,11 @@
 
 All notable changes to the CE-RISE Traceability and Life Cycle Events Data Model will be documented in this file.
 
+## [0.1.0] - 2026-05-12
+
+### Added
+- Optional links from selected lifecycle event classes to the CE-RISE uncertainty quantification, metrological traceability, and data quality framework utility models.
+
 ## [0.0.3] - 2026-02-03
 
 ### Breaking Changes

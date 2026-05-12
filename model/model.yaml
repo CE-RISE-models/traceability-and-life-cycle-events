@@ -3,7 +3,7 @@ name: traceability_and_life_cycle_events
 title: Traceability and Life Cycle Events Data Model
 description: Dynamic event-based information throughout supply chain journey for products, materials, batches, and commodities aligned with GS1 EPCIS 2.0 standard. Supports both Digital Product Passports (DPP) and Digital Material Passports (DMP).
 license: https://creativecommons.org/licenses/by-nc/4.0/
-version: 0.0.3
+version: 0.1.0
 
 prefixes:
     linkml: https://w3id.org/linkml/
@@ -14,9 +14,15 @@ prefixes:
     iso: https://www.iso.org/
     unece: https://unece.org/trade/
     gs1: https://www.gs1.org/voc/
+    uq: https://ce-rise-models.codeberg.page/uncertainty-quantification/
+    mt: https://ce-rise-models.codeberg.page/metrological-traceability/
+    dqf: https://ce-rise-models.codeberg.page/data-quality-framework/
 
 imports:
     - linkml:types
+    - https://codeberg.org/CE-RISE-models/uncertainty-quantification/raw/tag/pages-v0.0.3/generated/schema
+    - https://codeberg.org/CE-RISE-models/metrological-traceability/raw/tag/pages-v0.0.3/generated/schema
+    - https://codeberg.org/CE-RISE-models/data-quality-framework/raw/tag/pages-v0.0.3/generated/schema
 
 default_range: string
 
@@ -505,6 +511,39 @@ classes:
                 range: string
                 description: Value holder for quality results
 
+            value_adding_activity_uncertainty_statements:
+                range: UncertaintyStatement
+                description: Optional uncertainty statements for measured, estimated, or quality-checked transformation and processing values
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    owl.filler: uq:uncertaintyStatement
+                    sql_identifier: trc_value_uncertainty_statements
+
+            value_adding_activity_metrological_traceability_statements:
+                range: TraceabilityStatement
+                description: Optional metrological traceability statements for quality checks, process measurements, methods, standards, calibrations, or reference materials
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    owl.filler: mt:traceabilityStatement
+                    sql_identifier: trc_value_metrological_traceability
+
+            value_adding_activity_data_quality_assessments:
+                range: DataQualityAssessment
+                description: Optional data quality assessments for transformation and processing event data, quality checks, evidence, provenance, completeness, or representativeness
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    owl.filler: dqf:dataQualityAssessment
+                    sql_identifier: trc_value_data_quality_assessments
+
             process_duration:
                 range: string
                 description: Process duration in ISO 8601 format (e.g. PT30M for 30 minutes)
@@ -777,6 +816,39 @@ classes:
                 range: string
                 description: Value holder for transport conditions
 
+            logistics_uncertainty_statements:
+                range: UncertaintyStatement
+                description: Optional uncertainty statements for transport condition sensor data, timestamps, route estimates, or other logistics measurements
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    owl.filler: uq:uncertaintyStatement
+                    sql_identifier: trc_logis_uncertainty_statements
+
+            logistics_metrological_traceability_statements:
+                range: TraceabilityStatement
+                description: Optional metrological traceability statements for logistics measurements, transport condition sensors, methods, standards, calibrations, or reference materials
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    owl.filler: mt:traceabilityStatement
+                    sql_identifier: trc_logis_metrological_traceability
+
+            logistics_data_quality_assessments:
+                range: DataQualityAssessment
+                description: Optional data quality assessments for logistics event data, sensor evidence, provenance, completeness, or representativeness
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    owl.filler: dqf:dataQualityAssessment
+                    sql_identifier: trc_logis_data_quality_assessments
+
     IntermediateStop:
         description: Stop location during logistics movement
         attributes:
@@ -997,6 +1069,39 @@ classes:
             recovery_percentage_value:
                 range: string
                 description: Value holder for recovery percentage
+
+            recycling_uncertainty_statements:
+                range: UncertaintyStatement
+                description: Optional uncertainty statements for recovered material quantities, recovery percentages, or estimated recycling outputs
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    owl.filler: uq:uncertaintyStatement
+                    sql_identifier: trc_reverse_recycle_uncertainty
+
+            recycling_metrological_traceability_statements:
+                range: TraceabilityStatement
+                description: Optional metrological traceability statements for recycling measurements, recovery calculations, methods, standards, calibrations, or reference materials
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    owl.filler: mt:traceabilityStatement
+                    sql_identifier: trc_reverse_recycle_metrological_traceability
+
+            recycling_data_quality_assessments:
+                range: DataQualityAssessment
+                description: Optional data quality assessments for recycling event data, recovery evidence, provenance, completeness, or representativeness
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    owl.filler: dqf:dataQualityAssessment
+                    sql_identifier: trc_reverse_recycle_data_quality
 
     DisposalEvent:
         description: Final disposal details
@@ -1304,6 +1409,39 @@ classes:
             reporter_identifier_value:
                 range: string
                 description: Value holder for reporter identifier
+
+            incident_uncertainty_statements:
+                range: UncertaintyStatement
+                description: Optional uncertainty statements for incident impact estimates, affected-entity counts, timestamps, or other incident measurements
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    owl.filler: uq:uncertaintyStatement
+                    sql_identifier: trc_incident_uncertainty_statements
+
+            incident_metrological_traceability_statements:
+                range: TraceabilityStatement
+                description: Optional metrological traceability statements for incident measurements, inspection methods, standards, calibrations, or reference materials
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    owl.filler: mt:traceabilityStatement
+                    sql_identifier: trc_incident_metrological_traceability
+
+            incident_data_quality_assessments:
+                range: DataQualityAssessment
+                description: Optional data quality assessments for incident reports, evidence, provenance, completeness, or representativeness
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    owl.filler: dqf:dataQualityAssessment
+                    sql_identifier: trc_incident_data_quality_assessments
 
 # Enumerations aligned with EPCIS/CBV standards
 enums:

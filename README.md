@@ -38,7 +38,7 @@ This model is designed to be **compatible with GS1 EPCIS 2.0** (Electronic Produ
 - **Usage patterns and maintenance activities** → `usage-and-maintenance` model (how entity is used, maintenance schedules, repair records)
 - **Environmental impact calculations** → `integrated-lca` model (carbon footprint, resource consumption, impact assessments)
 - **Regulatory compliance status and certifications** → `compliance-and-standards` model (regulatory approvals, compliance evidence, certificates)
-- **Data quality and provenance metadata** → `uncertainty-and-quality` model (data validation, uncertainty, lineage tracking)
+- **Data quality, uncertainty, and metrological traceability metadata** → `data-quality-framework`, `uncertainty-quantification`, and `metrological-traceability` utility models
 - **Circularity design and end-of-life specifications** → `circularity-and-eol` model (design for circularity, recyclability, material recovery specifications)
 
 **Key Principle**: This model focuses exclusively on time-stamped events and state changes that occur during supply chain operations, from initial market entry through end-of-life collection.
@@ -319,7 +319,7 @@ This identifier system enables seamless integration with databases and ensures c
 **Within CE-RISE Architecture:**
 - **Cross-Model References**: Events reference identifiers from `product-profile`, link to results in `diagnostic-results`, trigger updates in `usage-and-maintenance`
 - **Data Flow Integration**: Supply chain events feed into `integrated-lca` for impact calculations and `compliance-and-standards` for regulatory tracking
-- **Shared Metadata**: Leverages `uncertainty-and-quality` for data provenance and validation across all event records
+- **Shared Metadata**: Selected event records can optionally reference `uncertainty-quantification`, `metrological-traceability`, and `data-quality-framework` utility model records
 
 **External System Integration:**
 - **GS1 EPCIS Infrastructure**: Direct compatibility with EPCIS 2.0 repositories and query interfaces
