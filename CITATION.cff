@@ -1,7 +1,5 @@
 cff-version: 1.2.0
 title: CE-RISE Traceability and Life Cycle Event
-message: >-
-  v0.0.3 - Updated to support both Digital Product Passports (DPP) and Digital Material Passports (DMP) with unified entity terminology.
 type: software
 doi: 10.5281/zenodo.17803667
 authors:
