@@ -2,6 +2,12 @@
 
 All notable changes to the CE-RISE Traceability and Life Cycle Events Data Model will be documented in this file.
 
+## [Unreleased]
+
+### Added
+- `DataErasureEvidence` class linked from `RefurbishmentEvent` via the new `data_erasure_evidence` attribute. Provides structured, auditable proof of secure data erasure (method, standard, tool, certificate ID, media serial, operator, timestamp, result, document reference), replacing reliance on free text. Typed with W3C PROV-O / SOSA / Dublin Core / schema.org and harmonised with the diagnostic-results `DataSanitization` class (feedback item #2).
+- Added `prov`, `dcterms`, and `sosa` prefixes to support standard ontology typing.
+
 ## [0.1.0] - 2026-05-12
 
 ### Added

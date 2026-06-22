@@ -14,6 +14,9 @@ prefixes:
     iso: https://www.iso.org/
     unece: https://unece.org/trade/
     gs1: https://www.gs1.org/voc/
+    prov: http://www.w3.org/ns/prov#
+    dcterms: http://purl.org/dc/terms/
+    sosa: http://www.w3.org/ns/sosa/
     uq: https://ce-rise-models.codeberg.page/uncertainty-quantification/
     mt: https://ce-rise-models.codeberg.page/metrological-traceability/
     dqf: https://ce-rise-models.codeberg.page/data-quality-framework/
@@ -1021,6 +1024,122 @@ classes:
             refurbishment_certification_value:
                 range: string
                 description: Value holder for refurbishment certification
+
+            data_erasure_evidence:
+                range: DataErasureEvidence
+                description: Structured, auditable proof of secure data erasure for data-bearing media (ICT refurbishment)
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+                required: false
+                annotations:
+                    sql_identifier: trc_reverse_erasure_evidence
+                    references: "NIST SP 800-88; IEEE 2883; ISO/IEC 27001; CE-RISE Deliverable 1.1"
+
+    DataErasureEvidence:
+        description: Auditable evidence of secure data erasure performed on data-bearing media. Harmonised with diagnostic-results DataSanitization.
+        class_uri: prov:Activity
+        attributes:
+            erasure_identifier:
+                range: string
+                description: Unique identifier or certificate/report ID of the erasure activity
+                annotations:
+                    sql_identifier: trc_erasure_id
+                    owl.filler: dcterms:identifier
+                    references: "NIST SP 800-88"
+
+            erasure_identifier_value:
+                range: string
+                description: Value holder for erasure identifier
+
+            erasure_method:
+                range: string
+                description: Erasure method applied (e.g. cryptographic erase, overwrite, degauss, physical destruction)
+                annotations:
+                    sql_identifier: trc_erasure_method
+                    owl.filler: sosa:usedProcedure
+
+            erasure_method_value:
+                range: string
+                description: Value holder for erasure method
+
+            erasure_standard:
+                range: uri
+                description: URI reference to the erasure standard followed (e.g. NIST SP 800-88, IEEE 2883)
+                annotations:
+                    sql_identifier: trc_erasure_standard
+                    owl.filler: dcterms:conformsTo
+
+            erasure_standard_value:
+                range: string
+                description: Value holder for erasure standard
+
+            erasure_tool:
+                range: string
+                description: Tool or software (name and version) used to perform the erasure
+                annotations:
+                    sql_identifier: trc_erasure_tool
+                    owl.filler: prov:used
+
+            erasure_tool_value:
+                range: string
+                description: Value holder for erasure tool
+
+            media_serial_number:
+                range: string
+                description: Serial number of the wiped data-bearing media or device
+                annotations:
+                    sql_identifier: trc_erasure_media_serial
+                    owl.filler: schema:serialNumber
+
+            media_serial_number_value:
+                range: string
+                description: Value holder for media serial number
+
+            operator:
+                range: string
+                description: Technician, organisation, or automated system that performed the erasure
+                annotations:
+                    sql_identifier: trc_erasure_operator
+                    owl.filler: prov:wasAssociatedWith
+
+            operator_value:
+                range: string
+                description: Value holder for operator
+
+            erasure_timestamp:
+                range: datetime
+                description: Timestamp when erasure was completed ISO 8601 format
+                annotations:
+                    sql_identifier: trc_erasure_timestamp
+                    owl.filler: prov:endedAtTime
+                    iso_8601: true
+
+            erasure_timestamp_value:
+                range: string
+                description: Value holder for erasure timestamp
+
+            erasure_result:
+                range: string
+                description: Outcome of the erasure activity (e.g. PASS, FAIL, INCOMPLETE)
+                annotations:
+                    sql_identifier: trc_erasure_result
+                    owl.filler: sosa:hasResult
+
+            erasure_result_value:
+                range: string
+                description: Value holder for erasure result
+
+            document_reference:
+                range: uri
+                description: URI reference to the erasure certificate document or supporting evidence
+                annotations:
+                    sql_identifier: trc_erasure_document_ref
+                    owl.filler: dcterms:references
+
+            document_reference_value:
+                range: string
+                description: Value holder for document reference
 
     RecyclingEvent:
         description: Material and product recovery and recycling details
