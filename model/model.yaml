@@ -922,6 +922,11 @@ classes:
                 range: string
                 description: Value holder for return reason
 
+            intake_event:
+                range: IntakeEvent
+                description: Condition assessment and triage of the entity at intake into the return/refurbishment workflow
+                inlined: true
+
             customer_return_channels:
                 range: CustomerReturnChannel
                 multivalued: true
@@ -974,6 +979,188 @@ classes:
             return_documentation_value:
                 range: string
                 description: Value holder for return documentation
+
+    IntakeEvent:
+        description: Condition assessment and triage of an entity (product, component) at intake into a return or refurbishment workflow
+        class_uri: prov:Activity
+        attributes:
+            intake_identifier:
+                range: string
+                description: Unique intake identifier or intake ticket ID
+                annotations:
+                    sql_identifier: trc_intake_id
+                    owl.filler: dcterms:identifier
+                    references: "CE-RISE Deliverable 1.1"
+
+            intake_identifier_value:
+                range: string
+                description: Value holder for intake identifier
+
+            intake_date:
+                range: datetime
+                description: When the entity was received at intake ISO 8601 format
+                annotations:
+                    sql_identifier: trc_intake_date
+                    owl.filler: dcterms:date
+                    iso_8601: true
+
+            intake_date_value:
+                range: string
+                description: Value holder for intake date
+
+            internal_asset_id:
+                range: string
+                description: Internal refurbisher asset tag or tracking ID, distinct from serial number, GTIN, or passport ID
+                annotations:
+                    sql_identifier: trc_intake_internal_asset_id
+                    owl.filler: dcterms:identifier
+
+            internal_asset_id_value:
+                range: string
+                description: Value holder for internal asset ID
+
+            customer_asset_tag:
+                range: string
+                description: Customer-provided asset tag for the received unit
+                annotations:
+                    sql_identifier: trc_intake_customer_asset_tag
+                    owl.filler: dcterms:identifier
+
+            customer_asset_tag_value:
+                range: string
+                description: Value holder for customer asset tag
+
+            previous_owner_reference:
+                range: string
+                description: Reference to the previous owner of the received unit
+                annotations:
+                    sql_identifier: trc_intake_previous_owner_ref
+                    owl.filler: prov:wasAttributedTo
+
+            previous_owner_reference_value:
+                range: string
+                description: Value holder for previous owner reference
+
+            intake_location:
+                range: string
+                description: Location where the entity was received - GLN identifier
+                annotations:
+                    sql_identifier: trc_intake_location
+                    owl.filler: gs1:GlobalLocationNumber
+
+            intake_location_value:
+                range: string
+                description: Value holder for intake location
+
+            received_by:
+                range: string
+                description: Technician, organisation, or system that received and assessed the entity
+                annotations:
+                    sql_identifier: trc_intake_received_by
+                    owl.filler: prov:wasAssociatedWith
+
+            received_by_value:
+                range: string
+                description: Value holder for received by
+
+            condition_items:
+                range: IntakeConditionItem
+                description: Structured condition findings recorded at intake
+                multivalued: true
+                inlined: true
+                inlined_as_list: true
+
+            media_status:
+                range: string
+                description: Status of data-bearing media at intake (e.g. present, removed, wiped, unknown)
+                annotations:
+                    sql_identifier: trc_intake_media_status
+                    owl.filler: dcterms:type
+
+            media_status_value:
+                range: string
+                description: Value holder for media status
+
+            triage_decision:
+                range: TriageDecisionEnum
+                description: Triage decision made at intake
+                annotations:
+                    sql_identifier: trc_intake_triage_decision
+                    owl.filler: prov:wasInformedBy
+
+            triage_decision_value:
+                range: string
+                description: Value holder for triage decision
+
+            intake_notes:
+                range: string
+                description: Free-text notes about the intake assessment
+                annotations:
+                    sql_identifier: trc_intake_notes
+                    owl.filler: dcterms:description
+
+            intake_notes_value:
+                range: string
+                description: Value holder for intake notes
+
+            intake_evidence:
+                range: uri
+                multivalued: true
+                description: URI references to intake evidence such as photos, condition reports, or intake forms
+                annotations:
+                    sql_identifier: trc_intake_evidence
+                    owl.filler: dcterms:references
+                    reference_type: "evidence"
+
+            intake_evidence_value:
+                range: string
+                description: Value holder for intake evidence
+
+    IntakeConditionItem:
+        description: A single structured condition finding recorded during intake assessment
+        attributes:
+            condition_category:
+                range: IntakeConditionCategoryEnum
+                description: Category of the condition finding
+                annotations:
+                    sql_identifier: trc_intake_cond_category
+                    owl.filler: dcterms:type
+
+            condition_category_value:
+                range: string
+                description: Value holder for condition category
+
+            condition_status:
+                range: string
+                description: Status for this category (e.g. PRESENT, ABSENT, DAMAGED, OK, LOCKED)
+                annotations:
+                    sql_identifier: trc_intake_cond_status
+
+            condition_status_value:
+                range: string
+                description: Value holder for condition status
+
+            condition_description:
+                range: string
+                description: Description of the condition finding
+                annotations:
+                    sql_identifier: trc_intake_cond_description
+                    owl.filler: dcterms:description
+
+            condition_description_value:
+                range: string
+                description: Value holder for condition description
+
+            evidence_reference:
+                range: uri
+                description: URI reference to evidence supporting this condition finding
+                annotations:
+                    sql_identifier: trc_intake_cond_evidence
+                    owl.filler: dcterms:references
+
+            evidence_reference_value:
+                range: string
+                description: Value holder for evidence reference
 
     RefurbishmentEvent:
         description: Entity (product, material, component) repair and refurbishment details
@@ -1635,6 +1822,46 @@ enums:
                 description: Industrial composting
             SPECIALIZED_TREATMENT:
                 description: Specialized hazardous treatment
+
+    IntakeConditionCategoryEnum:
+        description: Categories of condition findings recorded at intake
+        permissible_values:
+            MISSING_PARTS:
+                description: Parts or accessories missing from the received unit
+            VISIBLE_DAMAGE:
+                description: Visible physical or cosmetic damage
+            BATTERY_STATE:
+                description: Battery presence, health, or charge state
+            LOCKED_FIRMWARE:
+                description: Locked BIOS, firmware, account, or activation lock
+            DATA_BEARING_MEDIA:
+                description: Presence or status of data-bearing media
+            COSMETIC:
+                description: General cosmetic condition
+            FUNCTIONAL:
+                description: General functional condition
+            OTHER:
+                description: Other condition category
+
+    TriageDecisionEnum:
+        description: Triage decisions made at intake
+        permissible_values:
+            REFURBISH:
+                description: Route for refurbishment
+            REPAIR:
+                description: Route for repair
+            PARTS_HARVEST:
+                description: Harvest parts for reuse
+            RECYCLE:
+                description: Route for recycling
+            DISPOSE:
+                description: Route for disposal
+            RESELL_AS_IS:
+                description: Resell without further processing
+            REJECT:
+                description: Reject the unit
+            PENDING:
+                description: Triage decision pending
 
     PackagingLevelEnum:
         description: Levels in packaging hierarchy - aligns with EPCIS packaging concepts

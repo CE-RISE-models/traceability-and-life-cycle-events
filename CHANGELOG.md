@@ -6,6 +6,8 @@ All notable changes to the CE-RISE Traceability and Life Cycle Events Data Model
 
 ### Added
 - `DataErasureEvidence` class linked from `RefurbishmentEvent` via the new `data_erasure_evidence` attribute. Provides structured, auditable proof of secure data erasure (method, standard, tool, certificate ID, media serial, operator, timestamp, result, document reference), replacing reliance on free text. Typed with W3C PROV-O / SOSA / Dublin Core / schema.org and harmonised with the diagnostic-results `DataSanitization` class (feedback item #2).
+- `IntakeEvent` and `IntakeConditionItem` classes linked from `ReverseLogistics` via the new `intake_event` attribute, capturing device condition and triage at intake: structured condition findings (`condition_items` with `IntakeConditionCategoryEnum`), data-bearing `media_status`, `triage_decision` (`TriageDecisionEnum`), evidence references, plus the refurbisher-specific identifiers `intake_identifier`, `internal_asset_id`, `customer_asset_tag`, and `previous_owner_reference` (feedback items #10 and #9).
+- New `IntakeConditionCategoryEnum` and `TriageDecisionEnum`.
 - Added `prov`, `dcterms`, and `sosa` prefixes to support standard ontology typing.
 
 ## [0.1.0] - 2026-05-12
