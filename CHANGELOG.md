@@ -4,6 +4,9 @@ All notable changes to the CE-RISE Traceability and Life Cycle Events Data Model
 
 ## [Unreleased]
 
+### Changed
+- Clarified the `RecyclingEvent.recovery_percentage` description to state explicitly that it is a recovery rate per WFD Annex II (recovery is broader than recycling), distinct from the recycling-specific rate in circularity-and-eol. Description only - no rename or structural change.
+
 ### Fixed
 - **WFD Art. 3 compliance:** removed `ENERGY_RECOVERY` from `DisposalMethodEnum` - energy recovery is a recovery operation (WFD Annex II, R1), not disposal. Clarified `INCINERATION` as "without energy recovery" (WFD Annex I, D10). Added a `recovery_operation` field (new `RecoveryOperationEnum`: PREPARATION_FOR_REUSE, RECYCLING, ENERGY_RECOVERY, BACKFILLING, OTHER_RECOVERY) to `RecyclingEvent`, formally separating recycling from recovery and giving energy recovery its correct home.
 

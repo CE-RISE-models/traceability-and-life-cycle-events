@@ -1487,7 +1487,7 @@ classes:
 
             recovery_percentage:
                 range: float
-                description: Percentage of materials recovered (0-100)
+                description: Recovery rate as a percentage (0-100) for the recovery_operation, per WFD Annex II. Recovery is broader than recycling - distinct from the recycling-specific rate in circularity-and-eol (RecyclableMaterials.recycling_rate).
                 annotations:
                     sql_identifier: trc_reverse_recovery_pct
                     unit: "percent"
