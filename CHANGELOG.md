@@ -2,7 +2,7 @@
 
 All notable changes to the CE-RISE Traceability and Life Cycle Events Data Model will be documented in this file.
 
-## [0.1.1] - 2026-06-23
+## [0.1.1] - 2026-06-24
 
 ### Changed
 - **Breaking:** `RefurbishmentEvent.components_replaced` changed from free-text `string` (multivalued) to a structured, repeatable `ReplacedComponent` object.
