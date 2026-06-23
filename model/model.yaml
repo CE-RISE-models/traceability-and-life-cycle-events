@@ -1452,6 +1452,18 @@ classes:
                 range: string
                 description: Value holder for recycling date
 
+            recovery_operation:
+                range: RecoveryOperationEnum
+                description: Recovery operation performed, aligned with WFD Annex II (separates recycling, preparation for re-use, and energy recovery)
+                annotations:
+                    sql_identifier: trc_reverse_recovery_operation
+                    owl.filler: dcterms:type
+                    references: "EU Waste Framework Directive 2008/98/EC Annex II"
+
+            recovery_operation_value:
+                range: string
+                description: Value holder for recovery operation
+
             recycling_stream:
                 range: RecyclingStreamEnum
                 description: Which recycling stream
@@ -1919,19 +1931,31 @@ enums:
             MIXED_MATERIALS:
                 description: Mixed material recycling
 
+    RecoveryOperationEnum:
+        description: Recovery operations aligned with EU Waste Framework Directive 2008/98/EC Annex II. Distinct from disposal operations (see DisposalMethodEnum).
+        permissible_values:
+            PREPARATION_FOR_REUSE:
+                description: Preparing for re-use (WFD waste hierarchy, top recovery tier)
+            RECYCLING:
+                description: Recycling - reprocessing into products, materials, or substances (WFD Annex II, R2-R11)
+            ENERGY_RECOVERY:
+                description: Energy recovery / waste-to-energy (WFD Annex II, R1)
+            BACKFILLING:
+                description: Backfilling - recovery operation using waste to substitute other materials
+            OTHER_RECOVERY:
+                description: Other recovery operation
+
     DisposalMethodEnum:
-        description: Final disposal methods - DPP specific
+        description: Final disposal operations aligned with EU Waste Framework Directive 2008/98/EC Annex I. Recovery operations (incl. energy recovery) are NOT disposal - see RecoveryOperationEnum.
         permissible_values:
             LANDFILL:
-                description: Landfill disposal
+                description: Landfill disposal (WFD Annex I, D1/D5)
             INCINERATION:
-                description: Incineration
-            ENERGY_RECOVERY:
-                description: Waste-to-energy
+                description: Incineration without energy recovery (WFD Annex I, D10). Incineration with energy recovery is a recovery operation (R1) - see RecoveryOperationEnum.
             COMPOSTING:
                 description: Industrial composting
             SPECIALIZED_TREATMENT:
-                description: Specialized hazardous treatment
+                description: Specialized hazardous treatment (WFD Annex I, e.g. D9)
 
     IntakeConditionCategoryEnum:
         description: Categories of condition findings recorded at intake

@@ -4,6 +4,9 @@ All notable changes to the CE-RISE Traceability and Life Cycle Events Data Model
 
 ## [Unreleased]
 
+### Fixed
+- **WFD Art. 3 compliance:** removed `ENERGY_RECOVERY` from `DisposalMethodEnum` - energy recovery is a recovery operation (WFD Annex II, R1), not disposal. Clarified `INCINERATION` as "without energy recovery" (WFD Annex I, D10). Added a `recovery_operation` field (new `RecoveryOperationEnum`: PREPARATION_FOR_REUSE, RECYCLING, ENERGY_RECOVERY, BACKFILLING, OTHER_RECOVERY) to `RecyclingEvent`, formally separating recycling from recovery and giving energy recovery its correct home (feedback item #15; twin of item #26 in circularity-and-eol).
+
 ### Added
 - `DataErasureEvidence` class linked from `RefurbishmentEvent` via the new `data_erasure_evidence` attribute. Provides structured, auditable proof of secure data erasure (method, standard, tool, certificate ID, media serial, operator, timestamp, result, document reference), replacing reliance on free text. Typed with W3C PROV-O / SOSA / Dublin Core / schema.org and harmonised with the diagnostic-results `DataSanitization` class (feedback item #2).
 - `IntakeEvent` and `IntakeConditionItem` classes linked from `ReverseLogistics` via the new `intake_event` attribute, capturing device condition and triage at intake: structured condition findings (`condition_items` with `IntakeConditionCategoryEnum`), data-bearing `media_status`, `triage_decision` (`TriageDecisionEnum`), evidence references, plus the refurbisher-specific identifiers `intake_identifier`, `internal_asset_id`, `customer_asset_tag`, and `previous_owner_reference` (feedback items #10 and #9).
