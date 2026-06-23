@@ -3,7 +3,7 @@ name: traceability_and_life_cycle_events
 title: Traceability and Life Cycle Events Data Model
 description: Dynamic event-based information throughout supply chain journey for products, materials, batches, and commodities aligned with GS1 EPCIS 2.0 standard. Supports both Digital Product Passports (DPP) and Digital Material Passports (DMP).
 license: https://creativecommons.org/licenses/by-nc/4.0/
-version: 0.1.0
+version: 0.1.1
 
 prefixes:
     linkml: https://w3id.org/linkml/

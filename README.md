@@ -80,7 +80,17 @@ TraceabilityLifecycleEvents (root - for products, materials, batches, commoditie
 │   ├── TransferLocation
 │   ├── ChainOfCustodyReference
 │   └── OwnershipDocumentation
-├── 3. ValueAddingActivityLocation
+├── 3. PhysicalCustodyEvent (in-workshop custody handoffs, distinct from legal ownership)
+│   ├── CustodyEventIdentifier
+│   ├── LinkedEntityIdentifier
+│   ├── CustodyStage (intake/storage/bench/data-wipe/QA/packaging/resale/shipping)
+│   ├── Holder
+│   ├── CustodyLocation
+│   ├── CustodyTimestamp
+│   ├── TransferReason
+│   ├── SealStatus (sealed/open/tamper-evident)
+│   └── CustodyEvidence
+├── 4. ValueAddingActivityLocation
 │   ├── ActivityIdentifier
 │   ├── ActivityType (assembly, processing, packaging, quality control)
 │   ├── ActivityDate
@@ -88,14 +98,14 @@ TraceabilityLifecycleEvents (root - for products, materials, batches, commoditie
 │   ├── ProcessDescription
 │   ├── InputEntities (components/materials/batches consumed)
 │   └── OutputEntities (resulting products/materials/batches)
-├── 4. ActorTracking
+├── 5. ActorTracking
 │   ├── ActorIdentifier (GLN, LEI, VAT)
 │   ├── ActorRole (manufacturer, distributor, retailer, service provider)
 │   ├── ActivityTimestamp
 │   ├── ActionPerformed
 │   ├── ResponsibilityScope
 │   └── CertificationStatus
-├── 5. LogisticsEvents
+├── 6. LogisticsEvents
 │   ├── ShipmentIdentifier
 │   ├── TransportMode (road, rail, sea, air, multimodal)
 │   ├── DepartureLocation (UN/LOCODE)
@@ -111,10 +121,20 @@ TraceabilityLifecycleEvents (root - for products, materials, batches, commoditie
 │   ├── TransportConditions (temperature, humidity tracking)
 │   ├── ShipmentComposition (multiple products in shipment)
 │   └── InventoryEvents (stock intake, transfers, adjustments)
-├── 6. ReverseLogistics
+├── 7. ReverseLogistics
 │   ├── ReturnEventIdentifier
 │   ├── ReturnInitiationDate
 │   ├── ReturnReason (defect, warranty, end-of-life, recall)
+│   ├── IntakeEvent (condition assessment and triage at intake)
+│   │   ├── IntakeIdentifier
+│   │   ├── IntakeDate
+│   │   ├── InternalAssetId / CustomerAssetTag / PreviousOwnerReference
+│   │   ├── IntakeLocation
+│   │   ├── ReceivedBy
+│   │   ├── ConditionItems (repeatable: category/status/description/evidence)
+│   │   ├── MediaStatus (data-bearing media: present/removed/wiped/unknown)
+│   │   ├── TriageDecision (refurbish/repair/parts-harvest/recycle/dispose/...)
+│   │   └── IntakeEvidence
 │   ├── CustomerReturnChannels
 │   │   ├── ReturnLocation
 │   │   ├── ReturnMethod
@@ -122,19 +142,21 @@ TraceabilityLifecycleEvents (root - for products, materials, batches, commoditie
 │   ├── RefurbishmentEvent
 │   │   ├── RefurbishmentDate
 │   │   ├── RefurbishmentActivities
-│   │   ├── ComponentsReplaced
-│   │   └── RefurbishmentCertification
+│   │   ├── ComponentsReplaced (repeatable ReplacedComponent: name, old/new part & serial, manufacturer, quantity, reason, condition)
+│   │   ├── RefurbishmentCertification
+│   │   └── DataErasureEvidence (method, standard, tool, certificate ID, media serial, operator, timestamp, result, document)
 │   ├── RecyclingEvent
 │   │   ├── RecyclingDate
+│   │   ├── RecoveryOperation (WFD Annex II: preparation-for-reuse/recycling/energy-recovery/backfilling/other)
 │   │   ├── RecyclingStream
 │   │   ├── MaterialsRecovered
 │   │   └── RecoveryPercentage
 │   └── DisposalEvent
 │       ├── DisposalDate
-│       ├── DisposalMethod
+│       ├── DisposalMethod (WFD Annex I disposal; energy recovery is NOT disposal)
 │       ├── DisposalFacility
 │       └── DisposalCertification
-├── 7. AggregationEvents
+├── 8. AggregationEvents
 │   ├── AggregationEventID
 │   ├── AggregationType (PACK/UNPACK)
 │   ├── ParentIdentifier (container, pallet, case)
@@ -142,7 +164,7 @@ TraceabilityLifecycleEvents (root - for products, materials, batches, commoditie
 │   ├── AggregationLocation
 │   ├── AggregationTimestamp
 │   └── PackagingHierarchyLevel
-└── 8. SupplyChainIncidents
+└── 9. SupplyChainIncidents
     ├── IncidentIdentifier
     ├── IncidentType (damage, theft, delay, contamination, cold-chain-break)
     ├── IncidentTimestamp
@@ -298,6 +320,8 @@ This identifier system enables seamless integration with databases and ensures c
 ---
 
 ## Development Roadmap
+
+> **Note:** This roadmap documents the model's initial development. The data model has since been further developed and refined — see [CHANGELOG.md](CHANGELOG.md) for the authoritative, up-to-date record of changes.
 
 ### Current Implementation Status
 
