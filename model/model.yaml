@@ -43,6 +43,10 @@ classes:
                 range: OwnershipEvent
                 description: Legal ownership and custody transfers throughout supply chain
                 multivalued: true
+            physical_custody:
+                range: PhysicalCustodyEvent
+                description: In-workshop physical custody handoffs (e.g. intake, storage, bench, data wipe, QA, resale), distinct from legal ownership
+                multivalued: true
             value_adding_activity:
                 range: ValueAddingActivityLocation
                 description: Transformation and processing events that modify or enhance entities (products, materials, batches, commodities)
@@ -384,6 +388,112 @@ classes:
             ownership_status_value:
                 range: string
                 description: Value holder for ownership status
+
+    PhysicalCustodyEvent:
+        description: A single in-workshop physical custody handoff of an entity, distinct from legal ownership transfer. A sequence of these events forms the granular physical custody chain (e.g. intake to storage to bench to data wipe to QA to resale).
+        class_uri: prov:Activity
+        attributes:
+            custody_event_identifier:
+                range: string
+                description: Unique identifier for the physical custody event
+                annotations:
+                    sql_identifier: trc_custody_event_id
+                    owl.filler: dcterms:identifier
+
+            custody_event_identifier_value:
+                range: string
+                description: Value holder for custody event identifier
+
+            linked_entity_identifier:
+                range: string
+                description: Reference to the entity in custody - aligns with EPCIS epcList concept
+                annotations:
+                    sql_identifier: trc_custody_linked_entity
+                pattern: "^(urn:epc:id:|[0-9]{14}:).*"
+
+            linked_entity_identifier_value:
+                range: string
+                description: Value holder for linked entity identifier
+
+            custody_stage:
+                range: CustodyStageEnum
+                description: Workshop stage at which the entity is held
+                annotations:
+                    sql_identifier: trc_custody_stage
+                    owl.filler: dcterms:type
+
+            custody_stage_value:
+                range: string
+                description: Value holder for custody stage
+
+            holder:
+                range: string
+                description: Person, station, or department physically holding the entity
+                annotations:
+                    sql_identifier: trc_custody_holder
+                    owl.filler: prov:wasAssociatedWith
+
+            holder_value:
+                range: string
+                description: Value holder for holder
+
+            custody_location:
+                range: string
+                description: Physical location of custody - GLN or internal location identifier
+                annotations:
+                    sql_identifier: trc_custody_location
+                    owl.filler: gs1:GlobalLocationNumber
+
+            custody_location_value:
+                range: string
+                description: Value holder for custody location
+
+            custody_timestamp:
+                range: datetime
+                description: When the entity entered this custody stage ISO 8601 format
+                annotations:
+                    sql_identifier: trc_custody_timestamp
+                    owl.filler: dcterms:date
+                    iso_8601: true
+
+            custody_timestamp_value:
+                range: string
+                description: Value holder for custody timestamp
+
+            transfer_reason:
+                range: string
+                description: Reason for the custody transfer or handoff
+                annotations:
+                    sql_identifier: trc_custody_transfer_reason
+                    owl.filler: dcterms:description
+
+            transfer_reason_value:
+                range: string
+                description: Value holder for transfer reason
+
+            seal_status:
+                range: SealStatusEnum
+                description: Whether the entity or its packaging is sealed or open at this custody stage
+                annotations:
+                    sql_identifier: trc_custody_seal_status
+                    owl.filler: dcterms:type
+
+            seal_status_value:
+                range: string
+                description: Value holder for seal status
+
+            custody_evidence:
+                range: uri
+                multivalued: true
+                description: URI references to custody evidence such as handoff records, signatures, or photos
+                annotations:
+                    sql_identifier: trc_custody_evidence
+                    owl.filler: dcterms:references
+                    reference_type: "evidence"
+
+            custody_evidence_value:
+                range: string
+                description: Value holder for custody evidence
 
     ValueAddingActivityLocation:
         description: Transformation and processing events extending EPCIS TransformationEvent
@@ -1862,6 +1972,40 @@ enums:
                 description: Reject the unit
             PENDING:
                 description: Triage decision pending
+
+    CustodyStageEnum:
+        description: Workshop stages for in-workshop physical custody
+        permissible_values:
+            INTAKE:
+                description: Received at intake
+            STORAGE:
+                description: Held in storage
+            BENCH:
+                description: At the repair or diagnostic bench
+            DATA_WIPE:
+                description: At secure data erasure / sanitization
+            QA:
+                description: At quality assurance / testing
+            PACKAGING:
+                description: At packaging
+            RESALE:
+                description: Ready for or in resale
+            SHIPPING:
+                description: Handed to shipping / dispatch
+            OTHER:
+                description: Other custody stage
+
+    SealStatusEnum:
+        description: Seal or tamper status of an entity or its packaging during custody
+        permissible_values:
+            SEALED:
+                description: Sealed
+            OPEN:
+                description: Open / unsealed
+            TAMPER_EVIDENT:
+                description: Tamper-evident seal applied
+            UNKNOWN:
+                description: Seal status unknown
 
     PackagingLevelEnum:
         description: Levels in packaging hierarchy - aligns with EPCIS packaging concepts
