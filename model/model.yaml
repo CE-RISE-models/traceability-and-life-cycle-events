@@ -1300,15 +1300,14 @@ classes:
                 description: Value holder for refurbishment activities
 
             components_replaced:
-                range: string
+                range: ReplacedComponent
                 multivalued: true
-                description: Components that were replaced
+                inlined: true
+                inlined_as_list: true
+                description: Structured records of components replaced during refurbishment
                 annotations:
                     sql_identifier: trc_reverse_components
-
-            components_replaced_value:
-                range: string
-                description: Value holder for components replaced
+                    references: "CIRPASS; CE-RISE Deliverable 1.1"
 
             refurbishment_certification:
                 range: uri
@@ -1332,6 +1331,108 @@ classes:
                 annotations:
                     sql_identifier: trc_reverse_erasure_evidence
                     references: "NIST SP 800-88; IEEE 2883; ISO/IEC 27001; CE-RISE Deliverable 1.1"
+
+    ReplacedComponent:
+        description: Structured record of a single part or component replaced during refurbishment. Harmonised with usage-and-maintenance ReplacedComponent and diagnostic-results ReplacedPart.
+        attributes:
+            component_name:
+                range: string
+                description: Name of the replaced part or component
+                annotations:
+                    sql_identifier: trc_replaced_component_name
+                    owl.filler: schema:name
+
+            component_name_value:
+                range: string
+                description: Value holder for component name
+
+            old_part_number:
+                range: string
+                description: Part number of the removed part
+                annotations:
+                    sql_identifier: trc_replaced_old_part_number
+                    owl.filler: dcterms:identifier
+
+            old_part_number_value:
+                range: string
+                description: Value holder for old part number
+
+            old_serial_number:
+                range: string
+                description: Serial number of the removed part
+                annotations:
+                    sql_identifier: trc_replaced_old_serial_number
+                    owl.filler: schema:serialNumber
+
+            old_serial_number_value:
+                range: string
+                description: Value holder for old serial number
+
+            new_part_number:
+                range: string
+                description: Part number of the installed replacement part
+                annotations:
+                    sql_identifier: trc_replaced_new_part_number
+                    owl.filler: dcterms:identifier
+
+            new_part_number_value:
+                range: string
+                description: Value holder for new part number
+
+            new_serial_number:
+                range: string
+                description: Serial number of the installed replacement part
+                annotations:
+                    sql_identifier: trc_replaced_new_serial_number
+                    owl.filler: schema:serialNumber
+
+            new_serial_number_value:
+                range: string
+                description: Value holder for new serial number
+
+            manufacturer:
+                range: string
+                description: Manufacturer of the replacement part
+                annotations:
+                    sql_identifier: trc_replaced_manufacturer
+                    owl.filler: schema:manufacturer
+
+            manufacturer_value:
+                range: string
+                description: Value holder for manufacturer
+
+            replacement_quantity:
+                range: integer
+                description: Quantity of parts replaced
+                annotations:
+                    sql_identifier: trc_replaced_quantity
+                    owl.filler: schema:value
+
+            replacement_quantity_value:
+                range: string
+                description: Value holder for replacement quantity
+
+            replacement_reason:
+                range: string
+                description: Reason for the replacement
+                annotations:
+                    sql_identifier: trc_replaced_reason
+                    owl.filler: dcterms:description
+
+            replacement_reason_value:
+                range: string
+                description: Value holder for replacement reason
+
+            replacement_condition:
+                range: string
+                description: Condition of the replacement part (e.g. new, refurbished, used)
+                annotations:
+                    sql_identifier: trc_replaced_condition
+                    owl.filler: schema:itemCondition
+
+            replacement_condition_value:
+                range: string
+                description: Value holder for replacement condition
 
     DataErasureEvidence:
         description: Auditable evidence of secure data erasure performed on data-bearing media. Harmonised with diagnostic-results DataSanitization.
